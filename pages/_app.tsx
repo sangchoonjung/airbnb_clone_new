@@ -1,6 +1,13 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps } from "next/app";
+import UserAuthContextProvider from "../components/context/userAuth";
+import CloneLayout from "../components/layout/index";
 
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return (
+    // <UserAuthContextProvider>
+    <CloneLayout>
+      <Component {...pageProps} />
+    </CloneLayout>
+    // </UserAuthContextProvider>
+  );
 }
