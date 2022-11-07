@@ -1,32 +1,47 @@
-import Credentials from "next-auth/providers/credentials";
+import { compare } from "bcryptjs";
+import nextAuth, { User } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import mongooseInit from "../../../lib/mongooseInit";
 import UserDB from "../../../lib/model/schema/userSchema";
-import { compare } from "bcryptjs";
-import nextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
 export const option = {
   providers: [
-    Credentials({
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        password: { label: "Password", type: "password" },
+        email: { label: "email", type: "email" },
+      },
       async authorize(credentials, req) {
-        try {
-          console.log(credentials, "credentials");
-          mongooseInit();
-          const one = await UserDB.findOne({ email: credentials!.email });
-          const passCheck = await compare(
-            credentials!.password,
-            one?.password as string
-          );
-
-          if (!one || !passCheck) {
-            throw new Error("error!!!!!!!!!!!!");
+        console.log(credentials, "aaaaaaaaaaaaaaa");
+        const response = await fetch(
+          "http://localhost:3000/api/userApi/confirmPassApi",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              email: credentials!.email,
+              password: credentials!.password,
+            }),
+            headers: { "Content-type": "application/json" },
           }
-          if (one && passCheck) {
-              return { name: one.name; };
-          }
-        } catch (e) {
-          console.log(e);
+        );
+        const data: any = await response.json();
+        console.log("!!!!!!!!!!!!!!!!!!", data);
+        if (data) {
+          const user: User = {
+            email: data.message.email,
+            id: data.message.name,
+          };
+          return user;
+        } else {
+          return null;
         }
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
 };

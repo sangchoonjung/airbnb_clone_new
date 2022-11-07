@@ -1,28 +1,38 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
-function ConfirmPass({ inputEmail }: { inputEmail: string }) {
+type vari = {
+  inputEmail: string;
+  handleClose: () => void;
+};
+
+function ConfirmPass(props: vari) {
+  const { data, status } = useSession();
+  // console.log(data, "data!!!!!!!!!", status, "status!!!!!!!!!!");
+  // console.log(inputEmail, "이메일 넘어오기");
   const passRef = useRef<HTMLInputElement>(null);
-  console.log(inputEmail, "이메일 넘어오기");
-  const clickHandle = async () => {
-    const email = inputEmail;
-    const password = passRef.current!.value;
-    console.log(email, password);
+  console.log(status);
+  console.log(data);
+
+  const clickHandle = async (evt: any) => {
+    evt.preventDefault();
+    const email = props.inputEmail;
+    const password = passRef.current?.value;
     const result = await signIn("credentials", {
       redirect: false,
       email,
       password,
     });
-    // console.log(result, "chek!!!");
-    if (result?.ok) {
-      console.log(result);
+    if (result!.ok) {
+      console.log(result, "결과");
+      props.handleClose();
     } else {
       // passwordRef.current.value = "";
       passRef.current?.focus();
       passRef.current?.select();
     }
-    console.log("!!!!!!!!!!!!!!!!");
   };
 
   return (
@@ -33,7 +43,7 @@ function ConfirmPass({ inputEmail }: { inputEmail: string }) {
           label="password"
           type="password"
           style={{ marginTop: 10 }}
-          ref={passRef}
+          inputRef={passRef}
         />
         <Button
           variant="contained"

@@ -1,4 +1,5 @@
 import { Button, Typography } from "@mui/material";
+import GoogleLogin from "./googleLogin";
 import LoginInputEmail from "./loginInputEmail";
 type con = {
   changeMode: (s: string) => void;
@@ -27,16 +28,7 @@ function MethodOfLogin(props: con) {
       </Typography>
 
       <Typography>
-        <Button
-          variant="outlined"
-          style={{
-            borderColor: "#666666",
-            color: "black",
-            fontSize: 18,
-          }}
-        >
-          구글로 로그인하기
-        </Button>
+        <GoogleLogin />
       </Typography>
     </Typography>
   );

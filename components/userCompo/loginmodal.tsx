@@ -66,7 +66,9 @@ export default function LoginModal() {
           {mode === "joinInput" && (
             <JoinInput inputEmail={inputEmail} changeMode={changeMode} />
           )}
-          {mode === "confirmPass" && <ConfirmPass inputEmail={inputEmail} />}
+          {mode === "confirmPass" && (
+            <ConfirmPass inputEmail={inputEmail} handleClose={handleClose} />
+          )}
         </Box>
       </Modal>
     </div>

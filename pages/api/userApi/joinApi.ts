@@ -19,7 +19,7 @@ const JoinApi: NextApiHandler = async (req, res) => {
       birth,
       password: hashedPassword,
     });
-    console.log(response, "...............");
+    // console.log(response, "...............");
 
     return res.status(200).json({ result: true, message: response });
   }

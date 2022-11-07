@@ -1,10 +1,33 @@
-import { createContext } from "vm";
-import { ReactNode } from "react";
+import { useSession } from "next-auth/react";
+import { createContext } from "react";
+import { ReactNode, useState } from "react";
 
-export const UserAuthContext = createContext();
+export interface Ctxs {
+  status: string | undefined;
+  flag?: boolean;
+  admin?: boolean;
+  update: (action: string) => void;
+}
+
+export const UserAuthContext = createContext<Ctxs | null>(null);
 
 const UserAuthContextProvider = ({ children }: { children: ReactNode }) => {
-  return <UserAuthContext.Provider>{children}</UserAuthContext.Provider>;
+  const { data, status } = useSession();
+  console.log(data, "aaa");
+  // console.log(status, "aaaaaaaa");
+
+  const [flag, setFlag] = useState<boolean>();
+  const [admin, setAdmin] = useState<boolean>();
+
+  const update = (action: string) => {
+    console.log(update);
+  };
+
+  return (
+    <UserAuthContext.Provider value={{ flag, admin, update }}>
+      {children}
+    </UserAuthContext.Provider>
+  );
 };
 
 export default UserAuthContextProvider;
