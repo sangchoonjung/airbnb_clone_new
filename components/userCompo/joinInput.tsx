@@ -1,5 +1,5 @@
-import { Button, TextField, Typography } from "@mui/material";
-import { useRef } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import { FormEventHandler, useRef } from "react";
 import PersonalConsent from "./personalConsent";
 type insertAndBack = {
   inputEmail: string;
@@ -11,6 +11,7 @@ function JoinInput(props: insertAndBack) {
   const birthRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   //   console.log(inputEmail);
+
   const joinSubmitHandler: FormEventHandler = async (evt) => {
     evt.preventDefault();
     const name = nameRef.current?.value;
@@ -45,7 +46,7 @@ function JoinInput(props: insertAndBack) {
     }
   };
   return (
-    <Typography style={{ overflowY: "auto" }}>
+    <Box style={{ overflowY: "auto" }}>
       <form onSubmit={joinSubmitHandler}>
         <TextField
           fullWidth
@@ -89,7 +90,7 @@ function JoinInput(props: insertAndBack) {
 
         <PersonalConsent />
       </form>
-    </Typography>
+    </Box>
   );
 }
 

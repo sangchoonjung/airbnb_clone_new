@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useRef } from "react";
+import { FormEventHandler, useRef } from "react";
 type con = {
   changeMode: (s: string) => void;
   setInputEmail: (s: string) => void;

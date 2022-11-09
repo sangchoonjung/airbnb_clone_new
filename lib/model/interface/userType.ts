@@ -5,5 +5,7 @@ type UserType = {
   password: string;
   marketingAllow: Date;
   accountAuth: Date;
+  provider: string;
+  providerAccountId: string;
 };
 export default UserType;

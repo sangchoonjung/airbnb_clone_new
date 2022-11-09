@@ -9,15 +9,20 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-
+import logo from "../../public/icon/logo.png";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import MenuIcon from "@mui/icons-material/Menu";
 import { MouseEventHandler, useState } from "react";
 import LoginModal from "../userCompo/loginmodal";
+import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { Box } from "@mui/system";
 
 export default function Header() {
+  const { data, status } = useSession();
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
-
+  const router = useRouter();
   const openMenuHandle: MouseEventHandler = (evt) => {
     setAnchorEl(evt.currentTarget);
   };
@@ -32,22 +37,48 @@ export default function Header() {
         borderColor: "divider",
       }}
     >
-      <Typography variant="h5" color="inherit" noWrap>
-        airbnb
-      </Typography>
       <Button
-        variant="outlined"
+        variant="text"
         color="inherit"
-        sx={{
-          gap: "0.8rem",
-          color: "gray",
-          border: "1px solid gray",
-          borderRadius: "50px",
+        sx={{ fontWeight: "bold", color: "#E61E4D", fontSize: 35 }}
+        onClick={() => {
+          router.push("/");
         }}
-        onClick={openMenuHandle}
       >
-        <MenuIcon /> <AccountCircleIcon />
+        <Image
+          src={logo}
+          alt="Picture of the author"
+          width={30}
+          height={30}
+          style={{ marginRight: 5 }}
+        />
+        airbnb
       </Button>
+      <Box>
+        <Button
+          variant="text"
+          color="inherit"
+          style={{ fontWeight: "bold", marginRight: 20 }}
+          onClick={() => {
+            router.push("become-a-host");
+          }}
+        >
+          호스트되기
+        </Button>
+        <Button
+          variant="outlined"
+          color="inherit"
+          sx={{
+            gap: "0.8rem",
+            color: "gray",
+            border: "1px solid gray",
+            borderRadius: "50px",
+          }}
+          onClick={openMenuHandle}
+        >
+          <MenuIcon /> <AccountCircleIcon />
+        </Button>
+      </Box>
       <Menu
         anchorEl={anchorEl}
         open={!!anchorEl}
@@ -55,14 +86,23 @@ export default function Header() {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
-        sx={{
-          mt: "0.5rem",
-        }}
       >
-        <MenuItem onClick={openMenuHandle}>
-          <LoginModal />
-        </MenuItem>
-        <Divider />
+        {status === "unauthenticated" && (
+          <MenuItem onClick={openMenuHandle}>
+            <LoginModal />
+          </MenuItem>
+        )}
+        {status === "authenticated" && (
+          <MenuItem
+            onClick={() => {
+              signOut();
+            }}
+          >
+            로그아웃
+          </MenuItem>
+        )}
+
+        {/* <Divider /> */}
         <MenuItem onClick={closeMenuHandle}>숙소 호스트 되기</MenuItem>
         <MenuItem onClick={closeMenuHandle}>도움말</MenuItem>
       </Menu>

@@ -6,19 +6,18 @@ export type jsonType = {
   result: boolean;
   message: string;
 };
-const JoinApi: NextApiHandler = async (req, res) => {
+const SocialJoinApi: NextApiHandler = async (req, res) => {
   mongooseInit();
   const { method } = req;
   if (method === "POST") {
-    const { name, email, birth, password } = req.body;
-    const hashedPassword = await hash(password, 12);
+    const { name, birth, email, provider, providerAccountId } = req.body;
 
     const response = await UserDB.create({
       name,
       email,
       birth,
-      password: hashedPassword,
-      provider: "credentials",
+      provider,
+      providerAccountId,
     });
     // console.log(response, "...............");
 
@@ -26,4 +25,4 @@ const JoinApi: NextApiHandler = async (req, res) => {
   }
   return res.status(401).json({ result: false, message: "access Error" });
 };
-export default JoinApi;
+export default SocialJoinApi;

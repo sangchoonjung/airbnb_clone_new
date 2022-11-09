@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 function PersonalConsent() {
   return (
     <>
       <h3>개인정보동의</h3>
 
-      <p>
+      <Typography>
         동의 및 계속하기를 선택하여 에어비앤비 서비스 약관, 결제 서비스 약관,
         위치기반서비스 이용약관, 차별 금지 정책, 개인정보 처리방침에 동의합니다.
-      </p>
+      </Typography>
       <Button
         variant="contained"
         disableElevation

@@ -13,7 +13,7 @@ export const UserAuthContext = createContext<Ctxs | null>(null);
 
 const UserAuthContextProvider = ({ children }: { children: ReactNode }) => {
   const { data, status } = useSession();
-  console.log(data, "aaa");
+  // console.log(data, "aaa");
   // console.log(status, "aaaaaaaa");
 
   const [flag, setFlag] = useState<boolean>();

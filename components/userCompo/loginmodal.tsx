@@ -28,8 +28,6 @@ export default function LoginModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const text = useContext(ModalMove);
-  console.log(text);
 
   const [mode, setMode] = useState<string>("inputEmail");
   const [inputEmail, setInputEmail] = useState<string>("");
@@ -38,7 +36,7 @@ export default function LoginModal() {
   };
 
   return (
-    <div>
+    <>
       <Box onClick={handleOpen}>로그인</Box>
       <Modal
         open={open}
@@ -71,6 +69,6 @@ export default function LoginModal() {
           )}
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
