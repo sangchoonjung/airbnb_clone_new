@@ -55,16 +55,18 @@ export default function Header() {
         airbnb
       </Button>
       <Box>
-        <Button
-          variant="text"
-          color="inherit"
-          style={{ fontWeight: "bold", marginRight: 20 }}
-          onClick={() => {
-            router.push("become-a-host");
-          }}
-        >
-          호스트되기
-        </Button>
+        {status === "authenticated" && (
+          <Button
+            variant="text"
+            color="inherit"
+            style={{ fontWeight: "bold", marginRight: 20 }}
+            onClick={() => {
+              router.push("become-a-host");
+            }}
+          >
+            호스트되기
+          </Button>
+        )}
         <Button
           variant="outlined"
           color="inherit"

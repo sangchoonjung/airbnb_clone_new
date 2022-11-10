@@ -3,8 +3,29 @@ import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
+import { useState, useContext } from "react";
+import ToggleButton from "@mui/material/ToggleButton";
+import { useRouter } from "next/router";
+import { HostTypeContext } from "../../components/context/hostType";
 
 function propertyTypeGroup() {
+  const ctx = useContext(HostTypeContext);
+  console.log(ctx?.firstSelect);
+  const router = useRouter();
+  const prevStep = () => {
+    router.push("/become-a-host");
+  };
+  const nextStep = async () => {
+    const response = await fetch("/api/hostApi/createHostApi", {
+      method: "POST",
+      body: JSON.stringify({ group: ctx?.firstSelect }),
+      headers: { "Content-type": "application/json" },
+    });
+    const data = await response.json();
+    const itemId = data.message._id;
+    // console.log(data.message._id);
+    router.push("/become-a-host/" + itemId + "/property-type");
+  };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -67,58 +88,54 @@ function propertyTypeGroup() {
             alignItems: "center",
           }}
         >
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+          <ToggleButton
+            value="아파트"
+            color="warning"
+            selected={ctx?.firstSelect === "아파트"}
+            onClick={() => {
+              ctx?.setFirstHandler("아파트");
+            }}
           >
             아파트
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+          </ToggleButton>
+          <ToggleButton
+            value="주택"
+            color="warning"
+            selected={ctx?.firstSelect === "주택"}
+            onClick={() => {
+              ctx?.setFirstHandler("주택");
+            }}
           >
             주택
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+          </ToggleButton>
+          <ToggleButton
+            value="별채"
+            color="warning"
+            selected={ctx?.firstSelect === "별채"}
+            onClick={() => {
+              ctx?.setFirstHandler("별채");
+            }}
           >
             별채
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            독특한 숙소
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            B&B
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+          </ToggleButton>
+          <ToggleButton
+            value="부티크 호텔"
+            color="warning"
+            selected={ctx?.firstSelect === "부티크 호텔"}
+            onClick={() => {
+              ctx?.setFirstHandler("부티크 호텔");
+            }}
           >
             부티크 호텔
-          </Button>
+          </ToggleButton>
         </Box>
         <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained">뒤로</Button>
-          <Button variant="contained">다음</Button>
+          <Button variant="contained" onClick={prevStep}>
+            뒤로
+          </Button>
+          <Button variant="contained" onClick={nextStep}>
+            다음
+          </Button>
         </Box>
       </Grid>
     </Grid>

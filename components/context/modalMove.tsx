@@ -1,20 +1,21 @@
-import { createContext } from "vm";
+import { createContext } from "react";
 import { ReactNode } from "react";
 import { UserAuthContext } from "./userAuth";
 import LoginModal from "../userCompo/loginmodal";
 import { useState } from "react";
 type modal = {
-  inputedEmail: string;
-  setInputedEmail: () => void;
+  inputedEmail?: string | null;
+  setInputedEmail?: (a: string) => void;
 };
-export const ModalMove = createContext({});
+export const ModalMove = createContext<modal | null>(null);
 
 const ModalMoveProvider = () => {
-  const [inputedEmail, setInputedEmail] = useState<string>("aaa");
+  const [inputedEmail, setInputedEmail] = useState<string | null>(null);
+
   return (
-    <UserAuthContext.Provider value={{ setInputedEmail, inputedEmail }}>
+    <ModalMove.Provider value={{ inputedEmail, setInputedEmail }}>
       <LoginModal />
-    </UserAuthContext.Provider>
+    </ModalMove.Provider>
   );
 };
 

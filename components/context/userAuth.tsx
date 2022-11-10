@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { ReactNode, useState } from "react";
 
 export interface Ctxs {
-  status: string | undefined;
+  status?: string | undefined;
   flag?: boolean;
   admin?: boolean;
   update: (action: string) => void;

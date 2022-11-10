@@ -4,6 +4,8 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import UserAuthContextProvider from "../components/context/userAuth";
 import CloneLayout from "../components/layout/index";
+import hostTypeContextProvider from "../components/context/hostType";
+import HostTypeContextProvider from "../components/context/hostType";
 
 export default function App({ Component, pageProps }: AppProps) {
   // console.log(Component.isInLayout);
@@ -13,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // console.log(isInLayout, "!!!!!!!!!!!!");
   return (
     <SessionProvider>
-      <UserAuthContextProvider>
+      <HostTypeContextProvider>
         {!isInLayout && (
           <CloneLayout>
             <Head>
@@ -23,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </CloneLayout>
         )}
         {isInLayout && <Component {...pageProps} />}
-      </UserAuthContextProvider>
+      </HostTypeContextProvider>
     </SessionProvider>
   );
 }

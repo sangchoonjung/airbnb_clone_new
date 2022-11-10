@@ -6,10 +6,10 @@ import Grid from "@mui/material/Grid";
 import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
 import { useContext, useState } from "react";
 
-function privacyType() {
+function Location() {
   const router = useRouter();
   const { itemId } = router.query;
-  const [selectPrivacy, setSelectPrivacy] = useState<string | null>(null);
+  //   const [selectPrivacy, setSelectPrivacy] = useState<string | null>(null);
   const prevStep = () => {
     router.back();
   };
@@ -17,7 +17,7 @@ function privacyType() {
   const nextStep = async () => {
     const response = await fetch("/api/hostApi/createHostApi", {
       method: "POST",
-      body: JSON.stringify({ detail: selectPrivacy, _id: itemId }),
+      body: JSON.stringify({ _id: itemId }),
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();
@@ -50,7 +50,7 @@ function privacyType() {
             fontWeight: "bold",
           }}
         >
-          게스트가 머무르게 될 숙소의 종류가 무엇인가요?
+          숙소위치는 어디인가요?
         </Box>
       </Grid>
       {/* 오른쪽 */}
@@ -87,24 +87,17 @@ function privacyType() {
             flexDirection: "column",
             alignItems: "center",
           }}
-        >
-          <ThirdStepItem
-            setSelectPrivacy={setSelectPrivacy}
-            selectPrivacy={selectPrivacy as string}
-          />
-        </Box>
+        ></Box>
         {/* 하단버튼 */}
         <Box style={{ display: "flex", justifyContent: "space-between" }}>
           <Button variant="contained" onClick={prevStep}>
             뒤로
           </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
+          <Button variant="contained">다음</Button>
         </Box>
       </Grid>
     </Grid>
   );
 }
-privacyType.isInLayout = true;
-export default privacyType;
+Location.isInLayout = true;
+export default Location;

@@ -1,17 +1,32 @@
-import * as React from "react";
+import { useContext, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
 import { Box, Button } from "@mui/material";
+import { HostTypeContext } from "../../../components/context/hostType";
+import ToggleButton from "@mui/material/ToggleButton";
+import SecondStepItem from "../../../components/hostSelectType/secondStepItem";
 
 function propertyType() {
   const router = useRouter();
   const { itemId } = router.query;
 
-  const nextStepHandle = () => {
-    // 데이터 업데이트 fetch...===>
-    // 정상처리가 된다면
+  const [selectedType, setselectedType] = useState<string | null>(null);
+  const prevStep = () => {
+    router.back();
+  };
+  console.log(selectedType);
+
+  const nextStep = async () => {
+    const response = await fetch("/api/hostApi/createHostApi", {
+      method: "POST",
+      body: JSON.stringify({ type: selectedType, _id: itemId }),
+      headers: { "Content-type": "application/json" },
+    });
+    const data = await response.json();
+    console.log(data, "!!!!!!!!!!!!");
+    // console.log(data.message._id);
     router.push("/become-a-host/" + itemId + "/privacy-type");
   };
 
@@ -39,7 +54,7 @@ function propertyType() {
             fontWeight: "bold",
           }}
         >
-          {itemId}다음 중 숙소를 가장 잘 설명하는 문구는 무엇인가요?
+          다음 중 숙소를 가장 잘 설명하는 문구는 무엇인가요?
         </Box>
       </Grid>
       {/* 오른쪽 */}
@@ -77,49 +92,18 @@ function propertyType() {
             alignItems: "center",
           }}
         >
-          숙소 등록 완료하기
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            주택 숙소
-          </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            아파트 숙소
-          </Button>
+          <SecondStepItem
+            setselectedType={setselectedType}
+            selectedType={selectedType as string}
+          />
         </Box>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          숙소 등록 시작하기
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            새로운 숙소 등록하기
+        {/* 하단버튼 */}
+        <Box style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button variant="contained" onClick={prevStep}>
+            뒤로
           </Button>
-          <Button
-            variant="outlined"
-            color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
-          >
-            기존 숙소 복사하기
+          <Button variant="contained" onClick={nextStep}>
+            다음
           </Button>
         </Box>
       </Grid>
