@@ -43,8 +43,9 @@ export default function LoginModal() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        
       >
-        <Box sx={style}>
+        <Box sx={style} style={{overflowY:"auto"}}>
           <Typography
             id="modal-modal-title"
             variant="body1"

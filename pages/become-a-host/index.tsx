@@ -11,7 +11,6 @@ function BecomeAHost() {
   //   console.log(data);
   const router = useRouter();
   const goToNext = () => {
-    const itemId = Date.now();
     router.push("/become-a-host/property-type-group");
   };
   return (

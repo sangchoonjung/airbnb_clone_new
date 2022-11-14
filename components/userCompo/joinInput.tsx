@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { FormEventHandler, useRef } from "react";
+import { FormEventHandler, useRef,useState } from "react";
 import PersonalConsent from "./personalConsent";
 type insertAndBack = {
   inputEmail: string;
@@ -10,7 +10,14 @@ function JoinInput(props: insertAndBack) {
   const nameRef = useRef<HTMLInputElement>(null);
   const birthRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  //   console.log(inputEmail);
+  const [Essentialchecked, setEssentialChecked] = useState(false);
+  const [selectiveChecked,setSelectiveChecked] = useState(false);
+  const essentialhandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEssentialChecked(event.target.checked);
+  };
+  const selectivehandleChange= (event: React.ChangeEvent<HTMLInputElement>)=>{
+    setSelectiveChecked(event.target.checked);
+  }
 
   const joinSubmitHandler: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -86,9 +93,9 @@ function JoinInput(props: insertAndBack) {
           type="password"
           inputRef={passwordRef}
           style={{ marginTop: 10 }}
-        />
 
-        <PersonalConsent />
+        />
+        <PersonalConsent essentialhandleChange={essentialhandleChange} selectivehandleChange={selectivehandleChange} Essentialchecked={Essentialchecked} selectiveChecked={selectiveChecked}/>
       </form>
     </Box>
   );

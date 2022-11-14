@@ -1,5 +1,8 @@
 import { Button, Typography } from "@mui/material";
+import { Box, display } from "@mui/system";
 import { signIn, useSession } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
+
 function GoogleLogin() {
   const googleSigninHandle = () => {
     //새창 띄우기
@@ -23,7 +26,8 @@ function GoogleLogin() {
       }}
       onClick={googleSigninHandle}
     >
-      구글로 로그인하기
+      <FcGoogle />
+      <Typography>구글로 로그인하기</Typography>
     </Button>
   );
 }
