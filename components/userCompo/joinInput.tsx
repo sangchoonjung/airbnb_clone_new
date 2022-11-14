@@ -1,5 +1,5 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { FormEventHandler, useRef,useState } from "react";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
 import PersonalConsent from "./personalConsent";
 type insertAndBack = {
   inputEmail: string;
@@ -8,25 +8,41 @@ type insertAndBack = {
 
 function JoinInput(props: insertAndBack) {
   const nameRef = useRef<HTMLInputElement>(null);
+  console.log(nameRef.current?.value);
   const birthRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [Essentialchecked, setEssentialChecked] = useState(false);
-  const [selectiveChecked,setSelectiveChecked] = useState(false);
-  const essentialhandleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [selectiveChecked, setSelectiveChecked] = useState(false);
+  const essentialhandleChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setEssentialChecked(event.target.checked);
   };
-  const selectivehandleChange= (event: React.ChangeEvent<HTMLInputElement>)=>{
+  const selectivehandleChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setSelectiveChecked(event.target.checked);
-  }
+  };
+
+  const nameval = nameRef.current?.value;
+  const birthval = birthRef.current?.value;
+  const passwordval = passwordRef.current?.value;
+  const [test, setTest] = useState(true);
+  // console.log(nameval);
+  // if (!(nameval == null)) {
+  //   console.log(test);
+  //   return setTest(false);
+  // }
+  // useEffect(() => {
+
+  // }, [nameval]);
 
   const joinSubmitHandler: FormEventHandler = async (evt) => {
     evt.preventDefault();
-    const name = nameRef.current?.value;
-    const birth = birthRef.current?.value;
-    const password = passwordRef.current?.value;
 
     const regExp =
       /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
     if (regExp.test(props.inputEmail as string)) {
       const response = await fetch("/api/userApi/joinApi", {
         method: "POST",
@@ -61,6 +77,7 @@ function JoinInput(props: insertAndBack) {
           type="text"
           inputRef={nameRef}
           style={{ marginTop: 10 }}
+          error={nameRef.current === null ? true : false}
         />
         <label style={{ fontSize: 12, color: "#666666" }}>
           정부 발급 신분증에 표시된 이름과 일치하는지 확인하세요.
@@ -93,9 +110,34 @@ function JoinInput(props: insertAndBack) {
           type="password"
           inputRef={passwordRef}
           style={{ marginTop: 10 }}
-
         />
-        <PersonalConsent essentialhandleChange={essentialhandleChange} selectivehandleChange={selectivehandleChange} Essentialchecked={Essentialchecked} selectiveChecked={selectiveChecked}/>
+        <Button
+          variant="contained"
+          disableElevation
+          sx={{ width: 300 }}
+          style={{
+            margin: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "column",
+            color: "white",
+            backgroundColor: test === true ? "grey" : "pink",
+          }}
+          type="submit"
+          disabled={test as boolean}
+        >
+          테스트
+        </Button>
+        <PersonalConsent
+          essentialhandleChange={essentialhandleChange}
+          selectivehandleChange={selectivehandleChange}
+          Essentialchecked={Essentialchecked}
+          selectiveChecked={selectiveChecked}
+          nameval={nameval}
+          birthval={birthval}
+          passwordval={passwordval}
+        />
       </form>
     </Box>
   );

@@ -1,13 +1,25 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import {useState}from "react"
+import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-type con={
-  essentialhandleChange:(b:any)=>void;
-  selectivehandleChange:(b:any)=>void;
-  Essentialchecked:boolean;
-  selectiveChecked:boolean;
-}
-function PersonalConsent(props:con) {
+type con = {
+  essentialhandleChange: (b: any) => void;
+  selectivehandleChange: (b: any) => void;
+  Essentialchecked: boolean;
+  selectiveChecked: boolean;
+  submitAct: boolean;
+};
+function PersonalConsent(props: con) {
+  const [submitAct, setSubmitAct] = useState<boolean | null>(true);
+  useEffect(() => {
+    if (
+      !props.nameval === null &&
+      !props.birthval === null &&
+      !props.passwordval === null
+    ) {
+      setSubmitAct((current) => !current);
+      console.log(submitAct);
+    }
+  }, [props.nameval, props.birthval, props.passwordval]);
 
   return (
     <Box>
@@ -28,10 +40,10 @@ function PersonalConsent(props:con) {
           inputProps={{ "aria-label": "controlled" }}
         />
       </Box>
-        <Typography sx={{ fontSize: 12 }}>
-          마케팅 이메일 수신을 원합니다(선택).
-        </Typography>
-      <Box style={{display:"flex",flexDirection:"row"}}>
+      <Typography sx={{ fontSize: 12 }}>
+        마케팅 이메일 수신을 원합니다(선택).
+      </Typography>
+      <Box style={{ display: "flex", flexDirection: "row" }}>
         <Typography sx={{ fontSize: 12 }}>
           에어비앤비 회원 전용 할인, 추천 여행 정보, 마케팅 이메일, 푸시 알림을
           보내드립니다. 계정 설정 또는 마케팅 알림에서 언제든지 수신을 거부할 수
@@ -49,23 +61,23 @@ function PersonalConsent(props:con) {
       </Box>
 
       <Button
-      variant="contained"
-      disableElevation
-      sx={{ width: 300 }}
-      style={{
-        margin: 10,
-        justifyContent: "center",
-        alignItems: "center",
-        display: "flex",
-        flexDirection: "column",
-        color: "pink",
-        backgroundColor: "#E61E4D",
-      }}
-      type="submit"
-    >
-      동의 및 계속하기
-    </Button>
-      
+        variant="contained"
+        disableElevation
+        sx={{ width: 300 }}
+        style={{
+          margin: 10,
+          justifyContent: "center",
+          alignItems: "center",
+          display: "flex",
+          flexDirection: "column",
+          color: "white",
+          backgroundColor: submitAct === true ? "grey" : "pink",
+        }}
+        type="submit"
+        disabled={submitAct as boolean}
+      >
+        동의 및 계속하기
+      </Button>
     </Box>
   );
 }
