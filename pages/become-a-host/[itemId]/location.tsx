@@ -1,14 +1,65 @@
 import { useRouter } from "next/router";
-import { Box, Button } from "@mui/material";
+import {
+  Box,
+  Button,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  TextField,
+} from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import LocationSelect from "../../../components/hostSelectType/locationSelect";
+import LocationDetail from "../../../components/hostSelectType/locationDetail";
 
 function Location() {
   const router = useRouter();
   const { itemId } = router.query;
+  const [inputVal, setInputVal] = useState<string>("");
+  const [predictions, setPredictions] = useState<any[] | null>(null);
+  const [addressDetail, setAddressDetail] = useState<any[] | null>(null);
+  const [addressLocation, setAddressLocation] = useState<{}>({
+    lat: "",
+    lng: "",
+  });
+  const [mode, setMode] = useState<string>("inputVal");
+
+  useEffect(() => {
+    const timerID = setTimeout(async () => {
+      // console.log("QQQQQ", inputVal);
+      if (inputVal.trim().length === 0) {
+        return;
+      }
+      const endPoint = `/google/autocomplete?input=${inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`;
+      const response = await fetch(endPoint);
+      const data = await response.json();
+      console.log(data.predictions);
+      setPredictions(data.predictions);
+    }, 1000);
+
+    //1초이내의 타이핑은 모두 취소 처리함.
+    return () => {
+      // console.log(timerID, "........");
+      clearTimeout(timerID);
+    };
+  }, [inputVal]);
+
+  const placeDetailHandler = async (place_id: string) => {
+    const endPoint = `/google/placeID?place_id=${place_id}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&language=ko`;
+    const response = await fetch(endPoint);
+    const data = await response.json();
+    const addressArray = data.result.address_components;
+    const lat = data.result.geometry.location.lat;
+    const lng = data.result.geometry.location.lng;
+    setAddressDetail(addressArray);
+    setAddressLocation({ lat: lat, lng: lng });
+    setMode("locationDetail");
+  };
+  // console.log(addressLocation, addressDetail, "gkgkgkgkgkg");
   //   const [selectPrivacy, setSelectPrivacy] = useState<string | null>(null);
   const prevStep = () => {
     router.back();
@@ -87,7 +138,23 @@ function Location() {
             flexDirection: "column",
             alignItems: "center",
           }}
-        ></Box>
+        >
+          {mode === "inputVal" && (
+            <LocationSelect
+              setInputVal={setInputVal}
+              inputVal={inputVal}
+              predictions={predictions as []}
+              placeDetailHandler={placeDetailHandler}
+            />
+          )}
+          {mode === "locationDetail" && (
+            <LocationDetail
+              addressDetail={addressDetail}
+              addressLocation={addressLocation}
+            />
+          )}
+        </Box>
+
         {/* 하단버튼 */}
         <Box style={{ display: "flex", justifyContent: "space-between" }}>
           <Button variant="contained" onClick={prevStep}>

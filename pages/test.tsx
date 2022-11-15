@@ -37,7 +37,9 @@ function Test() {
     );
 
     // script 중복 호출 방지
-    if (includeCheck) return initMap();
+    if (includeCheck) {
+      return initMap();
+    }
 
     window.initMap = initMap;
     loadScript(
