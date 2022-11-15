@@ -7,19 +7,9 @@ type con = {
   Essentialchecked: boolean;
   selectiveChecked: boolean;
   submitAct: boolean;
+  buttonActivate:boolean;
 };
 function PersonalConsent(props: con) {
-  const [submitAct, setSubmitAct] = useState<boolean | null>(true);
-  useEffect(() => {
-    if (
-      !props.nameval === null &&
-      !props.birthval === null &&
-      !props.passwordval === null
-    ) {
-      setSubmitAct((current) => !current);
-      console.log(submitAct);
-    }
-  }, [props.nameval, props.birthval, props.passwordval]);
 
   return (
     <Box>
@@ -71,10 +61,10 @@ function PersonalConsent(props: con) {
           display: "flex",
           flexDirection: "column",
           color: "white",
-          backgroundColor: submitAct === true ? "grey" : "pink",
+          backgroundColor: props.buttonActivate === true ? "grey" : "pink",
         }}
         type="submit"
-        disabled={submitAct as boolean}
+        disabled={props.buttonActivate as boolean}
       >
         동의 및 계속하기
       </Button>

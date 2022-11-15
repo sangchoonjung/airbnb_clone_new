@@ -29,7 +29,7 @@ function Location() {
     const timerID = setTimeout(async () => {
       // console.log(inputVal);
       if (ctx?.inputVal?.trim().length === 0) {
-        return;
+        return ;
       }
       const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`;
       const response = await fetch(endPoint);
@@ -61,7 +61,7 @@ function Location() {
     // console.log(data.message._id);
     router.push("/become-a-host/" + itemId + "/location");
   };
-  const location = { lat: 35.1653428, lng: 126.9092003 };
+  const baseLocation = { lat: 35.1653428, lng: 126.9092003 };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -110,7 +110,7 @@ function Location() {
           <Button
             variant="outlined"
             color="inherit"
-            style={{ backgroundColor: "#999999" }}
+            style={{ backgroundColor: "#999999",position: "absolute",top:10 }}
           >
             나가기
           </Button>
@@ -118,13 +118,14 @@ function Location() {
         <Box>
           <img
             draggable={false}
-            src={`https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
+            src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
             alt={"none"}
             style={{
               width: "100%",
               height: "100%",
               objectFit: "cover",
               verticalAlign: "bottom",
+              position:"relative"
             }}
           />
         </Box>
@@ -136,6 +137,10 @@ function Location() {
             flexDirection: "column",
             alignItems: "center",
             position: "absolute",
+            top:100,
+            left:1000,
+            backgroundColor:"white",
+            
           }}
         >
           {ctx?.mode === "inputVal" && <LocationSelect />}

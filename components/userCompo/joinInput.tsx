@@ -7,10 +7,6 @@ type insertAndBack = {
 };
 
 function JoinInput(props: insertAndBack) {
-  const nameRef = useRef<HTMLInputElement>(null);
-  console.log(nameRef.current?.value);
-  const birthRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
   const [Essentialchecked, setEssentialChecked] = useState(false);
   const [selectiveChecked, setSelectiveChecked] = useState(false);
   const essentialhandleChange = (
@@ -24,20 +20,43 @@ function JoinInput(props: insertAndBack) {
     setSelectiveChecked(event.target.checked);
   };
 
-  const nameval = nameRef.current?.value;
-  const birthval = birthRef.current?.value;
-  const passwordval = passwordRef.current?.value;
+  const [inputValue, setInputValue] = useState<{
+    name: string;
+    birth: string;
+    password: string;
+  }>({ name: "", birth: "", password: "" });
+  const [validCheck, setValidCheck] = useState({
+    name: true,
+    birth: true,
+    password: true,
+  });
+  const [buttonActivate, setButtonActivate] = useState(true);
 
-  const [test, setTest] = useState(true);
-  // console.log(nameval);
+  
+
+  
   useEffect(() => {
-    const name = nameRef.current?.value!;
-    console.log("nameval-------------", name);
-    // if (name?.length > 0) {
-    //   console.log(test);
-    //   return setTest(false);
-    // }
-  }, [nameRef.current?.value]);
+    if(inputValue.name.length>1){
+      setValidCheck((e)=>{return {...e,name:false}})
+    }else{
+      setValidCheck((e)=>{return {...e,name:true}})
+    }
+    if(inputValue.birth.length>7){
+      setValidCheck((e)=>{return {...e,birth:false}})
+    }else{
+      setValidCheck((e)=>{return {...e,birth:true}})
+    }
+    if(inputValue.password.length>7){
+      setValidCheck((e)=>{return {...e,password:false}})
+      setButtonActivate(false);
+    }else{
+      setValidCheck((e)=>{return {...e,password:true}})
+      setButtonActivate(true);
+    }
+    
+
+
+  }, [inputValue]);
 
   const joinSubmitHandler: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -49,10 +68,10 @@ function JoinInput(props: insertAndBack) {
       const response = await fetch("/api/userApi/joinApi", {
         method: "POST",
         body: JSON.stringify({
-          name,
-          birth,
+          name: inputValue.name,
+          birth: inputValue.birth,
           email: props.inputEmail,
-          password,
+          password: inputValue.password,
         }),
         headers: {
           "Content-type": "application/json",
@@ -77,9 +96,13 @@ function JoinInput(props: insertAndBack) {
           fullWidth
           label="name"
           type="text"
-          inputRef={nameRef}
           style={{ marginTop: 10 }}
-          error={nameRef.current === null ? true : false}
+          error={validCheck.name}
+          onChange={(e) => {
+            setInputValue((c) => {
+              return { ...c, name: e.target.value };
+            });
+          }}
         />
         <label style={{ fontSize: 12, color: "#666666" }}>
           정부 발급 신분증에 표시된 이름과 일치하는지 확인하세요.
@@ -87,9 +110,15 @@ function JoinInput(props: insertAndBack) {
         <TextField
           fullWidth
           label="birth"
-          inputRef={birthRef}
+          type="number"
           placeholder={"19900101"}
           style={{ marginTop: 10 }}
+          error={validCheck.birth}
+          onChange={(e) => {
+            setInputValue((c) => {
+              return { ...c, birth: e.target.value };
+            });
+          }}
         />
         <label style={{ fontSize: 12, color: "#666666" }}>
           만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 에어비앤비의
@@ -110,35 +139,24 @@ function JoinInput(props: insertAndBack) {
           fullWidth
           label="password"
           type="password"
-          inputRef={passwordRef}
           style={{ marginTop: 10 }}
-        />
-        <Button
-          variant="contained"
-          disableElevation
-          sx={{ width: 300 }}
-          style={{
-            margin: 10,
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
-            color: "white",
-            backgroundColor: test === true ? "grey" : "pink",
+          error={validCheck.password}
+          onChange={(e) => {
+            setInputValue((c) => {
+              return { ...c, password: e.target.value };
+            });
           }}
-          type="submit"
-          disabled={test}
-        >
-          테스트
-        </Button>
+        />
+                <label style={{ fontSize: 12, color: "#666666" }}>
+          8자 이상입니다.
+        </label>
+
         <PersonalConsent
           essentialhandleChange={essentialhandleChange}
           selectivehandleChange={selectivehandleChange}
           Essentialchecked={Essentialchecked}
           selectiveChecked={selectiveChecked}
-          nameval={nameval}
-          birthval={birthval}
-          passwordval={passwordval}
+          buttonActivate={buttonActivate}
         />
       </form>
     </Box>

@@ -16,6 +16,7 @@ const confirmPassApi: NextApiHandler = async (req, res) => {
     if (!response || !passCheck) {
       return res.status(401).json({ result: false, message: "password Error" });
     }
+    console.log(passCheck,"aaaaaaaaa")
     if (response && passCheck) {
       return res.status(200).json({ result: true, message: response });
     }
