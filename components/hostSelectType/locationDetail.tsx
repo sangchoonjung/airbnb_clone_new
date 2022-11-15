@@ -1,12 +1,19 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { FormEventHandler, useRef } from "react";
+import { FormEventHandler, useRef, useContext } from "react";
+import { createTextSpan } from "typescript";
+import { HostTypeContext } from "../context/hostType";
 type con = {
   addressDetail: [];
   addressLocation: {};
 };
-function LocationDetail(props: con) {
-  console.log(props.addressDetail);
-  console.log(props.addressLocation);
+function LocationDetail() {
+  const ctx = useContext(HostTypeContext);
+  const backStep = () => {
+    ctx?.setMode("inputVal");
+  };
+  const GoNextStep = () => {
+    ctx?.setMode("checkLocation");
+  };
   const ad = useRef();
   return (
     <>
@@ -22,42 +29,42 @@ function LocationDetail(props: con) {
             label="주/도"
             hiddenLabel
             type="text"
-            value={props.addressDetail[3].long_name}
+            value={ctx?.addressDetail[3]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField
             fullWidth
             label="도시"
             type="text"
-            value={props.addressDetail[2].long_name}
+            value={ctx?.addressDetail[2]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField
             fullWidth
             label="도로명"
             type="text"
-            value={props.addressDetail[1].long_name}
+            value={ctx?.addressDetail[1]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField
             fullWidth
             label="아파트이름,동호수"
             type="text"
-            value={props.addressDetail[0].long_name}
+            value={ctx?.addressDetail[0]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField
             fullWidth
             label="우편번호"
             type="text"
-            value={props.addressDetail[5].long_name}
+            value={ctx?.addressDetail[5]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField
             fullWidth
             label="국가/지역"
             type="text"
-            value={props.addressDetail[4].long_name}
+            value={ctx?.addressDetail[4]?.long_name}
             style={{ marginBottom: 10 }}
           />
           <Button
@@ -72,10 +79,19 @@ function LocationDetail(props: con) {
               borderRadius: 2,
             }}
             type="submit"
+            onClick={() => {
+              ctx?.setMode("checkLocation");
+            }}
           >
             계속
           </Button>
         </form>
+      </Box>
+      {/* 하단버튼 */}
+      <Box style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button variant="contained" onClick={backStep}>
+          뒤로
+        </Button>
       </Box>
     </>
   );

@@ -6,7 +6,7 @@ export type Ctxs = {
   setFirstHandler?: (type: string) => void;
   setInputVal: (s: string) => void;
   inputVal: string | null;
-  setPredictions: () => void;
+  setPredictions: ([]) => void;
   predictions: [];
   setAddressDetail: () => void;
   addressDetail: [];
@@ -14,6 +14,7 @@ export type Ctxs = {
   addressLocation: {};
   setMode: (s: string) => void;
   mode: string;
+  placeDetailHandler: (place_id: string) => void;
 };
 export const HostTypeContext = createContext<Ctxs | null>(null);
 
@@ -23,6 +24,7 @@ const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
     setFirstSelect(type);
   };
 
+  //Location component
   const [inputVal, setInputVal] = useState<string>("");
   const [predictions, setPredictions] = useState<any[] | null>(null);
   const [addressDetail, setAddressDetail] = useState<any[] | null>(null);
@@ -30,8 +32,20 @@ const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
     lat: "",
     lng: "",
   });
-
   const [mode, setMode] = useState<string>("inputVal");
+
+  const placeDetailHandler = async (place_id: string) => {
+    const endPoint = `/google/placeID?place_id=${place_id}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&language=ko`;
+    const response = await fetch(endPoint);
+    const data = await response.json();
+    const addressArray = data.result.address_components;
+    const lat = data.result.geometry.location.lat;
+    const lng = data.result.geometry.location.lng;
+    setAddressDetail(addressArray);
+    setAddressLocation({ lat: lat, lng: lng });
+    setMode("locationDetail");
+  };
+
   return (
     <HostTypeContext.Provider
       value={{
@@ -47,6 +61,7 @@ const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
         addressLocation,
         setMode,
         mode,
+        placeDetailHandler,
       }}
     >
       {children}

@@ -7,6 +7,8 @@ import {
   ListItemText,
   TextField,
 } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { HostTypeContext } from "../context/hostType";
 
 type con = {
   setInputVal: (s: string) => void;
@@ -15,7 +17,8 @@ type con = {
   placeDetailHandler: (s: string) => void;
 };
 
-function LocationSelect(props: con) {
+function LocationSelect() {
+  const ctx = useContext(HostTypeContext);
   return (
     <Box>
       <TextField
@@ -23,22 +26,22 @@ function LocationSelect(props: con) {
         label="Search"
         variant="outlined"
         onChange={(e) => {
-          props.setInputVal(e.currentTarget.value);
+          ctx?.setInputVal(e.currentTarget.value);
         }}
-        value={props.inputVal}
+        value={ctx?.inputVal}
       />
-      {props.predictions &&
-        props.predictions.map((item) => {
+      {ctx?.predictions &&
+        ctx?.predictions.map((item) => {
           return (
             <List>
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemText
                     primary={item.description}
-                    key={item.description}
+                    key={item.place_id}
                     onClick={(i) => {
                       console.log(item.place_id);
-                      props.placeDetailHandler(item.place_id);
+                      ctx?.placeDetailHandler(item.place_id);
                     }}
                   />
                 </ListItemButton>

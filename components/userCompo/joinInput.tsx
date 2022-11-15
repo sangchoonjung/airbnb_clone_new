@@ -27,15 +27,17 @@ function JoinInput(props: insertAndBack) {
   const nameval = nameRef.current?.value;
   const birthval = birthRef.current?.value;
   const passwordval = passwordRef.current?.value;
+
   const [test, setTest] = useState(true);
   // console.log(nameval);
-  // if (!(nameval == null)) {
-  //   console.log(test);
-  //   return setTest(false);
-  // }
-  // useEffect(() => {
-
-  // }, [nameval]);
+  useEffect(() => {
+    const name = nameRef.current?.value!;
+    console.log("nameval-------------", name);
+    // if (name?.length > 0) {
+    //   console.log(test);
+    //   return setTest(false);
+    // }
+  }, [nameRef.current?.value]);
 
   const joinSubmitHandler: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -125,7 +127,7 @@ function JoinInput(props: insertAndBack) {
             backgroundColor: test === true ? "grey" : "pink",
           }}
           type="submit"
-          disabled={test as boolean}
+          disabled={test}
         >
           테스트
         </Button>

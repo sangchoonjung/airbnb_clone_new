@@ -15,50 +15,35 @@ import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
 import { useContext, useEffect, useState } from "react";
 import LocationSelect from "../../../components/hostSelectType/locationSelect";
 import LocationDetail from "../../../components/hostSelectType/locationDetail";
+import { HostTypeContext } from "../../../components/context/hostType";
+import LocationCheck from "../../../components/hostSelectType/locationCheck";
+import Image from "next/image";
 
 function Location() {
+  const ctx = useContext(HostTypeContext);
+
   const router = useRouter();
   const { itemId } = router.query;
-  const [inputVal, setInputVal] = useState<string>("");
-  const [predictions, setPredictions] = useState<any[] | null>(null);
-  const [addressDetail, setAddressDetail] = useState<any[] | null>(null);
-  const [addressLocation, setAddressLocation] = useState<{}>({
-    lat: "",
-    lng: "",
-  });
-  const [mode, setMode] = useState<string>("inputVal");
 
   useEffect(() => {
     const timerID = setTimeout(async () => {
-      // console.log("QQQQQ", inputVal);
-      if (inputVal.trim().length === 0) {
+      // console.log(inputVal);
+      if (ctx?.inputVal?.trim().length === 0) {
         return;
       }
-      const endPoint = `/google/autocomplete?input=${inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`;
+      const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`;
       const response = await fetch(endPoint);
       const data = await response.json();
       console.log(data.predictions);
-      setPredictions(data.predictions);
+      ctx?.setPredictions(data.predictions);
     }, 1000);
-
     //1초이내의 타이핑은 모두 취소 처리함.
     return () => {
       // console.log(timerID, "........");
       clearTimeout(timerID);
     };
-  }, [inputVal]);
+  }, [ctx?.inputVal]);
 
-  const placeDetailHandler = async (place_id: string) => {
-    const endPoint = `/google/placeID?place_id=${place_id}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&language=ko`;
-    const response = await fetch(endPoint);
-    const data = await response.json();
-    const addressArray = data.result.address_components;
-    const lat = data.result.geometry.location.lat;
-    const lng = data.result.geometry.location.lng;
-    setAddressDetail(addressArray);
-    setAddressLocation({ lat: lat, lng: lng });
-    setMode("locationDetail");
-  };
   // console.log(addressLocation, addressDetail, "gkgkgkgkgkg");
   //   const [selectPrivacy, setSelectPrivacy] = useState<string | null>(null);
   const prevStep = () => {
@@ -76,7 +61,7 @@ function Location() {
     // console.log(data.message._id);
     router.push("/become-a-host/" + itemId + "/location");
   };
-
+  const location = { lat: 35.1653428, lng: 126.9092003 };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -130,6 +115,19 @@ function Location() {
             나가기
           </Button>
         </Box>
+        <Box>
+          <img
+            draggable={false}
+            src={`https://maps.googleapis.com/maps/api/staticmap?center=${location.lat},${location.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
+            alt={"none"}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              verticalAlign: "bottom",
+            }}
+          />
+        </Box>
         <Box
           sx={{
             my: 5,
@@ -137,22 +135,12 @@ function Location() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            position: "absolute",
           }}
         >
-          {mode === "inputVal" && (
-            <LocationSelect
-              setInputVal={setInputVal}
-              inputVal={inputVal}
-              predictions={predictions as []}
-              placeDetailHandler={placeDetailHandler}
-            />
-          )}
-          {mode === "locationDetail" && (
-            <LocationDetail
-              addressDetail={addressDetail}
-              addressLocation={addressLocation}
-            />
-          )}
+          {ctx?.mode === "inputVal" && <LocationSelect />}
+          {ctx?.mode === "locationDetail" && <LocationDetail />}
+          {ctx?.mode === "checkLocation" && <LocationCheck />}
         </Box>
 
         {/* 하단버튼 */}
