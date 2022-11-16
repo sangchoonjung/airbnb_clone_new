@@ -12,7 +12,7 @@ const CreateHostApi: NextApiHandler = async (req, res) => {
 
   const { method } = req;
   const item = req.body;
-  //유니크아이디 있을때 바로 생성
+  //유니크아이디 없을때 바로 생성
   if (method === "POST") {
     if (!item._id) {
       const response = await HostDB.create({

@@ -29,14 +29,15 @@ function Location() {
     const timerID = setTimeout(async () => {
       // console.log(inputVal);
       if (ctx?.inputVal?.trim().length === 0) {
-        return ;
+        return;
       }
-      const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`;
+      const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&types=address`;
       const response = await fetch(endPoint);
       const data = await response.json();
-      console.log(data.predictions);
       ctx?.setPredictions(data.predictions);
+      // console.log(data.predictions, "aaaaaaaa");
     }, 1000);
+
     //1초이내의 타이핑은 모두 취소 처리함.
     return () => {
       // console.log(timerID, "........");
@@ -51,19 +52,25 @@ function Location() {
   };
 
   const nextStep = async () => {
+    const { address, lat, lng } = ctx?.userPickLocation;
+    console.log(address, lat, lng);
     const response = await fetch("/api/hostApi/createHostApi", {
       method: "POST",
-      body: JSON.stringify({ _id: itemId }),
+      body: JSON.stringify({
+        _id: itemId,
+        location: { address: address, lat: lat, lng: lng },
+      }),
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();
     console.log(data, "!!!!!!!!!!!!");
     // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/location");
+    router.push("/become-a-host/" + itemId + "/personnel");
   };
+  //정적맵 기본 위도,경도
   const baseLocation = { lat: 35.1653428, lng: 126.9092003 };
   return (
-    <Grid container component="main" sx={{ height: "100vh" }}>
+    <Grid container component="main" sx={{ height: "95vh" }}>
       <CssBaseline />
       {/* 왼쪽 */}
       <Grid
@@ -110,41 +117,50 @@ function Location() {
           <Button
             variant="outlined"
             color="inherit"
-            style={{ backgroundColor: "#999999",position: "absolute",top:10 }}
+            style={{
+              backgroundColor: "#999999",
+              position: "absolute",
+              top: 10,
+            }}
           >
             나가기
           </Button>
         </Box>
-        <Box>
-          <img
-            draggable={false}
-            src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
-            alt={"none"}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              verticalAlign: "bottom",
-              position:"relative"
-            }}
-          />
-        </Box>
+        {ctx?.mode !== "checkLocation" && (
+          <Box>
+            <img
+              draggable={false}
+              src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
+              alt={"none"}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                verticalAlign: "bottom",
+                position: "relative",
+              }}
+            />
+          </Box>
+        )}
         <Box
           sx={{
-            my: 5,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
-            alignItems: "center",
             position: "absolute",
-            top:100,
-            left:1000,
-            backgroundColor:"white",
-            
+            backgroundColor: "white",
           }}
         >
           {ctx?.mode === "inputVal" && <LocationSelect />}
           {ctx?.mode === "locationDetail" && <LocationDetail />}
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            backgroundColor: "white",
+            position: "sticky",
+          }}
+        >
           {ctx?.mode === "checkLocation" && <LocationCheck />}
         </Box>
 
@@ -153,7 +169,11 @@ function Location() {
           <Button variant="contained" onClick={prevStep}>
             뒤로
           </Button>
-          <Button variant="contained">다음</Button>
+          {ctx.mode === "checkLocation" && (
+            <Button variant="contained" onClick={nextStep}>
+              다음
+            </Button>
+          )}
         </Box>
       </Grid>
     </Grid>

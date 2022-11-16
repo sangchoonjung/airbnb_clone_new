@@ -6,7 +6,11 @@ const hostSchema = new mongoose.Schema<HostType>({
   group: String,
   type: String,
   detail: String,
-  location: String,
+  location: {
+    address: String,
+    lat: String,
+    lng: String,
+  },
   personnel: {
     guest: Number,
     bed: Number,

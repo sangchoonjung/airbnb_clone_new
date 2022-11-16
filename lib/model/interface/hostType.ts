@@ -1,9 +1,13 @@
-type UserType = {
+type HostType = {
   uniqueId: string;
   group: string;
   type: string;
   detail: string;
-  location: string;
+  location: {
+    address: string;
+    lat: string;
+    lng: string;
+  };
   personnel: {
     guest: number;
     bed: number;
@@ -14,4 +18,4 @@ type UserType = {
   convenience: [];
   picture: [];
 };
-export default UserType;
+export default HostType;

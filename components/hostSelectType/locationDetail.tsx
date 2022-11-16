@@ -16,11 +16,18 @@ function LocationDetail() {
   };
   const ad = useRef();
   return (
-    <>
+    <Box
+      style={{
+        top: 100,
+        position: "absolute",
+        left: 50,
+      }}
+    >
       <Box
         sx={{
           width: 500,
           maxWidth: "100%",
+          backgroundColor: "white",
         }}
       >
         <form>
@@ -79,9 +86,7 @@ function LocationDetail() {
               borderRadius: 2,
             }}
             type="submit"
-            onClick={() => {
-              ctx?.setMode("checkLocation");
-            }}
+            onClick={GoNextStep}
           >
             계속
           </Button>
@@ -93,7 +98,7 @@ function LocationDetail() {
           뒤로
         </Button>
       </Box>
-    </>
+    </Box>
   );
 }
 

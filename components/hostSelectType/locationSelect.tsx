@@ -10,31 +10,24 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { HostTypeContext } from "../context/hostType";
 
-type con = {
-  setInputVal: (s: string) => void;
-  inputVal: string;
-  predictions: any[];
-  placeDetailHandler: (s: string) => void;
-};
-
 function LocationSelect() {
   const ctx = useContext(HostTypeContext);
   return (
-    <Box>
+    <Box style={{ display: "flex", flexDirection: "column" }}>
       <TextField
         id="outlined-basic"
         label="Search"
         variant="outlined"
-        sx={{width:"27rem"}}
+        sx={{ width: "27rem", top: 100, left: 100, bgcolor: "white" }}
         onChange={(e) => {
           ctx?.setInputVal(e.currentTarget.value);
         }}
         value={ctx?.inputVal}
       />
-      {ctx?.predictions &&
-        ctx?.predictions.map((item) => {
-          return (
-            <List>
+      <List>
+        {ctx?.predictions &&
+          ctx?.predictions.map((item) => {
+            return (
               <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemText
@@ -47,9 +40,9 @@ function LocationSelect() {
                   />
                 </ListItemButton>
               </ListItem>
-            </List>
-          );
-        })}
+            );
+          })}
+      </List>
     </Box>
   );
 }
