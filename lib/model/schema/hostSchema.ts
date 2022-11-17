@@ -18,7 +18,7 @@ const hostSchema = new mongoose.Schema<HostType>({
     bathRoom: Number,
     bathRoomPerOne: Boolean,
   },
-  convenience: Array,
+  convenience: [{ basic: Array, special: Array, safety: Array }],
   picture: Array,
 });
 

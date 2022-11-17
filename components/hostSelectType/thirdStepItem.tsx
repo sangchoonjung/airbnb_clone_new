@@ -20,6 +20,7 @@ function ThirdStepItem(props: con) {
             onClick={() => {
               props.setSelectPrivacy(item);
             }}
+            defaultValue={privacyType[0]}
           >
             <Box>{item}</Box>
           </ToggleButton>

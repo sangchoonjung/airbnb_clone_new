@@ -1,20 +1,10 @@
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  TextField,
-} from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
-import { green } from "@mui/material/colors";
-import Icon from "@mui/material/Icon";
 
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
 
@@ -34,13 +24,18 @@ function Personnel() {
       method: "POST",
       body: JSON.stringify({
         _id: itemId,
+        personnel: {
+          guest: guestCount,
+          bed: bedCount,
+          bathRoom: bathRoomCount,
+        },
       }),
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();
     console.log(data, "!!!!!!!!!!!!");
     // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/personnel");
+    router.push("/become-a-host/" + itemId + "/convenience");
   };
   return (
     <Grid container component="main" sx={{ height: "95vh" }}>
@@ -223,7 +218,9 @@ function Personnel() {
           <Button variant="contained" onClick={prevStep}>
             뒤로
           </Button>
-          <Button variant="contained">다음</Button>
+          <Button variant="contained" onClick={nextStep}>
+            다음
+          </Button>
         </Box>
       </Grid>
     </Grid>
