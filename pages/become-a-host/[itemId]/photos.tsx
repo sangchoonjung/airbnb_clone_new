@@ -23,6 +23,7 @@ const RealUploadPhotos = () => {
     const formData = new FormData();
     formData.append("itemId", itemId as string);
     ctx?.files.forEach((one) => {
+      // console.log(typeof one);
       formData.append("photos", one);
     });
 
