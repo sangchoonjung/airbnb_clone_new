@@ -8,6 +8,9 @@ import HostUploadPhotoContextProvider, {
 } from "../../../components/context/hostUploadPhoto";
 import EmptyPhotoBox from "../../../components/hostSelectType/photos/emptyPhotoBox";
 import PreviewPhotoBox from "../../../components/hostSelectType/photos/previewPhotoBox";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { firebaseApp } from "../../../lib/data/firebase-config";
+import { v4 as uuidv4 } from "uuid";
 
 const RealUploadPhotos = () => {
   const ctx = useContext(HostUploadPhotoContext);
@@ -19,17 +22,34 @@ const RealUploadPhotos = () => {
 
   const nextStep = async () => {
     const { itemId } = router.query;
-    const response = await fetch("/api/hostApi/createHostApi", {
-      method: "POST",
-      body: JSON.stringify({
-        _id: itemId,
-      }),
-      headers: { "Content-type": "application/json" },
-    });
-    const data = await response.json();
-    console.log(data, "!!!!!!!!!!!!");
-    // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/photos");
+    //storage 작업지원
+    const storage = getStorage(firebaseApp);
+    //storage기준으로 업로드할 하위폴더,파일의 경로를 설정
+    const dirRef = ref(storage, "hosting/" + itemId);
+    const photoURI: string[] = [];
+    for (let i = 0; i < ctx?.files.length; i++) {
+      const fileRef = ref(dirRef, uuidv4());
+      //파일을 파이어베이스에 업로드
+      const rst = await uploadBytes(fileRef);
+      // console.log(rst);
+      //접근할수있는 URL을 가져옴.
+      const url = await getDownloadURL(fileRef);
+      // console.log(url);
+      photoURI.push(url);
+    }
+    console.log(photoURI);
+
+    // const response = await fetch("/api/hostApi/createHostApi", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     _id: itemId,
+    //   }),
+    //   headers: { "Content-type": "application/json" },
+    // });
+    // const data = await response.json();
+    // console.log(data, "!!!!!!!!!!!!");
+    // // console.log(data.message._id);
+    // router.push("/become-a-host/" + itemId + "/photos");
   };
 
   return (
@@ -92,7 +112,9 @@ const RealUploadPhotos = () => {
         <Button variant="contained" onClick={prevStep}>
           뒤로
         </Button>
-        <Button variant="contained">다음</Button>
+        <Button variant="contained" onClick={nextStep}>
+          다음
+        </Button>
       </Box>
     </Box>
   );
