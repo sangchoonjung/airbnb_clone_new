@@ -61,7 +61,7 @@ function Personnel() {
             fontWeight: "bold",
           }}
         >
-          숙소에서 맞이할 최대 인원수를 알려주세요.
+          숙소 기본 정보를 알려주세요
         </Box>
       </Grid>
       {/* 오른쪽 */}
@@ -73,13 +73,17 @@ function Personnel() {
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+        }}
       >
         <Box
           style={{
             display: "flex",
             justifyContent: "end",
-            margin: 30,
+            // margin: 30,
           }}
         >
           <Button

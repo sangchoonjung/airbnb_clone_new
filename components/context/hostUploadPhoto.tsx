@@ -28,9 +28,10 @@ const HostUploadPhotoContextProvider = ({
   };
 
   const removeFiles = (file: File) => {
+    // console.log(files.includes(file));
     if (files.includes(file)) {
-      const result = files.filter((item) => item != file);
-      return setFiles((current) => [...result]);
+      const result = files.filter((item) => item !== file);
+      return setFiles(result);
     }
   };
 

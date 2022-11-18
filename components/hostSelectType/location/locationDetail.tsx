@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { FormEventHandler, useRef, useContext } from "react";
 import { createTextSpan } from "typescript";
-import { HostTypeContext } from "../context/hostType";
+import { HostTypeContext } from "../../context/hostType";
 type con = {
   addressDetail: [];
   addressLocation: {};
@@ -18,9 +18,12 @@ function LocationDetail() {
   return (
     <Box
       style={{
-        top: 100,
+        top: 200,
+        left: 150,
         position: "absolute",
-        left: 50,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       }}
     >
       <Box
@@ -93,9 +96,13 @@ function LocationDetail() {
         </form>
       </Box>
       {/* 하단버튼 */}
-      <Box style={{ display: "flex", justifyContent: "space-between" }}>
-        <Button variant="contained" onClick={backStep}>
-          뒤로
+      <Box style={{ margin: 10 }}>
+        <Button
+          variant="contained"
+          onClick={backStep}
+          sx={{ bgcolor: "#FF385C" }}
+        >
+          주소 다시 찾아보기
         </Button>
       </Box>
     </Box>

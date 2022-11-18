@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext, useEffect, useRef } from "react";
-import { HostTypeContext } from "../context/hostType";
+import { HostTypeContext } from "../../context/hostType";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import RoomIcon from "@mui/icons-material/Room";
 //래핑으로 감싸서 컨포넌트 이중처리
@@ -30,7 +30,7 @@ export function MapComponent() {
   }, []);
   return (
     <>
-      <Box id="map" ref={ref} sx={{ height: "90vh", width: "100%" }}></Box>
+      <Box id="map" ref={ref} sx={{ height: "80vh", width: "100%" }}></Box>
       <RoomIcon
         sx={{
           position: "absolute",
@@ -48,18 +48,22 @@ function LocationCheck() {
   const ctx = useContext(HostTypeContext);
   // console.log("체크");
   return (
-    <Box>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Wrapper apiKey={"AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM"}>
         <MapComponent />
       </Wrapper>
-      <Box style={{ display: "flex", justifyContent: "center" }}>
+      {/* 하단버튼 */}
+      <Box style={{ margin: 5 }}>
         <Button
           variant="contained"
           onClick={() => {
             ctx?.setMode("locationDetail");
           }}
+          sx={{ bgcolor: "#FF385C" }}
         >
-          이전
+          주소 다시 확인하기
         </Button>
       </Box>
     </Box>

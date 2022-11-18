@@ -15,7 +15,7 @@ type HostType = {
     bathRoom: number;
     bathRoomPerOne: boolean;
   };
-  convenience: [{ basic: []; special: []; safety: [] }];
+  convenience: { basic: []; special: []; safety: [] };
   picture: [];
 };
 export default HostType;

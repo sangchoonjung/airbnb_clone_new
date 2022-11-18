@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/router";
 import { useState, useRef, useContext } from "react";
 import HostUploadPhotoContextProvider, {
   HostUploadPhotoContext,
@@ -10,6 +11,26 @@ import PreviewPhotoBox from "../../../components/hostSelectType/photos/previewPh
 
 const RealUploadPhotos = () => {
   const ctx = useContext(HostUploadPhotoContext);
+  const router = useRouter();
+  const prevStep = () => {
+    router.back();
+    // console.log("QQQ");
+  };
+
+  const nextStep = async () => {
+    const { itemId } = router.query;
+    const response = await fetch("/api/hostApi/createHostApi", {
+      method: "POST",
+      body: JSON.stringify({
+        _id: itemId,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+    const data = await response.json();
+    console.log(data, "!!!!!!!!!!!!");
+    // console.log(data.message._id);
+    router.push("/become-a-host/" + itemId + "/photos");
+  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -65,15 +86,12 @@ const RealUploadPhotos = () => {
         style={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "end",
-          alignItems: "end",
-          position: "absolute",
-          bottom: 0,
-
-          //   flexDirection: "column",
+          justifyContent: "space-between",
         }}
       >
-        <Button variant="contained">뒤로</Button>
+        <Button variant="contained" onClick={prevStep}>
+          뒤로
+        </Button>
         <Button variant="contained">다음</Button>
       </Box>
     </Box>

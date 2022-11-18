@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { HostTypeContext } from "../context/hostType";
+import { HostTypeContext } from "../../context/hostType";
 
 function LocationSelect() {
   const ctx = useContext(HostTypeContext);
@@ -18,15 +18,15 @@ function LocationSelect() {
         id="outlined-basic"
         label="Search"
         variant="outlined"
-        sx={{ width: "27rem", top: 100, left: 100, bgcolor: "white" }}
+        sx={{ width: "27rem", top: 200, left: 200, bgcolor: "white" }}
         onChange={(e) => {
           ctx?.setInputVal(e.currentTarget.value);
         }}
         value={ctx?.inputVal}
       />
-      <List>
+      <List sx={{ width: "27rem", top: 200, left: 200, bgcolor: "white" }}>
         {ctx?.predictions &&
-          ctx?.predictions.map((item) => {
+          ctx?.predictions.map((item: any) => {
             return (
               <ListItem disablePadding>
                 <ListItemButton>

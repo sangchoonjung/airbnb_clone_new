@@ -13,8 +13,8 @@ function EmptyPhotoBox() {
     evt.stopPropagation();
     //드롭된 파일명
     const droppedFiles = Array.from(evt.dataTransfer.files); //파일 배열
+    ctx?.addFiles(droppedFiles);
     if (droppedFiles.length > 0) {
-      ctx?.addFiles(droppedFiles);
       ctx?.setMode("uploadingPicture");
     }
   };
@@ -25,8 +25,11 @@ function EmptyPhotoBox() {
     //픽업된 파일명
     const droppedFiles = Array.from(evt.target.files);
     ctx?.addFiles(droppedFiles);
+    if (droppedFiles.length > 0) {
+      ctx?.setMode("uploadingPicture");
+    }
   };
-  // console.log(ctx?.files, "업로드한 파일");
+  // console.log(ctx?.files, "업로드한 파일(드롭,픽업 모두포함)");
 
   return (
     <Box
@@ -36,6 +39,9 @@ function EmptyPhotoBox() {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
+        width: "700px",
+        height: "500px",
+        // objectFit: "cover",
       }}
       // 드래그 오버 , 드랍 모두 다 이벤트 걸어줘야한다.
       onDragOver={(evt) => {

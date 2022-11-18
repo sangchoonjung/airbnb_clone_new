@@ -13,10 +13,10 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
 import { useContext, useEffect, useState } from "react";
-import LocationSelect from "../../../components/hostSelectType/locationSelect";
-import LocationDetail from "../../../components/hostSelectType/locationDetail";
+import LocationSelect from "../../../components/hostSelectType/location/locationSelect";
+import LocationDetail from "../../../components/hostSelectType/location/locationDetail";
 import { HostTypeContext } from "../../../components/context/hostType";
-import LocationCheck from "../../../components/hostSelectType/locationCheck";
+import LocationCheck from "../../../components/hostSelectType/location/locationCheck";
 import Image from "next/image";
 
 function Location() {
@@ -70,7 +70,7 @@ function Location() {
   //정적맵 기본 위도,경도
   const baseLocation = { lat: 35.1653428, lng: 126.9092003 };
   return (
-    <Grid container component="main" sx={{ height: "95vh" }}>
+    <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
       {/* 왼쪽 */}
       <Grid
@@ -119,15 +119,15 @@ function Location() {
             color="inherit"
             style={{
               backgroundColor: "#999999",
-              position: "absolute",
-              top: 10,
+              // position: "absolute",
+              // top: 10,
             }}
           >
             나가기
           </Button>
         </Box>
-        {ctx?.mode !== "checkLocation" && (
-          <Box>
+        <Box>
+          {ctx?.mode !== "checkLocation" && (
             <img
               draggable={false}
               src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
@@ -140,8 +140,9 @@ function Location() {
                 position: "relative",
               }}
             />
-          </Box>
-        )}
+          )}
+        </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -153,12 +154,13 @@ function Location() {
           {ctx?.mode === "inputVal" && <LocationSelect />}
           {ctx?.mode === "locationDetail" && <LocationDetail />}
         </Box>
+
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             backgroundColor: "white",
-            position: "sticky",
+            position: "relative",
           }}
         >
           {ctx?.mode === "checkLocation" && <LocationCheck />}

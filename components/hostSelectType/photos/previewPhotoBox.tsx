@@ -11,19 +11,31 @@ function PreviewPhotoBox() {
   return (
     <Box
       sx={{
-        width: "80%",
+        width: "50%",
       }}
     >
-      <Grid container rowSpacing={2} columnSpacing={2}>
+      <Grid container rowSpacing={4} columnSpacing={5}>
         {ctx?.files.map((file, index) => {
           return (
-            <Grid item md={index === 0 ? 12 : 6} sx={{ position: "relative" }}>
+            <Grid
+              item
+              md={index === 0 ? 12 : 6}
+              // sx={{ position: "relative" }}
+              key={file.name}
+            >
               <PreviewPhotoBoxItem target={file} isCover={index === 0} />
             </Grid>
           );
         })}
 
-        <Grid item md={6} sx={{ position: "relative" }}>
+        <Grid
+          item
+          md={12}
+          sx={{
+            position: "relative",
+            display: "flex",
+          }}
+        >
           <EmptyPhotoBox />
         </Grid>
       </Grid>

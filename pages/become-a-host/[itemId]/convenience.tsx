@@ -7,18 +7,16 @@ import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
+import {
+  basicList,
+  specialList,
+  safetyObjects,
+} from "../../../lib/data/convenidenceList";
+
 function Convenience() {
-  const selectList_1 = [
-    "무선인터넷",
-    "TV",
-    "주방",
-    "세탁기",
-    "건물 내 무료주차",
-    "건물 내 유료주차",
-    "에어컨",
-    "업무 전용 공간",
-  ];
   const [selected_1, setSelected_1] = useState<any[]>([]);
+  const [selected_2, setSelected_2] = useState<any[]>([]);
+  const [selected_3, setSelected_3] = useState<any[]>([]);
   //   console.log(selected_1, "선택한 배열");
 
   const select_1Handler = (item: any) => {
@@ -32,6 +30,29 @@ function Convenience() {
       });
     }
   };
+  const select_2Handler = (item: any) => {
+    if (selected_2.includes(item)) {
+      const result = selected_2.filter((prev) => prev != item);
+      console.log(result);
+      return setSelected_2(result);
+    } else {
+      setSelected_2((current) => {
+        return [...current, item];
+      });
+    }
+  };
+  const select_3Handler = (item: any) => {
+    if (selected_3.includes(item)) {
+      const result = selected_3.filter((prev) => prev != item);
+      console.log(result);
+      return setSelected_3(result);
+    } else {
+      setSelected_3((current) => {
+        return [...current, item];
+      });
+    }
+  };
+
   console.log(selected_1);
   const router = useRouter();
   const prevStep = () => {
@@ -44,6 +65,9 @@ function Convenience() {
       method: "POST",
       body: JSON.stringify({
         _id: itemId,
+        convenience: [
+          { basic: selected_1, special: selected_2, safety: selected_3 },
+        ],
       }),
       headers: { "Content-type": "application/json" },
     });
@@ -119,25 +143,77 @@ function Convenience() {
           }}
         >
           <Box>
-            <Typography>숙소 편의시설 정보를 추가하세요</Typography>
+            <Typography variant="h4">
+              숙소 편의시설 정보를 추가하세요
+            </Typography>
+            <Typography variant="h6">
+              여기에 추가하려는 편의시설이 보이지 않더라도 걱정하지 마세요!
+              숙소를 등록한 후에 편의시설을 추가할 수 있습니다.
+            </Typography>
           </Box>
+
           <Box style={{ width: "50%" }}>
-            {selectList_1.map((item) => {
-              return (
-                <ToggleButton
-                  value={item}
-                  key={item}
-                  color="warning"
-                  //   selected={= item}
-                  onClick={() => {
-                    select_1Handler(item);
-                  }}
-                  selected={selected_1.includes(item)}
-                >
-                  <Box>{item}</Box>
-                </ToggleButton>
-              );
-            })}
+            <Box>
+              {basicList.map((item) => {
+                return (
+                  <ToggleButton
+                    value={item}
+                    key={item}
+                    color="warning"
+                    //   selected={= item}
+                    onClick={() => {
+                      select_1Handler(item);
+                    }}
+                    selected={selected_1.includes(item)}
+                    sx={{ m: 1 }}
+                  >
+                    <Box>{item}</Box>
+                  </ToggleButton>
+                );
+              })}
+            </Box>
+
+            <Box>
+              <Typography>특별히 내세울 만한 편의시설이 있나요?</Typography>
+              {specialList.map((item) => {
+                return (
+                  <ToggleButton
+                    value={item}
+                    key={item}
+                    color="warning"
+                    //   selected={= item}
+                    onClick={() => {
+                      select_2Handler(item);
+                    }}
+                    selected={selected_2.includes(item)}
+                    sx={{ m: 1 }}
+                  >
+                    <Box>{item}</Box>
+                  </ToggleButton>
+                );
+              })}
+            </Box>
+
+            <Box>
+              <Typography>다음과 같은 안전 관련 물품이 있나요?</Typography>
+              {safetyObjects.map((item) => {
+                return (
+                  <ToggleButton
+                    value={item}
+                    key={item}
+                    color="warning"
+                    //   selected={= item}
+                    onClick={() => {
+                      select_3Handler(item);
+                    }}
+                    selected={selected_3.includes(item)}
+                    sx={{ m: 1 }}
+                  >
+                    <Box>{item}</Box>
+                  </ToggleButton>
+                );
+              })}
+            </Box>
           </Box>
         </Box>
 
