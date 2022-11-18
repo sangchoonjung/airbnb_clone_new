@@ -19,17 +19,23 @@ const RealUploadPhotos = () => {
 
   const nextStep = async () => {
     const { itemId } = router.query;
-    const response = await fetch("/api/hostApi/createHostApi", {
+    //폼데이터객체를 만든다
+    const formData = new FormData();
+    formData.append("itemId", itemId as string);
+    ctx?.files.forEach((one) => {
+      formData.append("photos", one);
+    });
+
+    const response = await fetch("/api/hostApi/uploadPhotos", {
       method: "POST",
-      body: JSON.stringify({
-        _id: itemId,
-      }),
-      headers: { "Content-type": "application/json" },
+      body: formData,
     });
     const data = await response.json();
-    console.log(data, "!!!!!!!!!!!!");
+    alert(response.status);
+
+    console.log(data, "파일업로드 요청처리");
     // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/photos");
+    // router.push("/become-a-host/" + itemId + "/photos");
   };
 
   return (
@@ -92,7 +98,9 @@ const RealUploadPhotos = () => {
         <Button variant="contained" onClick={prevStep}>
           뒤로
         </Button>
-        <Button variant="contained">다음</Button>
+        <Button variant="contained" onClick={nextStep}>
+          다음
+        </Button>
       </Box>
     </Box>
   );
