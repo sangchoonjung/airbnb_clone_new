@@ -83,7 +83,7 @@ export default function Header() {
       </Box>
       <Menu
         anchorEl={anchorEl}
-        open={!!anchorEl}
+        open={anchorEl}
         onClose={closeMenuHandle}
         MenuListProps={{
           "aria-labelledby": "basic-button",

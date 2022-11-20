@@ -7,14 +7,20 @@ import { useState, useContext } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useRouter } from "next/router";
 import { HostTypeContext } from "../../components/context/hostType";
+import LeftGrid from "../../components/custom/hostLeftGrid";
+import HostExitButton from "../../components/custom/hostSelectHeader";
+import HostSelectfooter from "../../components/custom/hostSelectfooter";
 
 function propertyTypeGroup() {
   const ctx = useContext(HostTypeContext);
   console.log(ctx?.firstSelect);
   const router = useRouter();
+  const typeList = ["아파트", "주택", "별채", "부티크호텔"];
+
   const prevStep = () => {
     router.push("/become-a-host");
   };
+
   const nextStep = async () => {
     const response = await fetch("/api/hostApi/createHostApi", {
       method: "POST",
@@ -28,31 +34,7 @@ function propertyTypeGroup() {
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          호스팅할 숙소 유형을 알려주세요
-        </Box>
-      </Grid>
+      <LeftGrid showText={"호스팅할 숙소 유형을 알려주세요"} />
       {/* 오른쪽 */}
       <Grid
         item
@@ -62,81 +44,47 @@ function propertyTypeGroup() {
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+        }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{ backgroundColor: "#999999" }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostExitButton />
         <Box
           sx={{
-            my: 5,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <ToggleButton
-            value="아파트"
-            color="warning"
-            selected={ctx?.firstSelect === "아파트"}
-            onClick={() => {
-              ctx?.setFirstHandler("아파트");
-            }}
-          >
-            아파트
-          </ToggleButton>
-          <ToggleButton
-            value="주택"
-            color="warning"
-            selected={ctx?.firstSelect === "주택"}
-            onClick={() => {
-              ctx?.setFirstHandler("주택");
-            }}
-          >
-            주택
-          </ToggleButton>
-          <ToggleButton
-            value="별채"
-            color="warning"
-            selected={ctx?.firstSelect === "별채"}
-            onClick={() => {
-              ctx?.setFirstHandler("별채");
-            }}
-          >
-            별채
-          </ToggleButton>
-          <ToggleButton
-            value="부티크 호텔"
-            color="warning"
-            selected={ctx?.firstSelect === "부티크 호텔"}
-            onClick={() => {
-              ctx?.setFirstHandler("부티크 호텔");
-            }}
-          >
-            부티크 호텔
-          </ToggleButton>
+          {typeList.map((item: string) => {
+            return (
+              <ToggleButton
+                value={item}
+                color="warning"
+                selected={ctx?.firstSelect == item}
+                onClick={() => {
+                  ctx?.setFirstHandler!(item);
+                }}
+                key={item}
+                sx={{
+                  width: "15rem",
+                  height: "6rem",
+                  marginBottom: 2,
+                  border: "solid 1px #999999",
+                  justifyContent: "start",
+                  borderRadius: 5,
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "black",
+                }}
+              >
+                {item}
+              </ToggleButton>
+            );
+          })}
         </Box>
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );

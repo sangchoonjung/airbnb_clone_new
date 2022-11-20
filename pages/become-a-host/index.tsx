@@ -1,11 +1,15 @@
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import HostExitButton from "../../components/custom/hostSelectHeader";
+import { AiTwotoneHome } from "react-icons/ai";
+import { RiHomeSmileLine, RiArrowRightSLine } from "react-icons/ri";
+import LeftGrid from "../../components/custom/hostLeftGrid";
+
 function BecomeAHost() {
   const { data, status } = useSession();
   //   console.log(data);
@@ -15,31 +19,7 @@ function BecomeAHost() {
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          {data?.user?.name}님,환영합니다
-        </Box>
-      </Grid>
+      <LeftGrid showText={`${data?.user.name}님 환영합니다!!`} />
       {/* 오른쪽 */}
       <Grid
         item
@@ -51,74 +31,91 @@ function BecomeAHost() {
         square
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{ backgroundColor: "#999999" }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostExitButton />
         <Box
           sx={{
-            my: 5,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          숙소 등록 완료하기
+          <Typography variant="h5" sx={{ fontWeight: 900, marginBottom: 2 }}>
+            숙소 등록 완료하기
+          </Typography>
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+            sx={{
+              width: "20rem",
+              height: "6rem",
+              marginBottom: 2,
+              border: "solid 1px #999999",
+              justifyContent: "start",
+            }}
           >
-            주택 숙소
+            <AiTwotoneHome style={{ fontSize: 20, marginRight: 10 }} />
+            숙소 등록일
           </Button>
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+            sx={{
+              width: "20rem",
+              height: "6rem",
+              marginBottom: 2,
+              border: "solid 1px #999999",
+              justifyContent: "start",
+            }}
           >
-            아파트 숙소
+            <AiTwotoneHome style={{ fontSize: 20, marginRight: 10 }} />
+            별채 숙소 등록일
           </Button>
         </Box>
         <Box
           sx={{
-            my: 8,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            marginTop: 2,
           }}
         >
-          숙소 등록 시작하기
+          <Typography variant="h5" sx={{ fontWeight: 900, marginBottom: 2 }}>
+            숙소 등록 시작하기
+          </Typography>
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+            sx={{
+              width: "20rem",
+              height: "6rem",
+              marginBottom: 2,
+              border: "none",
+              borderRadius: 0,
+              borderBottom: "solid 1px #999999",
+              justifyContent: "start",
+            }}
             onClick={goToNext}
           >
-            새로운 숙소 등록하기 (이거만 누르기)
+            <RiHomeSmileLine style={{ fontSize: 20, marginRight: 10 }} />
+            새로운 숙소 등록하기
+            <RiArrowRightSLine style={{ marginLeft: 100, fontSize: 20 }} />
           </Button>
           <Button
             variant="outlined"
             color="inherit"
-            sx={{ px: 30, py: 3, my: 1 }}
-            fullWidth
+            sx={{
+              width: "20rem",
+              height: "6rem",
+              marginBottom: 2,
+              border: "none",
+              borderRadius: 0,
+              borderBottom: "solid 1px #999999",
+              justifyContent: "start",
+            }}
           >
+            <RiHomeSmileLine style={{ fontSize: 20, marginRight: 10 }} />
             기존 숙소 복사하기
+            <RiArrowRightSLine style={{ marginLeft: 100, fontSize: 20 }} />
           </Button>
         </Box>
       </Grid>

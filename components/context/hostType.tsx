@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { ReactNode, useState } from "react";
 
 export type Ctxs = {
-  firstSelect?: string | null;
+  firstSelect?: string;
   setFirstHandler?: (type: string) => void;
   setInputVal: (s: string) => void;
   inputVal: string | null;
@@ -24,7 +24,7 @@ export type Ctxs = {
 export const HostTypeContext = createContext<Ctxs | null>(null);
 
 const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
-  const [firstSelect, setFirstSelect] = useState<string | null>(null);
+  const [firstSelect, setFirstSelect] = useState<string>("");
   const setFirstHandler = (type: string) => {
     setFirstSelect(type);
   };

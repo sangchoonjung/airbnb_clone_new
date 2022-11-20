@@ -9,7 +9,7 @@ type con = {
   selectedType: string;
 };
 
-function SecondStepItem(props: con) {
+function PropertyTypeItem(props: con) {
   //   console.log(property, "pppppppppppppppppppp");
   const ctx = useContext(HostTypeContext);
 
@@ -26,19 +26,24 @@ function SecondStepItem(props: con) {
               onClick={() => {
                 props.setselectedType(item.property);
               }}
+              sx={{
+                width: "25rem",
+                border: "solid 1px #999999",
+                justifyContent: "start",
+                borderRadius: 3,
+                color: "black",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: 2,
+                alignItems: "start",
+                // boxShadow: "initial",
+              }}
             >
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "start",
-                }}
-              >
-                <Box style={{ fontWeight: "bold", color: "black" }}>
-                  {item.property}
-                </Box>
-                <Box>{item.description}</Box>
-              </Box>
+              <Typography style={{ fontWeight: "bold", color: "black" }}>
+                {item.property}
+              </Typography>
+              <Typography>{item.description}</Typography>
             </ToggleButton>
           );
         })}
@@ -127,4 +132,4 @@ function SecondStepItem(props: con) {
   );
 }
 
-export default SecondStepItem;
+export default PropertyTypeItem;

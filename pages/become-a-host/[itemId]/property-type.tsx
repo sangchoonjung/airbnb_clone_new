@@ -5,8 +5,10 @@ import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
 import { Box, Button } from "@mui/material";
 import { HostTypeContext } from "../../../components/context/hostType";
-import ToggleButton from "@mui/material/ToggleButton";
-import SecondStepItem from "../../../components/hostSelectType/secondStepItem";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
+import HostLeftGrid from "../../../components/custom/hostLeftGrid";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
+import PropertyTypeItem from "../../../components/hostSelectType/propertyTypeItem";
 
 function propertyType() {
   const router = useRouter();
@@ -32,31 +34,7 @@ function propertyType() {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          다음 중 숙소를 가장 잘 설명하는 문구는 무엇인가요?
-        </Box>
-      </Grid>
+      <HostLeftGrid showText="다음중 숙소를 가장 잘 설명하는 문구는 무엇인가요?" />
       {/* 오른쪽 */}
       <Grid
         item
@@ -68,44 +46,20 @@ function propertyType() {
         square
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{ backgroundColor: "#999999" }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostSelectHeader />
         <Box
           sx={{
-            my: 5,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <SecondStepItem
+          <PropertyTypeItem
             setselectedType={setselectedType}
             selectedType={selectedType as string}
           />
         </Box>
-        {/* 하단버튼 */}
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );
