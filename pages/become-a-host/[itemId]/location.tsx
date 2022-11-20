@@ -11,7 +11,7 @@ import {
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
+import ThirdStepItem from "../../../components/hostSelectType/privacyTypeItem";
 import { useContext, useEffect, useState } from "react";
 import LocationSelect from "../../../components/hostSelectType/location/locationSelect";
 import LocationDetail from "../../../components/hostSelectType/location/locationDetail";

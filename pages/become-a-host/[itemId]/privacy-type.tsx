@@ -3,8 +3,11 @@ import { Box, Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import ThirdStepItem from "../../../components/hostSelectType/thirdStepItem";
 import { useContext, useState } from "react";
+import HostLeftGrid from "../../../components/custom/hostLeftGrid";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
+import PrivacyTypeItem from "../../../components/hostSelectType/privacyTypeItem";
 
 function privacyType() {
   const router = useRouter();
@@ -28,31 +31,7 @@ function privacyType() {
 
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          게스트가 머무르게 될 숙소의 종류가 무엇인가요?
-        </Box>
-      </Grid>
+      <HostLeftGrid showText="게스트가 사용할 숙소 유형을 선택하여주세요" />
       {/* 오른쪽 */}
       <Grid
         item
@@ -62,46 +41,27 @@ function privacyType() {
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          // justifyContent: "center",
+        }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{ backgroundColor: "#999999" }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostSelectHeader />
         <Box
           sx={{
-            my: 5,
-            mx: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
+            marginTop: 5,
           }}
         >
-          <ThirdStepItem
+          <PrivacyTypeItem
             setSelectPrivacy={setSelectPrivacy}
             selectPrivacy={selectPrivacy as string}
           />
         </Box>
-        {/* 하단버튼 */}
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );

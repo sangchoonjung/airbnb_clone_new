@@ -58,19 +58,24 @@ function PropertyTypeItem(props: con) {
               onClick={() => {
                 props.setselectedType(item.property);
               }}
+              sx={{
+                width: "25rem",
+                border: "solid 1px #999999",
+                justifyContent: "start",
+                borderRadius: 3,
+                color: "black",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: 2,
+                alignItems: "start",
+                // boxShadow: "initial",
+              }}
             >
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "start",
-                }}
-              >
-                <Box style={{ fontWeight: "bold", color: "black" }}>
-                  {item.property}
-                </Box>
-                <Box>{item.description}</Box>
-              </Box>
+              <Typography style={{ fontWeight: "bold", color: "black" }}>
+                {item.property}
+              </Typography>
+              <Typography>{item.description}</Typography>
             </ToggleButton>
           );
         })}
@@ -85,23 +90,28 @@ function PropertyTypeItem(props: con) {
               onClick={() => {
                 props.setselectedType(item.property);
               }}
+              sx={{
+                width: "25rem",
+                border: "solid 1px #999999",
+                justifyContent: "start",
+                borderRadius: 3,
+                color: "black",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: 2,
+                alignItems: "start",
+                // boxShadow: "initial",
+              }}
             >
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "start",
-                }}
-              >
-                <Box style={{ fontWeight: "bold", color: "black" }}>
-                  {item.property}
-                </Box>
-                <Box>{item.description}</Box>
-              </Box>
+              <Typography style={{ fontWeight: "bold", color: "black" }}>
+                {item.property}
+              </Typography>
+              <Typography>{item.description}</Typography>
             </ToggleButton>
           );
         })}
-      {ctx?.firstSelect === "부티크 호텔" &&
+      {ctx?.firstSelect === "부티크호텔" &&
         property[3].types.map((item) => {
           return (
             <ToggleButton
@@ -112,19 +122,24 @@ function PropertyTypeItem(props: con) {
               onClick={() => {
                 props.setselectedType(item.property);
               }}
+              sx={{
+                width: "25rem",
+                border: "solid 1px #999999",
+                justifyContent: "start",
+                borderRadius: 3,
+                color: "black",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                marginBottom: 2,
+                alignItems: "start",
+                // boxShadow: "initial",
+              }}
             >
-              <Box
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "start",
-                }}
-              >
-                <Box style={{ fontWeight: "bold", color: "black" }}>
-                  {item.property}
-                </Box>
-                <Box>{item.description}</Box>
-              </Box>
+              <Typography style={{ fontWeight: "bold", color: "black" }}>
+                {item.property}
+              </Typography>
+              <Typography>{item.description}</Typography>
             </ToggleButton>
           );
         })}
