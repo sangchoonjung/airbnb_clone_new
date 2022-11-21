@@ -17,5 +17,10 @@ type HostType = {
   };
   convenience: { basic: []; special: []; safety: [] };
   picture: [];
+  title: string;
+  description: string;
+  price: number;
+  receipt: Date;
+  publish: boolean;
 };
 export default HostType;

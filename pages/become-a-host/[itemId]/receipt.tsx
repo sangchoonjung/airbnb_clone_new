@@ -9,9 +9,14 @@ import Typography from "@mui/material/Typography";
 import { GetServerSideProps } from "next";
 import HostDB from "../../../lib/model/schema/hostSchema";
 import HostType from "../../../lib/model/interface/hostType";
+import { BsCalendar2Check } from "react-icons/bs";
+import { MdCalendarToday } from "react-icons/md";
+import { BsPencil } from "react-icons/bs";
+import ReceiptBoxItem from "../../../components/hostSelectType/receipt/receiptBoxItem";
 
-const Title = ({ hosting }: { hosting: HostType }) => {
+const Recript = ({ hosting }: { hosting: HostType }) => {
   const ctx = useContext(HostUploadPhotoContext);
+  console.log(hosting.picture);
   const router = useRouter();
   const { itemId } = router.query;
   const [titleText, setTitleText] = useState<string | null>(null);
@@ -20,53 +25,30 @@ const Title = ({ hosting }: { hosting: HostType }) => {
     // console.log("QQQ");
   };
   const nextStep = async () => {
-    const response = await fetch("/api/hostApi/createHostApi", {
-      method: "POST",
-      body: JSON.stringify({ title: titleText, _id: itemId }),
-      headers: { "Content-type": "application/json" },
-    });
-    const data = await response.json();
-    console.log(data, "!!!!!!!!!!!!");
-    // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/description");
+    if (confirm("완료하시겠습니까??")) {
+      router.push("/become-a-host/" + itemId + "/publish-celebration");
+    } else {
+      alert("취소됨");
+    }
   };
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <HostSelectHeader />
-
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          // position: "relative",
-          // backgroundColor: "white",
           animation: "fadein 2s",
-          // justifyContent: "center",
-          mt: 20,
+          mt: 7,
         }}
       >
-        <Typography>이제 {hosting.type} 에 이름을 지어주세요.</Typography>
-        <Typography>
-          숙소 이름은 짧을수록 효과적입니다.나중에 언제든지 변경할수있으니,너무
-          걱정하지마세요.
-        </Typography>
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          sx={{ width: "30rem" }}
-          color="info"
-          value={titleText}
-          multiline
-          rows={5}
-          onChange={(e) => {
-            setTitleText(e.currentTarget.value);
-            console.log(titleText?.length);
-          }}
+        <ReceiptBoxItem
+          imgSrc={hosting.picture[0].extraUrl as string}
+          title={hosting.title}
+          price={hosting.price}
         />
-        <Typography>{titleText?.length}/32</Typography>
       </Box>
-
       <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
     </Box>
   );
@@ -82,11 +64,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
 
   return {
-    //바로 json 파일을 넘겨버리면 에러뜸
+    //바로 json 파일을 넘겨버리면 에러뜸! 패치를 통해서 할때만 제이슨으로 응답받아서 넘길수있다
     props: {
       hosting: JSON.parse(JSON.stringify(hosting)),
     },
   };
 };
-Title.isInLayout = true;
-export default Title;
+Recript.isInLayout = true;
+export default Recript;

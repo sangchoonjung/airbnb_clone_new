@@ -1,14 +1,15 @@
 import { Box, Button } from "@mui/material";
 type handler = {
-  prevStep: () => void;
-  nextStep: () => void;
+  prevStep?: () => void;
+  nextStep?: () => void;
 };
 function HostSelectfooter(props: handler) {
   return (
     <Box
       style={{
-        position: "fixed",
+        position: "absolute",
         bottom: 30,
+        // width: "100%",
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",

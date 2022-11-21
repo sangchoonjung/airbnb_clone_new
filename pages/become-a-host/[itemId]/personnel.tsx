@@ -7,6 +7,9 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 
 import { BiMinusCircle, BiPlusCircle } from "react-icons/bi";
+import HostLeftGrid from "../../../components/custom/hostLeftGrid";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
 
 function Personnel() {
   const router = useRouter();
@@ -39,72 +42,30 @@ function Personnel() {
   };
   return (
     <Grid container component="main" sx={{ height: "95vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          숙소 기본 정보를 알려주세요
-        </Box>
-      </Grid>
+      <HostLeftGrid showText="숙소 기본정보를 알려주세요" />
       {/* 오른쪽 */}
       <Grid
         item
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
         }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            // margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{
-              backgroundColor: "#999999",
-              position: "absolute",
-              top: 10,
-            }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostSelectHeader />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            position: "relative",
+            // position: "relative",
             backgroundColor: "white",
+            mt: 20,
           }}
         >
           {/* 게스트 */}
@@ -217,15 +178,7 @@ function Personnel() {
           </Box>
         </Box>
 
-        {/* 하단버튼 */}
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );

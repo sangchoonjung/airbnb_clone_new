@@ -9,34 +9,24 @@ import HostSelectHeader from "../../../components/custom/hostSelectHeader";
 import HostSelectfooter from "../../../components/custom/hostSelectfooter";
 import PrivacyTypeItem from "../../../components/hostSelectType/privacyTypeItem";
 
-function privacyType() {
+function PublishCelebration() {
   const router = useRouter();
   const { itemId } = router.query;
-  const [selectPrivacy, setSelectPrivacy] = useState<string | null>(null);
   const prevStep = () => {
     router.back();
   };
 
   const nextStep = async () => {
-    const response = await fetch("/api/hostApi/createHostApi", {
-      method: "POST",
-      body: JSON.stringify({ detail: selectPrivacy, _id: itemId }),
-      headers: { "Content-type": "application/json" },
-    });
-    const data = await response.json();
-    console.log(data, "!!!!!!!!!!!!");
-    // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/location");
+    router.push("/");
   };
-
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <HostLeftGrid showText="게스트가 사용할 숙소 유형을 선택하여주세요" />
+      <HostLeftGrid showText="축하드립니다 숙소 등록에 성공하였습니다!" />
       {/* 오른쪽 */}
       <Grid
         item
         xs={12}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
@@ -54,16 +44,11 @@ function privacyType() {
             alignItems: "center",
             marginTop: 5,
           }}
-        >
-          <PrivacyTypeItem
-            setSelectPrivacy={setSelectPrivacy}
-            selectPrivacy={selectPrivacy as string}
-          />
-        </Box>
-        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
+        ></Box>
+        {/* 완료 버튼자리 */}
       </Grid>
     </Grid>
   );
 }
-privacyType.isInLayout = true;
-export default privacyType;
+PublishCelebration.isInLayout = true;
+export default PublishCelebration;

@@ -10,8 +10,8 @@ function HostLeftGrid(props: text) {
       <Grid
         item
         xs={false}
-        sm={4}
-        md={7}
+        // sm={2}
+        md={6}
         style={{
           backgroundImage:
             "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",

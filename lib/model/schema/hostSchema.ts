@@ -20,6 +20,11 @@ const hostSchema = new mongoose.Schema<HostType>({
   },
   convenience: { basic: Array, special: Array, safety: Array },
   picture: Array,
+  title: String,
+  description: String,
+  price: Number,
+  receipt: Date,
+  publish: Boolean,
 });
 
 export default (mongoose.models.HostDB as mongoose.Model<HostType>) ||

@@ -6,6 +6,8 @@ import { useState, useRef, useContext } from "react";
 import HostUploadPhotoContextProvider, {
   HostUploadPhotoContext,
 } from "../../../components/context/hostUploadPhoto";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
 import EmptyPhotoBox from "../../../components/hostSelectType/photos/emptyPhotoBox";
 import PreviewPhotoBox from "../../../components/hostSelectType/photos/previewPhotoBox";
 
@@ -19,40 +21,33 @@ const RealUploadPhotos = () => {
 
   const nextStep = async () => {
     const { itemId } = router.query;
-    const response = await fetch("/api/hostApi/createHostApi", {
-      method: "POST",
-      body: JSON.stringify({
-        _id: itemId,
-      }),
-      headers: { "Content-type": "application/json" },
-    });
-    const data = await response.json();
-    console.log(data, "!!!!!!!!!!!!");
-    // console.log(data.message._id);
-    router.push("/become-a-host/" + itemId + "/photos");
+    //폼데이터객체를 만든다
+    if (ctx?.files.length > 4) {
+      const formData = new FormData();
+      formData.append("itemId", itemId as string);
+      ctx?.files.forEach((one) => {
+        // console.log(typeof one);
+        formData.append("photos", one);
+      });
+
+      const response = await fetch("/api/hostApi/uploadPhotos", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      alert(response.status);
+
+      console.log(data, "파일업로드 요청처리");
+      // console.log(data.message._id);
+      router.push("/become-a-host/" + itemId + "/title");
+    } else {
+      alert("5장이상 업로드 하여주세요");
+    }
   };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "end",
-          margin: 30,
-        }}
-      >
-        <Button
-          variant="outlined"
-          color="inherit"
-          style={{
-            backgroundColor: "#999999",
-            position: "absolute",
-            top: 10,
-          }}
-        >
-          나가기
-        </Button>
-      </Box>
+      <HostSelectHeader />
 
       <Box
         sx={{
@@ -80,20 +75,7 @@ const RealUploadPhotos = () => {
         {ctx?.mode == "inputPicture" && <EmptyPhotoBox />}
         {ctx?.mode == "uploadingPicture" && <PreviewPhotoBox />}
       </Box>
-
-      {/* 하단버튼 */}
-      <Box
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Button variant="contained" onClick={prevStep}>
-          뒤로
-        </Button>
-        <Button variant="contained">다음</Button>
-      </Box>
+      <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
     </Box>
   );
 };

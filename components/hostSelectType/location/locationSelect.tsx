@@ -18,13 +18,13 @@ function LocationSelect() {
         id="outlined-basic"
         label="Search"
         variant="outlined"
-        sx={{ width: "27rem", top: 200, left: 200, bgcolor: "white" }}
+        sx={{ width: "27rem", bgcolor: "white" }}
         onChange={(e) => {
           ctx?.setInputVal(e.currentTarget.value);
         }}
         value={ctx?.inputVal}
       />
-      <List sx={{ width: "27rem", top: 200, left: 200, bgcolor: "white" }}>
+      <List sx={{ width: "27rem", bgcolor: "white" }}>
         {ctx?.predictions &&
           ctx?.predictions.map((item: any) => {
             return (

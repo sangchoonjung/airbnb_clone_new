@@ -12,6 +12,9 @@ import {
   specialList,
   safetyObjects,
 } from "../../../lib/data/convenidenceList";
+import HostLeftGrid from "../../../components/custom/hostLeftGrid";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
 
 function Convenience() {
   const [selected_1, setSelected_1] = useState<any[]>([]);
@@ -53,7 +56,7 @@ function Convenience() {
     }
   };
 
-  console.log(selected_1);
+  // console.log(selected_1);
   const router = useRouter();
   const prevStep = () => {
     router.back();
@@ -78,74 +81,29 @@ function Convenience() {
   };
   return (
     <Grid container component="main" sx={{ height: "95vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          숙소 편의시설 추가
-        </Box>
-      </Grid>
+      <HostLeftGrid showText="숙소 편의 시설 추가" />
       {/* 오른쪽 */}
       <Grid
         item
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{
-              backgroundColor: "#999999",
-              position: "absolute",
-              top: 10,
-            }}
-          >
-            나가기
-          </Button>
-        </Box>
+        <HostSelectHeader />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            position: "relative",
+            // position: "relative",
             backgroundColor: "white",
           }}
         >
           <Box>
-            <Typography variant="h4">
-              숙소 편의시설 정보를 추가하세요
-            </Typography>
             <Typography variant="h6">
               여기에 추가하려는 편의시설이 보이지 않더라도 걱정하지 마세요!
               숙소를 등록한 후에 편의시설을 추가할 수 있습니다.
@@ -217,15 +175,7 @@ function Convenience() {
           </Box>
         </Box>
 
-        {/* 하단버튼 */}
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          <Button variant="contained" onClick={nextStep}>
-            다음
-          </Button>
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );

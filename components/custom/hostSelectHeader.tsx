@@ -11,7 +11,7 @@ function HostSelectHeader() {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        margin: 30,
+        margin: 20,
       }}
     >
       <FaAirbnb style={{ fontSize: 50 }} onClick={goHome} />

@@ -18,6 +18,9 @@ import LocationDetail from "../../../components/hostSelectType/location/location
 import { HostTypeContext } from "../../../components/context/hostType";
 import LocationCheck from "../../../components/hostSelectType/location/locationCheck";
 import Image from "next/image";
+import HostLeftGrid from "../../../components/custom/hostLeftGrid";
+import HostSelectHeader from "../../../components/custom/hostSelectHeader";
+import HostSelectfooter from "../../../components/custom/hostSelectfooter";
 
 function Location() {
   const ctx = useContext(HostTypeContext);
@@ -71,31 +74,7 @@ function Location() {
   const baseLocation = { lat: 35.1653428, lng: 126.9092003 };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <CssBaseline />
-      {/* 왼쪽 */}
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        style={{
-          backgroundImage:
-            "linear-gradient(0deg,rgba(67,34,170,1)0%,rgba(141,33,156,1)35%,rgba(201,37,120,1)100%",
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <Box
-          style={{
-            marginLeft: 50,
-            color: "white",
-            fontSize: 50,
-            fontWeight: "bold",
-          }}
-        >
-          숙소위치는 어디인가요?
-        </Box>
-      </Grid>
+      <HostLeftGrid showText="숙소 위치는 어디인가요?" />
       {/* 오른쪽 */}
       <Grid
         item
@@ -105,28 +84,15 @@ function Location() {
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          position: "relative",
+        }}
       >
-        <Box
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            margin: 30,
-          }}
-        >
-          <Button
-            variant="outlined"
-            color="inherit"
-            style={{
-              backgroundColor: "#999999",
-              // position: "absolute",
-              // top: 10,
-            }}
-          >
-            나가기
-          </Button>
-        </Box>
-        <Box>
+        <HostSelectHeader />
+        <Box sx={{ flex: 1, position: "relative" }}>
           {ctx?.mode !== "checkLocation" && (
             <img
               draggable={false}
@@ -149,12 +115,14 @@ function Location() {
             flexDirection: "column",
             position: "absolute",
             backgroundColor: "white",
+            top: 200,
+            zIndex: 1,
+            width: "80%",
           }}
         >
           {ctx?.mode === "inputVal" && <LocationSelect />}
           {ctx?.mode === "locationDetail" && <LocationDetail />}
         </Box>
-
         <Box
           sx={{
             display: "flex",
@@ -166,17 +134,7 @@ function Location() {
           {ctx?.mode === "checkLocation" && <LocationCheck />}
         </Box>
 
-        {/* 하단버튼 */}
-        <Box style={{ display: "flex", justifyContent: "space-between" }}>
-          <Button variant="contained" onClick={prevStep}>
-            뒤로
-          </Button>
-          {ctx.mode === "checkLocation" && (
-            <Button variant="contained" onClick={nextStep}>
-              다음
-            </Button>
-          )}
-        </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );
