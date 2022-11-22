@@ -76,7 +76,7 @@ function ReceiptBoxItem(props: con) {
             <img
               src={props.imgSrc}
               width="100%"
-              height={"100%"}
+              height="100%"
               alt="none"
               style={{ objectFit: "cover" }}
             />

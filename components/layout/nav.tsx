@@ -4,6 +4,7 @@ import { SyntheticEvent, useState } from "react";
 type Section = { title: string; url: string };
 
 const sections: Section[] = [
+  { title: "신규", url: "#" },
   { title: "한적한 시골", url: "#" },
   { title: "국립공원", url: "#" },
   { title: "해변 바로 앞", url: "#" },

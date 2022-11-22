@@ -18,7 +18,7 @@ export default function CloneLayout({ children }: { children: ReactNode }) {
         <Header />
         <Nav />
       </AppBar>
-      <Container sx={{ height: "120vh" }}>{children}</Container>
+      <Container sx={{ height: "120vh", width: "120vh" }}>{children}</Container>
     </>
   );
 }

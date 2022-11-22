@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { GetServerSideProps } from "next";
 import HostDB from "../../../lib/model/schema/hostSchema";
 import HostType from "../../../lib/model/interface/hostType";
+import mongooseInit from "../../../lib/mongooseInit";
 
 const Title = ({ hosting }: { hosting: HostType }) => {
   const ctx = useContext(HostUploadPhotoContext);
@@ -73,6 +74,7 @@ const Title = ({ hosting }: { hosting: HostType }) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const itemId = context.query.itemId as string;
+  mongooseInit();
   const hosting = await HostDB.findById(itemId).lean();
 
   if (!hosting) {

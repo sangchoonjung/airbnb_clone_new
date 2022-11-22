@@ -13,6 +13,7 @@ import { BsCalendar2Check } from "react-icons/bs";
 import { MdCalendarToday } from "react-icons/md";
 import { BsPencil } from "react-icons/bs";
 import ReceiptBoxItem from "../../../components/hostSelectType/receipt/receiptBoxItem";
+import mongooseInit from "../../../lib/mongooseInit";
 
 const Recript = ({ hosting }: { hosting: HostType }) => {
   const ctx = useContext(HostUploadPhotoContext);
@@ -26,6 +27,17 @@ const Recript = ({ hosting }: { hosting: HostType }) => {
   };
   const nextStep = async () => {
     if (confirm("완료하시겠습니까??")) {
+      const response = await fetch("/api/hostApi/createHostApi", {
+        method: "POST",
+        body: JSON.stringify({
+          receipt: new Date(),
+          publish: true,
+          _id: itemId,
+        }),
+        headers: { "Content-type": "application/json" },
+      });
+      const data = await response.json();
+
       router.push("/become-a-host/" + itemId + "/publish-celebration");
     } else {
       alert("취소됨");
@@ -55,6 +67,7 @@ const Recript = ({ hosting }: { hosting: HostType }) => {
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const itemId = context.query.itemId as string;
+  mongooseInit();
   const hosting = await HostDB.findById(itemId).lean();
 
   if (!hosting) {

@@ -4,17 +4,42 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useContext } from "react";
 import { UserAuthContext } from "../components/context/userAuth";
+import MainShow from "../components/registeredRoom/mainShow";
+import { GetServerSideProps } from "next";
+import { Box, Button } from "@mui/material";
 
-export default function Home() {
+export default function Home(props) {
   const { data, status } = useSession();
   // const ctx = useContext(UserAuthContext);
   // console.log(ctx, "..............");
-  console.log(data);
+  // console.log(props.roomDatas);
   return (
-    <>
-      <h1>메인</h1>
-      <h2>{status}</h2>
-      <h2>{JSON.stringify(data)}</h2>
-    </>
+    <Box sx={{ mt: 5 }}>
+      {/* <h2>{status}</h2>
+      <h2>{JSON.stringify(data)}</h2> */}
+      <MainShow datas={props.roomDatas} />
+    </Box>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context.query);
+  const response = await fetch(
+    "http://localhost:3000/api/hostApi/readHostApi",
+    {
+      method: "POST",
+    }
+  );
+  const roomDatas = await response.json();
+  // console.log(data);
+  if (!roomDatas) {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: {
+      roomDatas: roomDatas.message,
+    },
+  };
+};
