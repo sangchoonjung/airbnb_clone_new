@@ -45,6 +45,9 @@ function PublishCelebration() {
             marginTop: 5,
           }}
         ></Box>
+        <Button onClick={nextStep} variant={"contained"}>
+          완료
+        </Button>
         {/* 완료 버튼자리 */}
       </Grid>
     </Grid>

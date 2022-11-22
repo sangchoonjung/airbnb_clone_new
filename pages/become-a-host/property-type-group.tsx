@@ -15,16 +15,7 @@ function propertyTypeGroup() {
   const ctx = useContext(HostTypeContext);
   console.log(ctx?.firstSelect);
   const router = useRouter();
-  const typeList = [
-    "아파트",
-    "주택",
-    "별채",
-    "부티크호텔",
-    "asd",
-    "asdasd",
-    "asdasd",
-    "adasd",
-  ];
+  const typeList = ["아파트", "주택", "별채", "부티크호텔"];
 
   const prevStep = () => {
     router.push("/become-a-host");

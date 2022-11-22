@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export default function mongooseInit() {
-  const uri = process.env.mongoDB;
+  const uri = process.env.MONGODB_URI;
 
   if (!uri) {
     throw new Error("not connected to MONGO_DB, Check .env.local");
