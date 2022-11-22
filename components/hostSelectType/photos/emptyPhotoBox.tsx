@@ -20,11 +20,11 @@ function EmptyPhotoBox() {
   };
 
   const fileSelectHandle: React.ChangeEventHandler<HTMLInputElement> = (
-    evt
+    evt: any
   ) => {
     //픽업된 파일명
-    const droppedFiles = Array.from(evt.target.files);
-    ctx?.addFiles(droppedFiles);
+    const droppedFiles = Array.from(evt?.target?.files);
+    ctx?.addFiles(droppedFiles as File[]);
     if (droppedFiles.length > 0) {
       ctx?.setMode("uploadingPicture");
     }

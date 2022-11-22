@@ -21,10 +21,10 @@ import { Box } from "@mui/system";
 
 export default function Header() {
   const { data, status } = useSession();
-  const [anchorEl, setAnchorEl] = useState<null | Element>(null);
+  const [anchorEl, setAnchorEl] = useState<Element | null | boolean>(null);
   const router = useRouter();
-  const openMenuHandle: MouseEventHandler = (evt) => {
-    setAnchorEl(evt.currentTarget);
+  const openMenuHandle: MouseEventHandler = (evt: any) => {
+    setAnchorEl(evt?.currentTarget);
   };
   const closeMenuHandle = () => {
     setAnchorEl(null);
@@ -82,8 +82,14 @@ export default function Header() {
         </Button>
       </Box>
       <Menu
-        anchorEl={anchorEl}
-        open={anchorEl}
+        anchorEl={
+          anchorEl as
+            | Element
+            | ((element: Element) => Element)
+            | null
+            | undefined
+        }
+        open={anchorEl as boolean}
         onClose={closeMenuHandle}
         MenuListProps={{
           "aria-labelledby": "basic-button",

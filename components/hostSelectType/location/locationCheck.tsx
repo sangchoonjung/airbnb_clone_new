@@ -7,11 +7,14 @@ import RoomIcon from "@mui/icons-material/Room";
 export function MapComponent() {
   const ctx = useContext(HostTypeContext);
   const ref = useRef<HTMLElement>();
-  console.log(ctx.addressLocation, "세부정보에서 넘어온거");
+  console.log(ctx!.addressLocation, "세부정보에서 넘어온거");
   let map: google.maps.Map;
   useEffect(() => {
     map = new window.google.maps.Map(ref.current!, {
-      center: { lat: ctx?.addressLocation.lat, lng: ctx?.addressLocation.lng },
+      center: {
+        lat: ctx?.addressLocation!.lat!,
+        lng: ctx?.addressLocation!.lng!,
+      },
       zoom: 15,
       zoomControl: false,
       mapTypeControl: false,

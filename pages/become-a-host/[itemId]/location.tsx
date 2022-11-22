@@ -55,7 +55,7 @@ function Location() {
   };
 
   const nextStep = async () => {
-    const { address, lat, lng } = ctx?.userPickLocation;
+    const { address, lat, lng } = ctx?.userPickLocation as any;
     console.log(address, lat, lng);
     const response = await fetch("/api/hostApi/createHostApi", {
       method: "POST",

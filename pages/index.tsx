@@ -8,7 +8,7 @@ import MainShow from "../components/registeredRoom/mainShow";
 import { GetServerSideProps } from "next";
 import { Box, Button } from "@mui/material";
 
-export default function Home(props) {
+export default function Home(props: any) {
   const { data, status } = useSession();
   // const ctx = useContext(UserAuthContext);
   // console.log(ctx, "..............");

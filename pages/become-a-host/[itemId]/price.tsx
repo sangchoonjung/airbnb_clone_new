@@ -12,7 +12,7 @@ function Price() {
   const ctx = useContext(HostUploadPhotoContext);
   const router = useRouter();
   const { itemId } = router.query;
-  const [price, setPrice] = useState<number | null>(13401);
+  const [price, setPrice] = useState<number | null | string>(13401);
   const prevStep = () => {
     router.back();
     // console.log("QQQ");
@@ -67,9 +67,9 @@ function Price() {
             <Button
               sx={{ borderRadius: 20, color: "black" }}
               onClick={() => {
-                setPrice(price - 1000);
+                setPrice((price as number) - 1000);
               }}
-              disabled={price <= 13000 ? true : false}
+              disabled={(price as number) <= 13000 ? true : false}
             >
               <BiMinusCircle
                 style={{
@@ -89,13 +89,13 @@ function Price() {
               //   multiline
               //   rows={5}
               onChange={(e) => {
-                setPrice(e.currentTarget.value);
+                setPrice(e!.currentTarget!.value);
               }}
             />
             <Button
               sx={{ borderRadius: 20, color: "black" }}
               onClick={() => {
-                setPrice(price + 1000);
+                setPrice((price as number) + 1000);
               }}
             >
               <BiPlusCircle style={{ fontSize: 40 }} />

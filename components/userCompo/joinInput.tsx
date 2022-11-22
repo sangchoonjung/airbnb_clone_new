@@ -32,30 +32,36 @@ function JoinInput(props: insertAndBack) {
   });
   const [buttonActivate, setButtonActivate] = useState(true);
 
-  
-
-  
   useEffect(() => {
-    if(inputValue.name.length>1){
-      setValidCheck((e)=>{return {...e,name:false}})
-    }else{
-      setValidCheck((e)=>{return {...e,name:true}})
+    if (inputValue.name.length > 1) {
+      setValidCheck((e) => {
+        return { ...e, name: false };
+      });
+    } else {
+      setValidCheck((e) => {
+        return { ...e, name: true };
+      });
     }
-    if(inputValue.birth.length>7){
-      setValidCheck((e)=>{return {...e,birth:false}})
-    }else{
-      setValidCheck((e)=>{return {...e,birth:true}})
+    if (inputValue.birth.length > 7) {
+      setValidCheck((e) => {
+        return { ...e, birth: false };
+      });
+    } else {
+      setValidCheck((e) => {
+        return { ...e, birth: true };
+      });
     }
-    if(inputValue.password.length>7){
-      setValidCheck((e)=>{return {...e,password:false}})
+    if (inputValue.password.length > 7) {
+      setValidCheck((e) => {
+        return { ...e, password: false };
+      });
       setButtonActivate(false);
-    }else{
-      setValidCheck((e)=>{return {...e,password:true}})
+    } else {
+      setValidCheck((e) => {
+        return { ...e, password: true };
+      });
       setButtonActivate(true);
     }
-    
-
-
   }, [inputValue]);
 
   const joinSubmitHandler: FormEventHandler = async (evt) => {
@@ -147,7 +153,7 @@ function JoinInput(props: insertAndBack) {
             });
           }}
         />
-                <label style={{ fontSize: 12, color: "#666666" }}>
+        <label style={{ fontSize: 12, color: "#666666" }}>
           8자 이상입니다.
         </label>
 

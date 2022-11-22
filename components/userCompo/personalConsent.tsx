@@ -2,15 +2,14 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
 type con = {
-  essentialhandleChange: (b: any) => void;
-  selectivehandleChange: (b: any) => void;
-  Essentialchecked: boolean;
-  selectiveChecked: boolean;
-  submitAct: boolean;
-  buttonActivate:boolean;
+  essentialhandleChange?: (b: any) => void;
+  selectivehandleChange?: (b: any) => void;
+  Essentialchecked?: boolean;
+  selectiveChecked?: boolean;
+  submitAct?: boolean;
+  buttonActivate?: boolean;
 };
 function PersonalConsent(props: con) {
-
   return (
     <Box>
       <Typography sx={{ fontSize: 12 }}>

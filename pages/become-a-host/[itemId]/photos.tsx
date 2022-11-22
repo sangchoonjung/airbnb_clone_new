@@ -22,7 +22,7 @@ const RealUploadPhotos = () => {
   const nextStep = async () => {
     const { itemId } = router.query;
     //폼데이터객체를 만든다
-    if (ctx?.files.length > 4) {
+    if (ctx?.files.length! > 4) {
       const formData = new FormData();
       formData.append("itemId", itemId as string);
       ctx?.files.forEach((one) => {

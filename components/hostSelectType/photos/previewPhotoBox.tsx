@@ -23,7 +23,7 @@ function PreviewPhotoBox() {
               // sx={{ position: "relative" }}
               key={file.name}
             >
-              <PreviewPhotoBoxItem target={file} isCover={index === 0} />
+              <PreviewPhotoBoxItem target={file} />
             </Grid>
           );
         })}

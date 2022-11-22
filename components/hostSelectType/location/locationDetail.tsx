@@ -39,7 +39,7 @@ function LocationDetail() {
             label="주/도"
             hiddenLabel
             type="text"
-            value={ctx?.addressDetail[3]?.long_name}
+            value={ctx!.addressDetail[3]!.long_name}
             style={{ marginBottom: 10 }}
           />
           <TextField

@@ -15,7 +15,7 @@ import { BsPencil } from "react-icons/bs";
 import ReceiptBoxItem from "../../../components/hostSelectType/receipt/receiptBoxItem";
 import mongooseInit from "../../../lib/mongooseInit";
 
-const Recript = ({ hosting }: { hosting: HostType }) => {
+const Recript = ({ hosting }: { hosting: any }) => {
   const ctx = useContext(HostUploadPhotoContext);
   console.log(hosting.picture);
   const router = useRouter();

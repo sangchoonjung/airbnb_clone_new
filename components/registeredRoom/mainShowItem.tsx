@@ -12,7 +12,7 @@ function MainShowItem(props: con) {
   //   const result = formatDistance(props.datas., new Date(2015, 0, 1));
   return (
     <>
-      {props.datas.map((item: HostType) => {
+      {props.datas.map((item: any) => {
         // console.log(typeof item.receipt);
         return (
           <Grid item xs={2} sm={2} md={4} key={item._id}>

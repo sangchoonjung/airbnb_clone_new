@@ -7,18 +7,18 @@ export type Ctxs = {
   setInputVal: (s: string) => void;
   inputVal: string | null;
   setPredictions: ([]) => void;
-  predictions: [];
-  setAddressDetail: () => void;
-  addressDetail: [];
-  setAddressLocation: () => void;
-  addressLocation: {};
+  predictions: any[] | null;
+  setAddressDetail: ([]) => void;
+  addressDetail: any[];
+  setAddressLocation: ([]) => void;
+  addressLocation: { lat: number; lng: number };
   setMode: (s: string) => void;
   mode: string;
   placeDetailHandler: (place_id: string) => void;
   setUserPickLocation: ({}) => void;
   userPickLocation: {};
-  setAddressFullName: (s: string) => void;
-  addressFullName: string;
+  setAddressFullName?: (s: string) => void;
+  addressFullName?: string;
   addessSubmitHandler: (lat: number, lng: number) => void;
 };
 export const HostTypeContext = createContext<Ctxs | null>(null);
@@ -35,11 +35,11 @@ const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
   //인풋창 오토컴플릿 배열
   const [predictions, setPredictions] = useState<any[] | null>(null);
   //주소배열
-  const [addressDetail, setAddressDetail] = useState<any[] | null>(null);
+  const [addressDetail, setAddressDetail] = useState<any[]>([]);
   //오토컴플릿에서 픽해서 넘어온 주소 풀네임
   const [addressFullName, setAddressFullName] = useState<string>("");
   //장소세부정보에서 나온 위도,경도값
-  const [addressLocation, setAddressLocation] = useState<{}>({
+  const [addressLocation, setAddressLocation] = useState<any>({
     lat: "",
     lng: "",
   });

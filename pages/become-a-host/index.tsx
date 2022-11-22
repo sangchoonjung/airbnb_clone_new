@@ -19,7 +19,7 @@ function BecomeAHost() {
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <LeftGrid showText={`${data?.user.name}님 환영합니다!!`} />
+      <LeftGrid showText={`${data?.user?.name}님 환영합니다!!`} />
       {/* 오른쪽 */}
       <Grid
         item

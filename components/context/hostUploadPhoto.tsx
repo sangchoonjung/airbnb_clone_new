@@ -4,7 +4,7 @@ import UploadPhotos from "../../pages/become-a-host/[itemId]/photos";
 import EmptyPhotoBox from "../hostSelectType/photos/emptyPhotoBox";
 
 export type Ctxs = {
-  files: File[];
+  files: File[] | [];
   addFiles: (f: File[]) => void;
   removeFiles: (file: File) => void;
   setMode: (s: string) => void;
