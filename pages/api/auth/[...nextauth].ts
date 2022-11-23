@@ -83,7 +83,10 @@ export const option: NextAuthOptions = {
           params.append("provider", account?.provider!);
           params.append("providerAccountId", account?.providerAccountId!);
 
-          return "/social/socialJoin?" + params.toString();
+          return (
+            `${process.env.SERVER_ADDRESS}/social/socialJoin?` +
+            params.toString()
+          );
         } else {
           //등록된 이메일이 있는경우,로그인시키기
           const response = await fetch(
@@ -102,6 +105,7 @@ export const option: NextAuthOptions = {
             console.log(data, "구글데이터 리턴값");
             return true;
           }
+          return false;
         }
       }
       return false;
