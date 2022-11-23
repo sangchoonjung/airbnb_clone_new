@@ -4,13 +4,12 @@ import { signIn, useSession } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 
 function GoogleLogin() {
-  process.env.SERVER_ADDRESS;
   const googleSigninHandle = () => {
     //새창 띄우기
     const topX = screenX + screen.width / 2 - 300 / 2;
     const topY = screenY + screen.height / 2 - 100 / 2;
     window.open(
-      `http://${process.env.SERVER_ADDRESS}:3000/popup/gAuth`,
+      `${process.env.SERVER_ADDRESS}/popup/gAuth`,
       "popup",
       `width=${topX},height=${topY},top=300,left=800`
     );

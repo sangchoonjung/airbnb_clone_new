@@ -25,7 +25,7 @@ export default function Home(props: any) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log(context.query);
   const response = await fetch(
-    `http://${process.env.SERVER_ADDRESS}:3000/api/hostApi/readHostApi`,
+    `${process.env.SERVER_ADDRESS}/api/hostApi/readHostApi`,
     {
       method: "POST",
     }

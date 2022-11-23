@@ -21,7 +21,7 @@ export const option: NextAuthOptions = {
       async authorize(credentials, req) {
         console.log(credentials, "aaaaaaaaaaaaaaa");
         const response = await fetch(
-          `http://${process.env.SERVER_ADDRESS}/api/userApi/confirmPassApi`,
+          `${process.env.SERVER_ADDRESS}/api/userApi/confirmPassApi`,
           {
             method: "POST",
             body: JSON.stringify({
@@ -66,7 +66,7 @@ export const option: NextAuthOptions = {
       if (account?.provider === "google") {
         //아이디 중복확인 해보기
         const response = await fetch(
-          `http://${process.env.SERVER_ADDRESS}/api/userApi/loginApi`,
+          `${process.env.SERVER_ADDRESS}/api/userApi/loginApi`,
           {
             method: "POST",
             body: JSON.stringify({ email: user.email }),
@@ -87,7 +87,7 @@ export const option: NextAuthOptions = {
         } else {
           //등록된 이메일이 있는경우,로그인시키기
           const response = await fetch(
-            `http://${process.env.SERVER_ADDRESS}/api/userApi/socialLogin`,
+            `${process.env.SERVER_ADDRESS}/api/userApi/socialLogin`,
             {
               method: "POST",
               body: JSON.stringify({
