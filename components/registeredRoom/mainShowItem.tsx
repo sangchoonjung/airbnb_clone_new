@@ -4,12 +4,17 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { formatDistance } from "date-fns";
 import { ko } from "date-fns/locale";
+import { useRouter } from "next/router";
 type con = {
   datas: [];
 };
 
 function MainShowItem(props: con) {
-  //   const result = formatDistance(props.datas., new Date(2015, 0, 1));
+  const router = useRouter();
+  console.log(props.datas);
+  const goToDetail = (item: {}) => {
+    router.push(`/rooms/${item._id}`);
+  };
   return (
     <>
       {props.datas.map((item: any) => {

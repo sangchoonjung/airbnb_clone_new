@@ -9,7 +9,7 @@ function GoogleLogin() {
     const topX = screenX + screen.width / 2 - 300 / 2;
     const topY = screenY + screen.height / 2 - 100 / 2;
     window.open(
-      `${process.env.SERVER_ADDRESS}/popup/gAuth`,
+      `/popup/gAuth`,
       "popup",
       `width=${topX},height=${topY},top=300,left=800`
     );
