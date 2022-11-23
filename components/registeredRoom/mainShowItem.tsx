@@ -11,14 +11,14 @@ type con = {
 
 function MainShowItem(props: con) {
   const router = useRouter();
-  console.log(props.datas);
-  const goToDetail = (item: any) => {
-    router.push(`/rooms/${item._id}`);
+  // console.log(props.datas);
+  const goToDetail = (itemId: any) => {
+    router.push(`/rooms/${itemId}`);
   };
   return (
     <>
       {props.datas.map((item: any) => {
-        // console.log(typeof item.receipt);
+        // console.log(item._id);
         return (
           <Grid item xs={2} sm={2} md={4} key={item._id}>
             <Box
@@ -29,6 +29,7 @@ function MainShowItem(props: con) {
                 width: "300px",
                 height: "380px",
               }}
+              onClick={() => goToDetail(item._id)}
             >
               <Box sx={{ width: "300px", heigh: "300px", p: 1 }}>
                 <img

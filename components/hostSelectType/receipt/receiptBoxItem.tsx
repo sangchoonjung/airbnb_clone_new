@@ -95,7 +95,10 @@ function ReceiptBoxItem(props: con) {
           </Box>
           {explain.map((item) => {
             return (
-              <Box sx={{ display: "flex", flexDirection: "row", my: 2 }}>
+              <Box
+                sx={{ display: "flex", flexDirection: "row", my: 2 }}
+                key={item.title}
+              >
                 <Box>
                   {item.num === 1 && (
                     <BsCalendar2Check style={{ fontSize: 30 }} />

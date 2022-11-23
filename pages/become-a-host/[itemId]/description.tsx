@@ -21,7 +21,7 @@ function Description() {
   const nextStep = async () => {
     const response = await fetch("/api/hostApi/createHostApi", {
       method: "POST",
-      body: JSON.stringify({ dcscription: description, _id: itemId }),
+      body: JSON.stringify({ description: description, _id: itemId }),
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();

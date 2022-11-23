@@ -7,6 +7,7 @@ import { UserAuthContext } from "../components/context/userAuth";
 import MainShow from "../components/registeredRoom/mainShow";
 import { GetServerSideProps } from "next";
 import { Box, Button } from "@mui/material";
+import RoomDetailDataContextProvider from "../components/context/roomDetailData";
 
 export default function Home(props: any) {
   const { data, status } = useSession();
