@@ -12,7 +12,7 @@ type con = {
 function MainShowItem(props: con) {
   const router = useRouter();
   console.log(props.datas);
-  const goToDetail = (item: {}) => {
+  const goToDetail = (item: any) => {
     router.push(`/rooms/${item._id}`);
   };
   return (
