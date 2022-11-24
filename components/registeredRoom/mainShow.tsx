@@ -11,8 +11,8 @@ function MainShow(props: con) {
   return (
     <Grid
       container
-      spacing={{ xs: 2, md: 4 }}
-      columns={{ xs: 2, sm: 4, md: 12 }}
+      spacing={{ xs: 2, md: 12 }}
+      columns={{ xs: 2, sm: 6, md: 12 }}
     >
       <MainShowItem datas={props.datas} />
     </Grid>

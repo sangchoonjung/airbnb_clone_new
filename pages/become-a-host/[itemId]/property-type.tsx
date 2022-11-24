@@ -36,7 +36,16 @@ function propertyType() {
     <Grid container component="main" sx={{ height: "100vh" }}>
       <HostLeftGrid showText="다음중 숙소를 가장 잘 설명하는 문구는 무엇인가요?" />
       {/* 오른쪽 */}
-      <Grid item xs={12} sm={8} md={6} component={Paper} elevation={6} square>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={6}
+        component={Paper}
+        elevation={6}
+        square
+        sx={{ position: "relative" }}
+      >
         <HostSelectHeader />
         <Box
           sx={{
@@ -45,22 +54,18 @@ function propertyType() {
             position: "relative",
             height: "100%",
             width: "100%",
+            maxHeight: "100vh",
+            alignItems: "center",
+            py: 10,
+            overflowY: "scroll",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <PropertyTypeItem
-              setselectedType={setselectedType}
-              selectedType={selectedType as string}
-            />
-          </Box>
-          <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
+          <PropertyTypeItem
+            setselectedType={setselectedType}
+            selectedType={selectedType as string}
+          />
         </Box>
+        <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>
   );

@@ -38,9 +38,9 @@ function BecomeAHost() {
             display: "flex",
             flexDirection: "column",
             position: "relative",
-            height: "100%",
+            // height: "100%",
             width: "100%",
-            maxHeight: "100vh",
+            // maxHeight: "100vh",
             alignItems: "center",
             py: 10,
           }}
@@ -82,7 +82,7 @@ function BecomeAHost() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            marginTop: 2,
+            // marginTop: 2,
           }}
         >
           <Typography variant="h5" sx={{ fontWeight: 900, marginBottom: 2 }}>

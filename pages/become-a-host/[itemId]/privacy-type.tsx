@@ -36,14 +36,12 @@ function privacyType() {
       <Grid
         item
         xs={12}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          // justifyContent: "center",
+          position: "relative",
         }}
       >
         <HostSelectHeader />
@@ -51,8 +49,13 @@ function privacyType() {
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
-            marginTop: 5,
+            py: 10,
+            overflowY: "scroll",
           }}
         >
           <PrivacyTypeItem

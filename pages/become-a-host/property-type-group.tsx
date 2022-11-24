@@ -88,60 +88,6 @@ function propertyTypeGroup() {
               </ToggleButton>
             );
           })}
-          {typeList.map((item: string) => {
-            return (
-              <ToggleButton
-                value={item}
-                color="warning"
-                selected={ctx?.firstSelect == item}
-                onClick={() => {
-                  ctx?.setFirstHandler!(item);
-                }}
-                key={item}
-                sx={{
-                  width: "15rem",
-                  height: "6rem",
-                  marginBottom: 2,
-                  border: "solid 1px #999999",
-                  justifyContent: "start",
-                  borderRadius: 5,
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "black",
-                  alignItems: "center",
-                }}
-              >
-                {item}
-              </ToggleButton>
-            );
-          })}
-          {typeList.map((item: string) => {
-            return (
-              <ToggleButton
-                value={item}
-                color="warning"
-                selected={ctx?.firstSelect == item}
-                onClick={() => {
-                  ctx?.setFirstHandler!(item);
-                }}
-                key={item}
-                sx={{
-                  width: "15rem",
-                  height: "6rem",
-                  marginBottom: 2,
-                  border: "solid 1px #999999",
-                  justifyContent: "start",
-                  borderRadius: 5,
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: "black",
-                  alignItems: "center",
-                }}
-              >
-                {item}
-              </ToggleButton>
-            );
-          })}
         </Box>
         <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>

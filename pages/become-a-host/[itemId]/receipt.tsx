@@ -50,9 +50,13 @@ const Recript = ({ hosting }: { hosting: any }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          position: "relative",
+          height: "100%",
+          width: "100%",
+          maxHeight: "100vh",
           alignItems: "center",
-          animation: "fadein 2s",
-          mt: 7,
+          py: 10,
+          overflowY: "scroll",
         }}
       >
         <ReceiptBoxItem

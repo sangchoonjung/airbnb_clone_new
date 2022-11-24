@@ -13,7 +13,15 @@ import { HostTypeContext } from "../../context/hostType";
 function LocationSelect() {
   const ctx = useContext(HostTypeContext);
   return (
-    <Box style={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        top: 200,
+        left: 150,
+        position: "absolute",
+      }}
+    >
       <TextField
         id="outlined-basic"
         label="Search"

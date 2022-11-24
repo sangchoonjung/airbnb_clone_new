@@ -91,16 +91,20 @@ function Convenience() {
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{ position: "relative" }}
       >
         <HostSelectHeader />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
-            // position: "relative",
-            backgroundColor: "white",
+            py: 10,
+            overflowY: "scroll",
           }}
         >
           <Box>

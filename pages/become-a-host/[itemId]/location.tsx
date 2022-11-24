@@ -1,13 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  TextField,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -80,19 +72,28 @@ function Location() {
         item
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
           position: "relative",
         }}
       >
         <HostSelectHeader />
-        <Box sx={{ flex: 1, position: "relative" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
+            alignItems: "center",
+            py: 10,
+            overflowY: "scroll",
+          }}
+        >
           {ctx?.mode !== "checkLocation" && (
             <img
               draggable={false}
@@ -107,33 +108,18 @@ function Location() {
               }}
             />
           )}
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            position: "absolute",
-            backgroundColor: "white",
-            top: 200,
-            zIndex: 1,
-            width: "80%",
-          }}
-        >
           {ctx?.mode === "inputVal" && <LocationSelect />}
           {ctx?.mode === "locationDetail" && <LocationDetail />}
+          {ctx?.mode === "checkLocation" && <LocationCheck />}
         </Box>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             backgroundColor: "white",
-            position: "relative",
+            position: "absolute",
           }}
-        >
-          {ctx?.mode === "checkLocation" && <LocationCheck />}
-        </Box>
-
+        ></Box>
         <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>

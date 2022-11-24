@@ -53,17 +53,19 @@ const RealUploadPhotos = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
           position: "relative",
-          backgroundColor: "white",
+          height: "100%",
+          width: "100%",
+          maxHeight: "100vh",
+          alignItems: "center",
+          py: 10,
+          overflowY: "scroll",
           animation: "fadein 2s",
         }}
       >
         <Box
           sx={{
-            my: "3rem",
             alignItems: "center",
-            //   justifyContent: "center",
             display: "flex",
             flexDirection: "column",
           }}

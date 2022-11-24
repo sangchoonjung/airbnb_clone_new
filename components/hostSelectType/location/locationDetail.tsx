@@ -18,8 +18,8 @@ function LocationDetail() {
   return (
     <Box
       style={{
-        top: 200,
-        left: 150,
+        top: 100,
+        left: 100,
         position: "absolute",
         display: "flex",
         flexDirection: "column",

@@ -53,8 +53,7 @@ function Personnel() {
         elevation={6}
         square
         sx={{
-          display: "flex",
-          flexDirection: "column",
+          position: "relative",
         }}
       >
         <HostSelectHeader />
@@ -62,15 +61,19 @@ function Personnel() {
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
-            // position: "relative",
-            backgroundColor: "white",
-            mt: 20,
+            py: 20,
+            overflowY: "scroll",
+            justifyContent: "center",
           }}
         >
           {/* 게스트 */}
           <Box
-            style={{
+            sx={{
               flexDirection: "row",
               display: "flex",
               justifyContent: "space-between",
@@ -79,101 +82,89 @@ function Personnel() {
             }}
           >
             <Box>
-              <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
-                게스트
-              </Typography>
+              <Box>
+                <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
+                  게스트
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setGuestCount(guestCount - 1);
+                  }}
+                  disabled={guestCount < 1 ? true : false}
+                >
+                  <BiMinusCircle style={{ fontSize: 40 }} />
+                </Button>
+                <Typography style={{ fontSize: 40 }}>{guestCount}</Typography>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setGuestCount(guestCount + 1);
+                  }}
+                >
+                  <BiPlusCircle style={{ fontSize: 40 }} />
+                </Button>
+              </Box>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setGuestCount(guestCount - 1);
-                }}
-                disabled={guestCount < 1 ? true : false}
-              >
-                <BiMinusCircle style={{ fontSize: 40 }} />
-              </Button>
-              <Typography style={{ fontSize: 40 }}>{guestCount}</Typography>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setGuestCount(guestCount + 1);
-                }}
-              >
-                <BiPlusCircle style={{ fontSize: 40 }} />
-              </Button>
-            </Box>
-          </Box>
-          {/* 침대 */}
-          <Box
-            style={{
-              flexDirection: "row",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "70%",
-            }}
-          >
+            {/* 침대 */}
             <Box>
-              <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
-                침대
-              </Typography>
+              <Box>
+                <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
+                  침대
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setBedCount(bedCount - 1);
+                  }}
+                  disabled={bedCount < 1 ? true : false}
+                >
+                  <BiMinusCircle style={{ fontSize: 40 }} />
+                </Button>
+                <Typography style={{ fontSize: 40 }}>{bedCount}</Typography>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setBedCount(bedCount + 1);
+                  }}
+                >
+                  <BiPlusCircle style={{ fontSize: 40 }} />
+                </Button>
+              </Box>
             </Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setBedCount(bedCount - 1);
-                }}
-                disabled={bedCount < 1 ? true : false}
-              >
-                <BiMinusCircle style={{ fontSize: 40 }} />
-              </Button>
-              <Typography style={{ fontSize: 40 }}>{bedCount}</Typography>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setBedCount(bedCount + 1);
-                }}
-              >
-                <BiPlusCircle style={{ fontSize: 40 }} />
-              </Button>
-            </Box>
-          </Box>
-          {/* 욕실 */}
-          <Box
-            style={{
-              flexDirection: "row",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              width: "70%",
-            }}
-          >
+            {/* 욕실 */}
             <Box>
-              <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
-                욕실
-              </Typography>
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setBathRoomCount(bathRoomCount - 1);
-                }}
-                disabled={bathRoomCount < 1 ? true : false}
-              >
-                <BiMinusCircle style={{ fontSize: 40 }} />
-              </Button>
-              <Typography style={{ fontSize: 40 }}>{bathRoomCount}</Typography>
-              <Button
-                sx={{ borderRadius: 20, color: "black" }}
-                onClick={() => {
-                  setBathRoomCount(bathRoomCount + 1);
-                }}
-              >
-                <BiPlusCircle style={{ fontSize: 40 }} />
-              </Button>
+              <Box>
+                <Typography style={{ fontSize: 30, fontWeight: "bold" }}>
+                  욕실
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", flexDirection: "row" }}>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setBathRoomCount(bathRoomCount - 1);
+                  }}
+                  disabled={bathRoomCount < 1 ? true : false}
+                >
+                  <BiMinusCircle style={{ fontSize: 40 }} />
+                </Button>
+                <Typography style={{ fontSize: 40 }}>
+                  {bathRoomCount}
+                </Typography>
+                <Button
+                  sx={{ borderRadius: 20, color: "black" }}
+                  onClick={() => {
+                    setBathRoomCount(bathRoomCount + 1);
+                  }}
+                >
+                  <BiPlusCircle style={{ fontSize: 40 }} />
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
