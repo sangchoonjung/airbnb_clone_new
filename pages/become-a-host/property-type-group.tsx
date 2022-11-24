@@ -8,8 +8,9 @@ import ToggleButton from "@mui/material/ToggleButton";
 import { useRouter } from "next/router";
 import { HostTypeContext } from "../../components/context/hostType";
 import LeftGrid from "../../components/custom/hostLeftGrid";
-import HostExitButton from "../../components/custom/hostSelectHeader";
+
 import HostSelectfooter from "../../components/custom/hostSelectfooter";
+import HostSelectHeader from "../../components/custom/hostSelectHeader";
 
 function propertyTypeGroup() {
   const ctx = useContext(HostTypeContext);
@@ -40,25 +41,53 @@ function propertyTypeGroup() {
         item
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-        position="relative"
+        sx={{ position: "relative" }}
       >
-        <HostExitButton />
+        <HostSelectHeader />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
-            height: "80%",
+            py: 10,
+            overflowY: "scroll",
           }}
         >
+          {typeList.map((item: string) => {
+            return (
+              <ToggleButton
+                value={item}
+                color="warning"
+                selected={ctx?.firstSelect == item}
+                onClick={() => {
+                  ctx?.setFirstHandler!(item);
+                }}
+                key={item}
+                sx={{
+                  minWidth: "15rem",
+                  minHeight: "6rem",
+                  marginBottom: 2,
+                  border: "solid 1px #999999",
+                  justifyContent: "start",
+                  borderRadius: 5,
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "black",
+                  alignItems: "center",
+                }}
+              >
+                {item}
+              </ToggleButton>
+            );
+          })}
           {typeList.map((item: string) => {
             return (
               <ToggleButton
@@ -79,6 +108,34 @@ function propertyTypeGroup() {
                   fontSize: 20,
                   fontWeight: 600,
                   color: "black",
+                  alignItems: "center",
+                }}
+              >
+                {item}
+              </ToggleButton>
+            );
+          })}
+          {typeList.map((item: string) => {
+            return (
+              <ToggleButton
+                value={item}
+                color="warning"
+                selected={ctx?.firstSelect == item}
+                onClick={() => {
+                  ctx?.setFirstHandler!(item);
+                }}
+                key={item}
+                sx={{
+                  width: "15rem",
+                  height: "6rem",
+                  marginBottom: 2,
+                  border: "solid 1px #999999",
+                  justifyContent: "start",
+                  borderRadius: 5,
+                  fontSize: 20,
+                  fontWeight: 600,
+                  color: "black",
+                  alignItems: "center",
                 }}
               >
                 {item}

@@ -5,8 +5,9 @@ import Paper from "@mui/material/Paper";
 import DetailPictureModal from "./detailPictureModal";
 import { useContext } from "react";
 import { RoomDetailDataContext } from "../../context/roomDetailData";
-
+import Divider from "@mui/material/Divider";
 import LoadingSpinner from "../../custom/loadingSpinner";
+
 type con = {
   item: {
     picture: any[];
@@ -34,44 +35,47 @@ function DetailPicture(props: con) {
     );
   // console.log(ctx?.itemData.picture[0].extraUrl, "컨텍스트 아이템");
   return (
-    <Box sx={{ flexGrow: 1, mb: 2 }}>
-      <Grid container spacing={2}>
-        <Grid item xs={4} md={8}>
-          <Item>
-            <img
-              src={ctx?.itemData.picture[0].extraUrl}
-              alt="커버 사진"
-              width={"100%"}
-              height={"500px"}
-              style={{ objectFit: "cover" }}
-            />
-          </Item>
-        </Grid>
+    <>
+      <Box sx={{ flexGrow: 1, mb: 2 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={4} md={8}>
+            <Item>
+              <img
+                src={ctx?.itemData.picture[0].extraUrl}
+                alt="커버 사진"
+                width={"100%"}
+                height={"500px"}
+                style={{ objectFit: "cover" }}
+              />
+            </Item>
+          </Grid>
 
-        <Grid item xs={8} md={4} sx={{ position: "relative" }}>
-          <Item>
-            <img
-              src={ctx?.itemData.picture[1].extraUrl}
-              alt="1번"
-              width={"100%"}
-              height={"240px"}
-              style={{ objectFit: "cover" }}
-            />
-          </Item>
-          <Item>
-            <img
-              src={ctx?.itemData.picture[2].extraUrl}
-              alt="2번"
-              width={"100%"}
-              height={"240px"}
-              style={{ objectFit: "cover" }}
-            />
-          </Item>
+          <Grid item xs={8} md={4} sx={{ position: "relative" }}>
+            <Item>
+              <img
+                src={ctx?.itemData.picture[1].extraUrl}
+                alt="1번"
+                width={"100%"}
+                height={"240px"}
+                style={{ objectFit: "cover" }}
+              />
+            </Item>
+            <Item>
+              <img
+                src={ctx?.itemData.picture[2].extraUrl}
+                alt="2번"
+                width={"100%"}
+                height={"240px"}
+                style={{ objectFit: "cover" }}
+              />
+            </Item>
 
-          <DetailPictureModal pictureArray={item.picture} />
+            <DetailPictureModal pictureArray={item.picture} />
+          </Grid>
         </Grid>
-      </Grid>
-    </Box>
+      </Box>
+      <Divider sx={{ my: 2 }} />
+    </>
   );
 }
 

@@ -32,7 +32,7 @@ export default function DetailConvenienceModal() {
   if (!ctx?.itemData) {
     return <LoadingSpinner />;
   }
-  console.log(ctx.itemData.convenience, "/////");
+  // console.log(ctx.itemData.convenience, "/////");
   return (
     <Box>
       <Button

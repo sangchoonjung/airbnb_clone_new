@@ -6,23 +6,49 @@ type handler = {
 function HostSelectfooter(props: handler) {
   return (
     <Box
-      style={{
+      sx={{
         position: "absolute",
-        bottom: 30,
-        // width: "100%",
+        bottom: 0,
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        // maxWidth: "100%",
-        // backgroundColor: "yellow",
+        width: "100%",
+        px: 2,
+        pb: 2,
+        backgroundColor: "#ffffff",
+        zIndex: 1,
       }}
     >
-      <Button variant="contained" onClick={props.prevStep}>
+      <Button
+        variant="contained"
+        onClick={props.prevStep}
+        sx={{
+          border: "solid 1px black",
+          color: "white",
+          bgcolor: "black",
+          "&:hover": {
+            backgroundColor: "#999999",
+          },
+          p: 2,
+        }}
+      >
         뒤로
       </Button>
 
-      <Button variant="contained" onClick={props.nextStep}>
+      <Button
+        variant="contained"
+        onClick={props.nextStep}
+        sx={{
+          border: "solid 1px black",
+          color: "white",
+          bgcolor: "black",
+          "&:hover": {
+            backgroundColor: "#999999",
+          },
+          p: 2,
+        }}
+      >
         다음
       </Button>
     </Box>

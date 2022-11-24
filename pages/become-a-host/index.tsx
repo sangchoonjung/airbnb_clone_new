@@ -5,10 +5,11 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import HostExitButton from "../../components/custom/hostSelectHeader";
+
 import { AiTwotoneHome } from "react-icons/ai";
 import { RiHomeSmileLine, RiArrowRightSLine } from "react-icons/ri";
 import LeftGrid from "../../components/custom/hostLeftGrid";
+import HostSelectHeader from "../../components/custom/hostSelectHeader";
 
 function BecomeAHost() {
   const { data, status } = useSession();
@@ -25,18 +26,23 @@ function BecomeAHost() {
         item
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         component={Paper}
         elevation={6}
         square
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{ display: "flex", flexDirection: "column", position: "relative" }}
       >
-        <HostExitButton />
+        <HostSelectHeader />
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
+            py: 10,
           }}
         >
           <Typography variant="h5" sx={{ fontWeight: 900, marginBottom: 2 }}>

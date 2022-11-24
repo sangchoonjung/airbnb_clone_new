@@ -6,15 +6,27 @@ function HostSelectHeader() {
   const goHome = () => {
     router.push("/");
   };
+  const questionHandler = () => {
+    alert("준비중입니다");
+  };
   return (
     <Box
-      style={{
+      sx={{
         display: "flex",
         justifyContent: "space-between",
-        margin: 20,
+        px: 2,
+        py: 1,
+        position: "absolute",
+        top: 0,
+        zIndex: 1,
+        backgroundColor: "#ffffff",
+        width: "100%",
+        alignItems: "center",
       }}
     >
-      <FaAirbnb style={{ fontSize: 50 }} onClick={goHome} />
+      <Button>
+        <FaAirbnb style={{ fontSize: 50, color: "black" }} onClick={goHome} />
+      </Button>
       <Box>
         <Button
           variant="outlined"
@@ -29,6 +41,7 @@ function HostSelectHeader() {
             textAlign: "center",
             marginRight: 20,
           }}
+          onClick={questionHandler}
         >
           궁금하신 점이 있나요?
         </Button>

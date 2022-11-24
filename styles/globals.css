@@ -36,3 +36,10 @@ a {
     opacity: 1;
   }
 }
+
+.MuiPickersPopper-paper > div > div:first-of-type {
+  display: none;
+}
+.css-3pa7bi-MuiDateRangePickerViewDesktop-container:not(:last-of-type) {
+  border-right: none !important;
+}

@@ -1,10 +1,14 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import DetailPicture from "./detailPicture";
 import { useContext } from "react";
 import { RoomDetailDataContext } from "../../context/roomDetailData";
-import DetailConvenience from "./detailConvenience";
+import DetailHeader from "./detailHeader";
+import DetailBodyLeft from "./detailBodyLeft";
+import DetailBodyRight from "./detailBodyRight";
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 
 type con = {
   item: {
@@ -27,63 +31,33 @@ function RoomDetail(props: con) {
   const a = ctx?.setItemData(item);
   // console.log(ctx?.itemData, "2wwwwwwwwwww");
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: "start",
+    color: "black",
+  }));
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", my: 3 }}>
-          <Typography variant="h4">{item.title}</Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <Box>5.0 후기 수퍼 호스트 위치</Box>
-            <Box>공유하기 / 저장</Box>
-          </Box>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-
+        <DetailHeader />
         <DetailPicture item={item} />
 
-        <Divider sx={{ my: 2 }} />
-        <Box>
-          {item.uniqueId} 님이 호스팅하는 {item.type}
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2} columns={12}>
+            <Grid item xs={8} md={8}>
+              <Item>
+                <DetailBodyLeft />
+              </Item>
+            </Grid>
+            <Grid item xs={4} md={4}>
+              <Item sx={{ position: "sticky", top: 0 }}>
+                <DetailBodyRight />
+              </Item>
+            </Grid>
+          </Grid>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "start",
-          }}
-        >
-          <Typography sx={{ mr: 1 }}>
-            최대인원 {item.personnel.guest}명
-          </Typography>
-          <Typography sx={{ mr: 1 }}>
-            침실 {item.personnel.bedRoom}개
-          </Typography>
-          <Typography sx={{ mr: 1 }}>
-            욕실 {item.personnel.bathRoom}개
-          </Typography>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <Box>
-          <Typography>상세 설명</Typography>
-          <Typography>
-            {item.description ? item.description : "없음"}
-          </Typography>
-        </Box>
-
-        <Divider sx={{ my: 2 }} />
-
-        <DetailConvenience />
-
-        <Divider sx={{ my: 2 }} />
 
         <Box>
           <Typography>호스팅 지역</Typography>
