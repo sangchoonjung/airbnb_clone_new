@@ -5,8 +5,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
-import LoadingSpinner from "../../custom/loadingSpinner";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import LoadingSpinner from "../../../custom/loadingSpinner";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 const Transition = React.forwardRef(function Transition(

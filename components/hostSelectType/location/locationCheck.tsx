@@ -37,7 +37,7 @@ export function MapComponent() {
       <RoomIcon
         sx={{
           position: "absolute",
-          top: "100%",
+          top: "50%",
           left: "50%",
           fontSize: 40,
           color: "purple",
@@ -51,7 +51,15 @@ function LocationCheck() {
   const ctx = useContext(HostTypeContext);
   // console.log("체크");
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        height: "100%",
+        alignItems: "center",
+      }}
+    >
       <Wrapper apiKey={"AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM"}>
         <MapComponent />
       </Wrapper>

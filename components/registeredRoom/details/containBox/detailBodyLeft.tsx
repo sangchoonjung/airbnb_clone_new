@@ -1,8 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
-import DetailBodyLeftDate from "./detailBodyLeftDate";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import DetailBodyLeftDate from "../date/detailBodyLeftDate";
 import DetailConvenience from "./detailConvenience";
 
 function DetailBodyLeft() {
@@ -52,7 +52,7 @@ function DetailBodyLeft() {
 
       <Divider sx={{ my: 2 }} />
       <DetailBodyLeftDate />
-      <Divider sx={{ my: 2 }} />
+      {/* <Divider sx={{ my: 2 }} /> */}
     </>
   );
 }

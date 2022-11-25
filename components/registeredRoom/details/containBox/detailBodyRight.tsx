@@ -1,22 +1,30 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
-import DetailBodyRightDatePicker from "./detailBodyRightDatePicker";
+import { useContext, useState } from "react";
+import { RoomDatePickData } from "../../../context/roomDatePickData";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import CheckInOutBox from "../date/checkInOutBox";
+import DatePickerPlates from "../date/DatePickerPlates";
+import DatePickerRightModal from "../date/DatePickerRightModal";
 import DetailBodyRightPopOver from "./detailBodyRightPopOver";
 
 function DetailBodyRight() {
   const ctx = useContext(RoomDetailDataContext);
+  const dateCtx = useContext(RoomDatePickData);
   if (!ctx?.itemData) {
     return <></>;
   }
-  console.log(ctx.itemData);
+  // console.log(ctx.itemData);
   const price = ctx.itemData.price;
+
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Typography>₩{price.toLocaleString()}/박</Typography>
-        <DetailBodyRightDatePicker />
+        <CheckInOutBox />
+        {dateCtx?.openCalender && <DatePickerRightModal />}
+
+        {/* ................................................................................ */}
         <DetailBodyRightPopOver />
         <Button
           variant="contained"

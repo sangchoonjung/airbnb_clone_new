@@ -1,18 +1,21 @@
 import { GetServerSideProps } from "next";
 import mongooseInit from "../../../lib/mongooseInit";
 import HostDB from "../../../lib/model/schema/hostSchema";
-import RoomDetail from "../../../components/registeredRoom/details/roomDetail";
+import RoomDetail from "../../../components/registeredRoom/details/containBox/roomDetail";
 import { useContext, useEffect } from "react";
 import RoomDetailDataContextProvider, {
   RoomDetailDataContext,
 } from "../../../components/context/roomDetailData";
+import RoomDatePickDataProvider from "../../../components/context/roomDatePickData";
 
 export const Base = ({ item }: { item: any }) => {
   return (
     <>
-      <RoomDetailDataContextProvider>
-        <RoomDetail item={item} />
-      </RoomDetailDataContextProvider>
+      <RoomDatePickDataProvider>
+        <RoomDetailDataContextProvider>
+          <RoomDetail item={item} />
+        </RoomDetailDataContextProvider>
+      </RoomDatePickDataProvider>
     </>
   );
 };

@@ -2,13 +2,14 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import DetailPicture from "./detailPicture";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
 import DetailHeader from "./detailHeader";
 import DetailBodyLeft from "./detailBodyLeft";
 import DetailBodyRight from "./detailBodyRight";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { RoomDatePickData } from "../../../context/roomDatePickData";
 
 type con = {
   item: {
@@ -28,8 +29,10 @@ type con = {
 function RoomDetail(props: con) {
   const { item } = props;
   const ctx = useContext(RoomDetailDataContext);
-  const a = ctx?.setItemData(item);
-  // console.log(ctx?.itemData, "2wwwwwwwwwww");
+
+  React.useEffect(() => {
+    ctx?.setItemData(item);
+  }, []);
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -38,6 +41,7 @@ function RoomDetail(props: con) {
     textAlign: "start",
     color: "black",
   }));
+
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -58,7 +62,7 @@ function RoomDetail(props: con) {
             </Grid>
           </Grid>
         </Box>
-
+        {/* 아래쪽 */}
         <Box>
           <Typography>호스팅 지역</Typography>
         </Box>

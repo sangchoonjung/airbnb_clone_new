@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import HostType from "../../lib/model/interface/hostType";
+import HostType from "../../../lib/model/interface/hostType";
 import MainShowItem from "./mainShowItem";
 type con = {
   datas: [];

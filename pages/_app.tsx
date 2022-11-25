@@ -8,7 +8,7 @@ import hostTypeContextProvider from "../components/context/hostType";
 import HostTypeContextProvider from "../components/context/hostType";
 import "../styles/globals.css";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 export default function App({ Component, pageProps }: AppProps) {
   // console.log(Component.isInLayout);
   //컨포넌트에 있는 프로토타입객체 빼오기 및 강제로 타입매기기
@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
   // console.log(isInLayout, "!!!!!!!!!!!!");
   return (
     <SessionProvider>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
         <HostTypeContextProvider>
           {!isInLayout && (
             <CloneLayout>

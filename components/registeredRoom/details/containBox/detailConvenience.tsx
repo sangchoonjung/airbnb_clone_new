@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
-import LoadingSpinner from "../../custom/loadingSpinner";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import LoadingSpinner from "../../../custom/loadingSpinner";
 import DetailConvenienceModal from "./detailConvenienceModal";
 
 function DetailConvenience() {

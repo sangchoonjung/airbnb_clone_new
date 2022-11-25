@@ -4,9 +4,9 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import DetailPictureModal from "./detailPictureModal";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
 import Divider from "@mui/material/Divider";
-import LoadingSpinner from "../../custom/loadingSpinner";
+import LoadingSpinner from "../../../custom/loadingSpinner";
 
 type con = {
   item: {

@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useContext } from "react";
 import { UserAuthContext } from "../components/context/userAuth";
-import MainShow from "../components/registeredRoom/mainShow";
+import MainShow from "../components/registeredRoom/homeContainBox/mainShow";
 import { GetServerSideProps } from "next";
 import { Box, Button } from "@mui/material";
 import RoomDetailDataContextProvider from "../components/context/roomDetailData";

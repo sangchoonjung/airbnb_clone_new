@@ -1,8 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useContext } from "react";
-import { RoomDetailDataContext } from "../../context/roomDetailData";
-import LoadingSpinner from "../../custom/loadingSpinner";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import LoadingSpinner from "../../../custom/loadingSpinner";
 
 function DetailHeader() {
   const ctx = useContext(RoomDetailDataContext);
