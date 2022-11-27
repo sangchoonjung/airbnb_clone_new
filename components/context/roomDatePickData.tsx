@@ -3,10 +3,10 @@ import { createContext, ReactNode, useState } from "react";
 type ctx = {
   DateData?: { checkin: Date | null; checkout: Date | null };
   updateDate?: (checkin: Date | null, checkout: Date | null) => void;
-  setDateData?: (a: any) => void;
+  setDateData?: (a: any, b: any) => void | undefined;
   openCalender?: boolean;
   openModalhandler?: (a: any) => void;
-  closeModalhandler?: (a: any) => void;
+  closeModalhandler?: () => void | undefined;
 };
 export const RoomDatePickData = createContext<ctx | null>(null);
 

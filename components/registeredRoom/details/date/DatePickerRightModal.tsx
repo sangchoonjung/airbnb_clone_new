@@ -5,10 +5,8 @@ import { useContext, useState } from "react";
 import { format } from "date-fns";
 import DatePickerPlates from "./DatePickerPlates";
 import { RoomDatePickData } from "../../../context/roomDatePickData";
-type con = {
-  closeModalhandler: (a: any) => void;
-};
-function DatePickerRightModal(props: con) {
+
+function DatePickerRightModal() {
   const dateCtx = useContext(RoomDatePickData);
 
   return (
@@ -35,7 +33,7 @@ function DatePickerRightModal(props: con) {
           height: "100vh",
           zIndex: -1,
         }}
-        onClick={() => dateCtx?.closeModalhandler()}
+        onClick={dateCtx!.closeModalhandler}
       ></Box>
       <Grid container>
         <Grid item md={6}>

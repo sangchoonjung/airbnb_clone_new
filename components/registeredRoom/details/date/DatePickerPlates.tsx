@@ -25,8 +25,8 @@ export default function DatePickerPlates() {
         <StaticDateRangePicker
           displayStaticWrapperAs="desktop"
           value={[dateCtx?.DateData?.checkin, dateCtx?.DateData?.checkout]}
-          onChange={(newValue) => {
-            dateCtx?.updateDate(newValue[0], newValue[1]);
+          onChange={(newValue: Array<any>) => {
+            dateCtx?.updateDate!(newValue[0], newValue[1]);
           }}
           renderInput={() => <></>}
         />

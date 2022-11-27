@@ -50,7 +50,7 @@ function CheckInOutBox() {
             : ""
         }
         placeholder={"YYYY-MM-DD"}
-        onClick={dateCtx.openModalhandler}
+        onClick={dateCtx?.openModalhandler}
       />
     </Box>
   );
