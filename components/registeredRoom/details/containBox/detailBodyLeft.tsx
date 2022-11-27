@@ -13,7 +13,7 @@ function DetailBodyLeft() {
   }
 
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box>
         <Typography variant="h5">
           {ctx.itemData.uniqueId} 님이 호스팅하는 {ctx.itemData.type}
@@ -52,8 +52,8 @@ function DetailBodyLeft() {
 
       <Divider sx={{ my: 2 }} />
       <DetailBodyLeftDate />
-      {/* <Divider sx={{ my: 2 }} /> */}
-    </>
+      {/* // <Divider sx={{ my: 2 }} /> */}
+    </Box>
   );
 }
 

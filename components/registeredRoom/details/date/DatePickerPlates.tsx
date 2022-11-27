@@ -20,7 +20,15 @@ export default function DatePickerPlates() {
 
   // console.log(dateCtx?.DateData, "데이타");
   return (
-    <Box>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko}>
         <StaticDateRangePicker
           displayStaticWrapperAs="desktop"
@@ -32,8 +40,11 @@ export default function DatePickerPlates() {
         />
       </LocalizationProvider>
       <Box>
-        <Button>날짜 지우기</Button>
-        <Button onClick={dateCtx?.closeModalhandler}>완료</Button>
+        <Button
+          onClick={() => dateCtx?.updateDate!(null as null, null as null)}
+        >
+          날짜 지우기
+        </Button>
       </Box>
     </Box>
   );

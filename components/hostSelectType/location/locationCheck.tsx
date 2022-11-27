@@ -9,6 +9,7 @@ export function MapComponent() {
   const ref = useRef<HTMLElement>();
   console.log(ctx!.addressLocation, "세부정보에서 넘어온거");
   let map: google.maps.Map;
+
   useEffect(() => {
     map = new window.google.maps.Map(ref.current!, {
       center: {

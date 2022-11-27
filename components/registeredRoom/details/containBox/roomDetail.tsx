@@ -1,4 +1,4 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import DetailPicture from "./detailPicture";
 import { useContext } from "react";
@@ -10,6 +10,7 @@ import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { RoomDatePickData } from "../../../context/roomDatePickData";
+import DetailBodyBottomLocation from "./detailBodyBottomLocation";
 
 type con = {
   item: {
@@ -47,7 +48,6 @@ function RoomDetail(props: con) {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <DetailHeader />
         <DetailPicture item={item} />
-
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2} columns={12}>
             <Grid item xs={8} md={8}>
@@ -63,8 +63,10 @@ function RoomDetail(props: con) {
           </Grid>
         </Box>
         {/* 아래쪽 */}
+        <Divider sx={{ my: 2 }} />
         <Box>
           <Typography>호스팅 지역</Typography>
+          <DetailBodyBottomLocation />
         </Box>
       </Box>
     </>
