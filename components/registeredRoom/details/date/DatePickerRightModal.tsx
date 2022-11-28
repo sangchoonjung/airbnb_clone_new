@@ -17,7 +17,7 @@ function DatePickerRightModal() {
         top: "24px",
         right: "0px",
         padding: "25px 20px 20px 20px",
-        zIndex: 3,
+        zIndex: 10,
       }}
       onClick={(evt) => {
         evt.stopPropagation();

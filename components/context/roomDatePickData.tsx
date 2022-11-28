@@ -7,6 +7,12 @@ type ctx = {
   openCalender?: boolean;
   openModalhandler?: (a: any) => void;
   closeModalhandler?: () => void | undefined;
+  guestCount: {};
+  setGuestCount: ({}) => void;
+  leftDate: string;
+  setLeftDate: (s: string) => {};
+  price: {};
+  setPrice: ({}) => void;
 };
 export const RoomDatePickData = createContext<ctx | null>(null);
 
@@ -27,6 +33,18 @@ const RoomDatePickDataProvider = ({ children }: { children: ReactNode }) => {
   const updateDate = (checkin: any, checkout: any) => {
     setDateData({ checkin: checkin, checkout: checkout });
   };
+  const [guestCount, setGuestCount] = useState({
+    adult: 1,
+    children: 0,
+    baby: 0,
+    animal: 0,
+  });
+  const [leftDate, setLeftDate] = useState("");
+  const [price, setPrice] = useState({
+    base: 0,
+    service: 0,
+    total: 0,
+  });
 
   return (
     <RoomDatePickData.Provider
@@ -36,6 +54,12 @@ const RoomDatePickDataProvider = ({ children }: { children: ReactNode }) => {
         openCalender,
         openModalhandler,
         closeModalhandler,
+        guestCount,
+        setGuestCount,
+        leftDate,
+        setLeftDate,
+        price,
+        setPrice,
       }}
     >
       {children}

@@ -5,13 +5,17 @@ import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { RoomDetailDataContext } from "../../../context/roomDetailData";
+import { RoomDatePickData } from "../../../context/roomDatePickData";
 
 export default function DetailBodyRightPopOver() {
+  const ctx = useContext(RoomDetailDataContext);
+  const maxGuest = ctx?.itemData.personnel.guest;
+
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
-
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -19,9 +23,9 @@ export default function DetailBodyRightPopOver() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
   const popupArray = [
     { title: "성인", description: "만 13세 이상", key: "adult" },
     { title: "어린이", description: "만 2 ~ 12세", key: "children" },
@@ -38,7 +42,10 @@ export default function DetailBodyRightPopOver() {
     baby: 0,
     animal: 0,
   });
-  // console.log(count, "카운트");
+  const dateCtx = useContext(RoomDatePickData);
+  useEffect(() => {
+    dateCtx?.setGuestCount(count);
+  }, [count]);
 
   const minusHandler = (evt: string) => {
     switch (evt) {
@@ -72,7 +79,14 @@ export default function DetailBodyRightPopOver() {
         aria-describedby={id}
         variant="text"
         onClick={handleClick}
-        sx={{ width: "100%", border: "solid 1px #999999", color: "black" }}
+        sx={{
+          width: "100%",
+          border: "solid 1px #000000",
+          color: "black",
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10,
+          overflow: "hidden",
+        }}
         color="success"
       >
         인원
@@ -118,7 +132,7 @@ export default function DetailBodyRightPopOver() {
                       minusHandler(one.key);
                       // console.log(typeof one.title);
                     }}
-                    disabled={count[one.key] < 1 ? true : false}
+                    disabled={count[one.key] < 2 ? true : false}
                   >
                     <RemoveCircleOutlineIcon sx={{ color: "#666666" }} />
                   </Button>
@@ -129,6 +143,12 @@ export default function DetailBodyRightPopOver() {
                     onClick={() => {
                       plusHandler(one.key);
                     }}
+                    // disabled={
+                    //   (one.key === "adult" || "children") &&
+                    //   count.adult >= maxGuest
+                    //     ? true
+                    //     : false
+                    // }
                   >
                     <ControlPointIcon sx={{ color: "#666666" }} />
                   </Button>

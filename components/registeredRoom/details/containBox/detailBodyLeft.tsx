@@ -1,25 +1,30 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { RoomDatePickData } from "../../../context/roomDatePickData";
 import { RoomDetailDataContext } from "../../../context/roomDetailData";
 import DetailBodyLeftDate from "../date/detailBodyLeftDate";
 import DetailConvenience from "./detailConvenience";
-import { differenceInCalendarDays } from "date-fns";
 
 function DetailBodyLeft() {
   const ctx = useContext(RoomDetailDataContext);
   const dateCtx = useContext(RoomDatePickData);
   // console.log(dateCtx?.DateData);
-  console.log(
-    differenceInCalendarDays(
-      dateCtx?.DateData?.checkout,
-      dateCtx?.DateData?.checkin
-    )
-  );
-  if (!ctx?.itemData) {
+
+  if (!ctx?.itemData && dateCtx) {
     return <></>;
   }
+  let leftDate;
+  if (dateCtx?.DateData?.checkin) {
+    leftDate = new Date(
+      dateCtx?.DateData?.checkin - 1000 * 60 * 60 * 24 * 10
+    ).toLocaleDateString();
+  } else {
+    leftDate = new Date().toLocaleDateString();
+  }
+  useEffect(() => {
+    dateCtx?.setLeftDate(leftDate);
+  }, [dateCtx?.DateData?.checkin]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -47,7 +52,7 @@ function DetailBodyLeft() {
       </Box>
 
       <Divider sx={{ my: 2 }} />
-      <Box>~전까지 무료로 취소하실수 있습니다.</Box>
+      <Box>{leftDate}전까지 무료로 취소하실수 있습니다.</Box>
       <Divider sx={{ my: 2 }} />
       <Box>
         <Typography>에어커버</Typography>
