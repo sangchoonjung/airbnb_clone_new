@@ -7,6 +7,7 @@ import CheckInOutBox from "../date/checkInOutBox";
 import DatePickerPlates from "../date/DatePickerPlates";
 import DatePickerRightModal from "../date/DatePickerRightModal";
 import DetailBodyRightPopOver from "./detailBodyRightPopOver";
+import { differenceInCalendarDays } from "date-fns";
 
 function DetailBodyRight() {
   const ctx = useContext(RoomDetailDataContext);
@@ -17,6 +18,12 @@ function DetailBodyRight() {
   // console.log(ctx.itemData);
   const price = ctx.itemData.price;
 
+  console.log(
+    differenceInCalendarDays(
+      dateCtx?.DateData?.checkout,
+      dateCtx?.DateData?.checkin
+    )
+  );
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "column" }}>

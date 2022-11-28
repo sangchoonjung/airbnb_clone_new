@@ -1,13 +1,22 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { useContext } from "react";
+import { RoomDatePickData } from "../../../context/roomDatePickData";
 import { RoomDetailDataContext } from "../../../context/roomDetailData";
 import DetailBodyLeftDate from "../date/detailBodyLeftDate";
 import DetailConvenience from "./detailConvenience";
+import { differenceInCalendarDays } from "date-fns";
 
 function DetailBodyLeft() {
   const ctx = useContext(RoomDetailDataContext);
-
+  const dateCtx = useContext(RoomDatePickData);
+  // console.log(dateCtx?.DateData);
+  console.log(
+    differenceInCalendarDays(
+      dateCtx?.DateData?.checkout,
+      dateCtx?.DateData?.checkin
+    )
+  );
   if (!ctx?.itemData) {
     return <></>;
   }
@@ -38,7 +47,18 @@ function DetailBodyLeft() {
       </Box>
 
       <Divider sx={{ my: 2 }} />
+      <Box>~전까지 무료로 취소하실수 있습니다.</Box>
+      <Divider sx={{ my: 2 }} />
+      <Box>
+        <Typography>에어커버</Typography>
+        <Typography>
+          모든 예약에는 호스트가 예약을 취소하거나 숙소 정보가 정확하지 않은
+          경우 또는 체크인에 문제가 있는 상황에 대비한 무료 보호 프로그램이
+          포함됩니다.
+        </Typography>
+      </Box>
 
+      <Divider sx={{ my: 2 }} />
       <Box>
         <Typography>상세 설명</Typography>
         <Typography>
