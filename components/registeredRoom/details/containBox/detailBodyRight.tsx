@@ -14,6 +14,8 @@ import { useSession } from "next-auth/react";
 function DetailBodyRight() {
   const ctx = useContext(RoomDetailDataContext);
   const dateCtx = useContext(RoomDatePickData);
+  const { data, status } = useSession();
+
   if (!ctx?.itemData) {
     return <></>;
   }
@@ -35,7 +37,7 @@ function DetailBodyRight() {
       total: totalFee,
     });
   }, [totalFee]);
-  const { data, status } = useSession();
+
   const buyerId = data?.user?.email;
   let startDate = dateCtx?.DateData?.checkin;
   let endDate = dateCtx?.DateData?.checkout;
@@ -77,6 +79,7 @@ function DetailBodyRight() {
 
         {/* ................................................................................ */}
         <DetailBodyRightPopOver />
+
         <Button
           variant="contained"
           sx={{
@@ -92,6 +95,7 @@ function DetailBodyRight() {
             },
           }}
           onClick={goToNextStepHandler}
+          disabled={status === "unauthenticated"}
         >
           예약하기
         </Button>
