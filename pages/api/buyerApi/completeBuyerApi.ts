@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 import mongooseInit from "../../../lib/mongooseInit";
 import BuyerDB from "../../../lib/model/schema/buyerSchema";
 
-const CreateBuyerApi: NextApiHandler = async (req, res) => {
+const CompleteBuyerApi: NextApiHandler = async (req, res) => {
   mongooseInit();
   const token = await getToken({ req });
   if (!token) {
@@ -11,20 +11,19 @@ const CreateBuyerApi: NextApiHandler = async (req, res) => {
   }
   const { method } = req;
   const item = req.body;
+
   if (method === "POST") {
-    const response = await BuyerDB.create({
-      buyerId: item.buyerId,
-      useDate: item.useDate,
-      guest: item.guest,
-      leftDate: item.leftDate,
-      price: item.price,
-      roomId: item.roomId,
-      roomInformation: item.roomInformation,
-    });
+    const response = await BuyerDB.findByIdAndUpdate(
+      item._id,
+      { paymentStatus: true, payauth: item.payauth },
+      {
+        returnDocument: "after",
+      }
+    );
     return res.status(200).json({ result: true, message: response });
   }
   return res
     .status(401)
-    .json({ result: false, message: "create hosting Error" });
+    .json({ result: false, message: "payment not complete" });
 };
-export default CreateBuyerApi;
+export default CompleteBuyerApi;

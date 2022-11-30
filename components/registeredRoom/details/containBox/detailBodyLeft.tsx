@@ -14,23 +14,23 @@ function DetailBodyLeft() {
   if (!ctx?.itemData && dateCtx) {
     return <></>;
   }
-  let leftDate;
+  let leftDate: any;
   if (dateCtx?.DateData?.checkin) {
     leftDate = new Date(
-      dateCtx?.DateData?.checkin - 1000 * 60 * 60 * 24 * 10
+      (dateCtx?.DateData?.checkin as any) - 1000 * 60 * 60 * 24 * 10
     ).toLocaleDateString();
   } else {
     leftDate = new Date().toLocaleDateString();
   }
   useEffect(() => {
-    dateCtx?.setLeftDate(leftDate);
+    dateCtx?.setLeftDate!(leftDate as string);
   }, [dateCtx?.DateData?.checkin]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box>
         <Typography variant="h5">
-          {ctx.itemData.uniqueId} 님이 호스팅하는 {ctx.itemData.type}
+          {ctx!.itemData.uniqueId} 님이 호스팅하는 {ctx!.itemData.type}
         </Typography>
       </Box>
       <Box
@@ -41,13 +41,13 @@ function DetailBodyLeft() {
         }}
       >
         <Typography sx={{ mr: 1 }}>
-          최대인원 {ctx.itemData.personnel.guest}명
+          최대인원 {ctx!.itemData.personnel.guest}명
         </Typography>
         <Typography sx={{ mr: 1 }}>
-          침실 {ctx.itemData.personnel.bed}개
+          침실 {ctx!.itemData.personnel.bed}개
         </Typography>
         <Typography sx={{ mr: 1 }}>
-          욕실 {ctx.itemData.personnel.bathRoom}개
+          욕실 {ctx!.itemData.personnel.bathRoom}개
         </Typography>
       </Box>
 
@@ -67,7 +67,7 @@ function DetailBodyLeft() {
       <Box>
         <Typography>상세 설명</Typography>
         <Typography>
-          {ctx.itemData.description ? ctx.itemData.description : "없음"}
+          {ctx!.itemData.description ? ctx!.itemData.description : "없음"}
         </Typography>
       </Box>
 

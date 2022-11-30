@@ -7,7 +7,7 @@ const buyerSchema = new mongoose.Schema<BuyerType>({
     start: String,
     end: String,
   },
-  quest: {
+  guest: {
     adult: Number,
     children: Number,
     baby: Number,
@@ -20,6 +20,9 @@ const buyerSchema = new mongoose.Schema<BuyerType>({
     total: Number,
   },
   roomId: String,
+  roomInformation: {},
+  paymentStatus: Boolean,
+  payauth: {},
 });
 
 export default (mongoose.models.BuyerDB as mongoose.Model<BuyerType>) ||

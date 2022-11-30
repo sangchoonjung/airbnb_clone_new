@@ -17,7 +17,7 @@ function DetailBodyRight() {
   if (!ctx?.itemData) {
     return <></>;
   }
-  // console.log(ctx.itemData);
+
   const price = ctx.itemData.price;
 
   const countDay = differenceInCalendarDays(
@@ -40,10 +40,10 @@ function DetailBodyRight() {
   let startDate = dateCtx?.DateData?.checkin;
   let endDate = dateCtx?.DateData?.checkout;
   if (startDate && endDate) {
-    startDate = dateCtx?.DateData?.checkin!.toLocaleDateString();
-    endDate = dateCtx?.DateData?.checkout!.toLocaleDateString();
+    startDate = dateCtx?.DateData?.checkin!.toLocaleDateString() as any;
+    endDate = dateCtx?.DateData?.checkout!.toLocaleDateString() as any;
   }
-
+  // console.log(ctx.itemData, "aaaaaa");
   const goToNextStepHandler = async () => {
     // console.log(router.query);
     const { itemId } = router.query;
@@ -52,17 +52,19 @@ function DetailBodyRight() {
       body: JSON.stringify({
         buyerId: buyerId,
         useDate: { start: startDate, end: endDate },
-        quest: dateCtx?.guestCount,
+        guest: dateCtx?.guestCount,
         leftDate: dateCtx?.leftDate,
         price: dateCtx?.price,
         roomId: itemId,
+        roomInformation: ctx.itemData,
       }),
       headers: { "Content-type": "application/json" },
     });
     const data = await response.json();
     console.log(data);
+    const paymentId = data.message._id;
 
-    // router.push(`/book/stays/${itemId}`);
+    router.push(`/book/stays/${paymentId}`);
   };
   return (
     <>

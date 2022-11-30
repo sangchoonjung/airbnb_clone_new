@@ -7,12 +7,14 @@ type ctx = {
   openCalender?: boolean;
   openModalhandler?: (a: any) => void;
   closeModalhandler?: () => void | undefined;
-  guestCount: {};
-  setGuestCount: ({}) => void;
-  leftDate: string;
-  setLeftDate: (s: string) => {};
-  price: {};
-  setPrice: ({}) => void;
+  guestCount?: {};
+  setGuestCount: Function;
+  leftDate?: string;
+  setLeftDate?: (s: string) => void;
+  price?: {};
+  setPrice: Function;
+  roomId?: string;
+  setRoomId?: (s: string) => void;
 };
 export const RoomDatePickData = createContext<ctx | null>(null);
 
@@ -45,6 +47,7 @@ const RoomDatePickDataProvider = ({ children }: { children: ReactNode }) => {
     service: 0,
     total: 0,
   });
+  const [roomId, setRoomId] = useState("");
 
   return (
     <RoomDatePickData.Provider
