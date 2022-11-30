@@ -1,31 +1,36 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { RoomDatePickData } from "../../../context/roomDatePickData";
 import { RoomDetailDataContext } from "../../../context/roomDetailData";
 import DetailBodyLeftDate from "../date/detailBodyLeftDate";
 import DetailConvenience from "./detailConvenience";
-import { differenceInCalendarDays } from "date-fns";
 
 function DetailBodyLeft() {
   const ctx = useContext(RoomDetailDataContext);
   const dateCtx = useContext(RoomDatePickData);
   // console.log(dateCtx?.DateData);
-  console.log(
-    differenceInCalendarDays(
-      dateCtx?.DateData?.checkout,
-      dateCtx?.DateData?.checkin
-    )
-  );
-  if (!ctx?.itemData) {
+
+  if (!ctx?.itemData && dateCtx) {
     return <></>;
   }
+  let leftDate: any;
+  if (dateCtx?.DateData?.checkin) {
+    leftDate = new Date(
+      (dateCtx?.DateData?.checkin as any) - 1000 * 60 * 60 * 24 * 10
+    ).toLocaleDateString();
+  } else {
+    leftDate = new Date().toLocaleDateString();
+  }
+  useEffect(() => {
+    dateCtx?.setLeftDate!(leftDate as string);
+  }, [dateCtx?.DateData?.checkin]);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <Box>
         <Typography variant="h5">
-          {ctx.itemData.uniqueId} 님이 호스팅하는 {ctx.itemData.type}
+          {ctx!.itemData.uniqueId} 님이 호스팅하는 {ctx!.itemData.type}
         </Typography>
       </Box>
       <Box
@@ -36,18 +41,18 @@ function DetailBodyLeft() {
         }}
       >
         <Typography sx={{ mr: 1 }}>
-          최대인원 {ctx.itemData.personnel.guest}명
+          최대인원 {ctx!.itemData.personnel.guest}명
         </Typography>
         <Typography sx={{ mr: 1 }}>
-          침실 {ctx.itemData.personnel.bed}개
+          침실 {ctx!.itemData.personnel.bed}개
         </Typography>
         <Typography sx={{ mr: 1 }}>
-          욕실 {ctx.itemData.personnel.bathRoom}개
+          욕실 {ctx!.itemData.personnel.bathRoom}개
         </Typography>
       </Box>
 
       <Divider sx={{ my: 2 }} />
-      <Box>~전까지 무료로 취소하실수 있습니다.</Box>
+      <Box>{leftDate}전까지 무료로 취소하실수 있습니다.</Box>
       <Divider sx={{ my: 2 }} />
       <Box>
         <Typography>에어커버</Typography>
@@ -62,7 +67,7 @@ function DetailBodyLeft() {
       <Box>
         <Typography>상세 설명</Typography>
         <Typography>
-          {ctx.itemData.description ? ctx.itemData.description : "없음"}
+          {ctx!.itemData.description ? ctx!.itemData.description : "없음"}
         </Typography>
       </Box>
 

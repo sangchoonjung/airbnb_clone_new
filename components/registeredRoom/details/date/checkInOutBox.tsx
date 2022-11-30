@@ -17,12 +17,17 @@ function CheckInOutBox() {
   // );
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
       <TextField
-        color="info"
+        color="success"
         size="medium"
         variant="filled"
-        inputProps={{ style: { border: "1px solid #000000" } }}
+        // inputProps={{ style: { border: "1px solid #000000" } }}
         InputLabelProps={{
           shrink: true,
         }}
@@ -34,12 +39,17 @@ function CheckInOutBox() {
         }
         placeholder={"YYYY-MM-DD"}
         onClick={dateCtx?.openModalhandler}
+        sx={{
+          border: "solid 1px #000000",
+          color: "black",
+          borderTopLeftRadius: 10,
+        }}
       />
       <TextField
-        color="info"
+        color="success"
         size="medium"
         variant="filled"
-        inputProps={{ style: { border: "1px solid #000000" } }}
+        // inputProps={{ style: { border: "1px solid #000000" } }}
         InputLabelProps={{
           shrink: true,
         }}
@@ -51,6 +61,11 @@ function CheckInOutBox() {
         }
         placeholder={"YYYY-MM-DD"}
         onClick={dateCtx?.openModalhandler}
+        sx={{
+          border: "solid 1px #000000",
+          color: "black",
+          borderTopRightRadius: 10,
+        }}
       />
     </Box>
   );

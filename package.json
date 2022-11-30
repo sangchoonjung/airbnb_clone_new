@@ -16,6 +16,7 @@
     "@mui/material": "^5.10.12",
     "@mui/styled-engine-sc": "^5.10.6",
     "@mui/x-date-pickers-pro": "^5.0.8",
+    "@paypal/react-paypal-js": "^7.8.1",
     "@react-icons/all-files": "^4.1.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/formidable": "^2.0.5",

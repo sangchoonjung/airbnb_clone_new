@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
           {!isInLayout && (
             <CloneLayout>
               <Head>
-                <title>여행!!!!</title>
+                <title>여행!</title>
               </Head>
               <Component {...pageProps} />
             </CloneLayout>

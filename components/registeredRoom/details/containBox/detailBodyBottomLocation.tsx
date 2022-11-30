@@ -9,18 +9,26 @@ export function MyMapComponent() {
   const ctx = useContext(RoomDetailDataContext);
   console.log(ctx?.itemData.location);
   useEffect(() => {
-    new window.google.maps.Map(ref.current!, {
+    const map = new window.google.maps.Map(ref.current!, {
       center: {
-        lat: ctx?.itemData.location.lat,
-        lng: ctx?.itemData.location.lng,
+        lat: Number(ctx?.itemData.location.lat),
+        lng: Number(ctx?.itemData.location.lng),
       },
       zoom: 15,
       zoomControl: false,
       mapTypeControl: false,
     });
-  });
+    new google.maps.Marker({
+      position: {
+        lat: Number(ctx?.itemData.location.lat),
+        lng: Number(ctx?.itemData.location.lng),
+      },
+      map,
+      title: "Hello World!",
+    });
+  }, []);
 
-  return <Box ref={ref} id="map" sx={{ height: "50vh", width: "50vw" }}></Box>;
+  return <Box ref={ref} id="map" sx={{ height: "50vw", width: "100%" }}></Box>;
 }
 
 const render = (status: Status) => {
