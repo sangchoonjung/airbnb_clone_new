@@ -31,9 +31,7 @@ function PublishCelebration() {
         elevation={6}
         square
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          // justifyContent: "center",
+          position: "relative",
         }}
       >
         <HostSelectHeader />
@@ -41,13 +39,45 @@ function PublishCelebration() {
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
+            height: "100%",
+            width: "100%",
+            maxHeight: "100vh",
             alignItems: "center",
-            marginTop: 5,
+            py: 10,
+            overflowY: "scroll",
           }}
-        ></Box>
-        <Button onClick={nextStep} variant={"contained"}>
-          완료
-        </Button>
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              bottom: 0,
+              width: "100%",
+              px: 2,
+              pb: 2,
+              backgroundColor: "#ffffff",
+              zIndex: 1,
+            }}
+          >
+            <Button
+              onClick={nextStep}
+              variant={"contained"}
+              sx={{
+                border: "solid 1px black",
+                color: "white",
+                bgcolor: "black",
+                "&:hover": {
+                  backgroundColor: "#999999",
+                },
+                p: 2,
+                width: "100%",
+              }}
+            >
+              완료
+            </Button>
+          </Box>
+        </Box>
+
         {/* 완료 버튼자리 */}
       </Grid>
     </Grid>

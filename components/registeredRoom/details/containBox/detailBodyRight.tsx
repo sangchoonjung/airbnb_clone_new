@@ -105,27 +105,38 @@ function DetailBodyRight() {
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            p: 1,
           }}
         >
-          <Typography>
-            ₩{price.toLocaleString()}X{countDay ? countDay : "0"}박
-          </Typography>
-          <Typography>
-            ₩{countDay ? baseTotalFee.toLocaleString() : price.toLocaleString()}
-          </Typography>
+          <Box>
+            <Typography>
+              ₩{price.toLocaleString()}X{countDay ? countDay : "0"}박
+            </Typography>
+            <Typography>서비스 수수료</Typography>
+          </Box>
+          <Box>
+            <Typography>
+              ₩
+              {countDay
+                ? baseTotalFee.toLocaleString()
+                : price.toLocaleString()}
+            </Typography>
+            <Typography>₩{serviceFee.toLocaleString()}</Typography>
+          </Box>
         </Box>
+        <Divider sx={{ my: 2 }} />
         <Box
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-between",
+            p: 1,
           }}
         >
-          <Typography>서비스 수수료</Typography>
-          <Typography>₩{serviceFee.toLocaleString()}</Typography>
+          <Typography>총 합계</Typography>
+
+          <Typography>₩{totalFee.toLocaleString()}</Typography>
         </Box>
-        <Divider />
-        <Typography>총 합계</Typography>
       </Box>
     </>
   );

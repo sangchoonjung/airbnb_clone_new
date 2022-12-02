@@ -43,11 +43,16 @@ export default function DatePickerPlates() {
       return one.useDate;
     }
   });
+
   // console.log(arr);
+
   const checkDate = (num: Date) => {
     for (let key of arr) {
       // console.log(key, "sssssssssssssssss");
-      if (num >= new Date(key.start) && num <= new Date(key.end)) {
+      if (
+        num >= new Date(key ? key.start : null) &&
+        num <= new Date(key ? key.end : null)
+      ) {
         return true;
       }
     }
@@ -76,7 +81,7 @@ export default function DatePickerPlates() {
           renderInput={() => <></>}
           disablePast={true}
           shouldDisableDate={(target) => {
-            return checkDate(target);
+            return arr ? checkDate(target) : false;
           }}
         />
       </LocalizationProvider>

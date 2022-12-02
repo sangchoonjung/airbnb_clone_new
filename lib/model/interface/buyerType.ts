@@ -26,7 +26,9 @@ type BuyerType = {
     title: string;
   };
   paymentStatus?: boolean;
-  payauth?: {};
+  payauth?: {
+    create_time: any;
+  };
   _id?: mongoose.ObjectId;
 };
 

@@ -101,13 +101,22 @@ export default function Header() {
           </MenuItem>
         )}
         {status === "authenticated" && (
-          <MenuItem
-            onClick={() => {
-              signOut();
-            }}
-          >
-            로그아웃
-          </MenuItem>
+          <Box>
+            <MenuItem
+              onClick={() => {
+                signOut();
+              }}
+            >
+              로그아웃
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                router.push("/myTravel");
+              }}
+            >
+              내 예약
+            </MenuItem>
+          </Box>
         )}
 
         {/* <Divider /> */}

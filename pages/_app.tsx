@@ -20,12 +20,14 @@ export default function App({ Component, pageProps }: AppProps) {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <HostTypeContextProvider>
           {!isInLayout && (
-            <CloneLayout>
-              <Head>
-                <title>여행!</title>
-              </Head>
-              <Component {...pageProps} />
-            </CloneLayout>
+            <>
+              <CloneLayout>
+                <Head>
+                  <title>여행!</title>
+                </Head>
+                <Component {...pageProps} />
+              </CloneLayout>
+            </>
           )}
           {isInLayout && <Component {...pageProps} />}
         </HostTypeContextProvider>

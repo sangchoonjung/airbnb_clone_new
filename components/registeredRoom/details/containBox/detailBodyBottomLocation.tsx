@@ -28,7 +28,9 @@ export function MyMapComponent() {
     });
   }, []);
 
-  return <Box ref={ref} id="map" sx={{ height: "50vw", width: "100%" }}></Box>;
+  return (
+    <Box ref={ref} id="map" sx={{ height: "50vw", width: "100%", mb: 5 }}></Box>
+  );
 }
 
 const render = (status: Status) => {

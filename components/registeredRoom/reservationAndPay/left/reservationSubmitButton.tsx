@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 function ReservationSubmitButton({ submitHandle }: { submitHandle: boolean }) {
   const router = useRouter();
   const submitComplete = () => {
-    router.push("/myPage");
+    router.push("/myTravel");
   };
   return (
     <Box>
