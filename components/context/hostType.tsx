@@ -52,7 +52,7 @@ const HostTypeContextProvider = ({ children }: { children: ReactNode }) => {
   const [mode, setMode] = useState<string>("inputVal");
   // console.log(predictions, "aaaaaaaaaa");
   const placeDetailHandler = async (place_id: string) => {
-    const endPoint = `/google/placeID?place_id=${place_id}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&language=ko`;
+    const endPoint = `/google/placeID?place_id=${place_id}&key=AIzaSyBQ4KAEwnbMnekJ8qqcpUbdyNQwX9AhsBo&language=ko`;
     const response = await fetch(endPoint);
     const data = await response.json();
     setAddressFullName(data.result.formatted_address);

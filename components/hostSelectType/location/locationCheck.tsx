@@ -61,7 +61,7 @@ function LocationCheck() {
         alignItems: "center",
       }}
     >
-      <Wrapper apiKey={"AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM"}>
+      <Wrapper apiKey={"AIzaSyBQ4KAEwnbMnekJ8qqcpUbdyNQwX9AhsBo"}>
         <MapComponent />
       </Wrapper>
       {/* 하단버튼 */}

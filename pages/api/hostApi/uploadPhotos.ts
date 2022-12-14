@@ -1,12 +1,13 @@
 import formidable from "formidable";
 import { NextApiHandler, NextConfig } from "next";
-import { initializeApp } from "firebase/app";
 import { ref, getStorage, getDownloadURL, uploadBytes } from "firebase/storage";
 import fs from "fs";
 import HostDB from "../../../lib/model/schema/hostSchema";
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 //multipart.form-data parser는 기본내장이 안되어 있어서 추가 설정해야함
 //firmidable 라는 multipart parsing 라이브러리 활용
+
 //넥스트 리퀘스트 환경 설정
 export const config: NextConfig = {
   api: {
@@ -15,13 +16,13 @@ export const config: NextConfig = {
 };
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM",
-  authDomain: "airbnb-367901.firebaseapp.com",
-  projectId: "airbnb-367901",
-  storageBucket: "airbnb-367901.appspot.com",
-  messagingSenderId: "177736670407",
-  appId: "1:177736670407:web:6f036dea248ede8d50f2e2",
-  measurementId: "G-VJW27D6WM2",
+  apiKey: "AIzaSyBjceuN6OF6AQ0A-CtxMmY0z-M4hVuHQZs",
+  authDomain: "airbnb-7c727.firebaseapp.com",
+  projectId: "airbnb-7c727",
+  storageBucket: "airbnb-7c727.appspot.com",
+  messagingSenderId: "134860388288",
+  appId: "1:134860388288:web:3d5724c1b39f6a9c417a25",
+  measurementId: "G-K85X3Q8VH5",
 };
 
 // Initialize Firebase

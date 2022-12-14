@@ -26,7 +26,7 @@ function Location() {
       if (ctx?.inputVal?.trim().length === 0) {
         return;
       }
-      const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM&types=address`;
+      const endPoint = `/google/autocomplete?input=${ctx?.inputVal}&key=AIzaSyBQ4KAEwnbMnekJ8qqcpUbdyNQwX9AhsBo&types=address`;
       const response = await fetch(endPoint);
       const data = await response.json();
       ctx?.setPredictions(data.predictions);
@@ -97,7 +97,7 @@ function Location() {
           {ctx?.mode !== "checkLocation" && (
             <img
               draggable={false}
-              src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyA_myu9dLANhpR1FXQXZ_IVqXmRuUR_ahM`}
+              src={`https://maps.googleapis.com/maps/api/staticmap?center=${baseLocation.lat},${baseLocation.lng}&zoom=13&size=1000x1000&maptype=roadmap&key=AIzaSyBQ4KAEwnbMnekJ8qqcpUbdyNQwX9AhsBo`}
               alt={"none"}
               style={{
                 width: "100%",
