@@ -112,14 +112,7 @@ function Location() {
           {ctx?.mode === "locationDetail" && <LocationDetail />}
           {ctx?.mode === "checkLocation" && <LocationCheck />}
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            backgroundColor: "white",
-            position: "absolute",
-          }}
-        ></Box>
+
         <HostSelectfooter prevStep={prevStep} nextStep={nextStep} />
       </Grid>
     </Grid>

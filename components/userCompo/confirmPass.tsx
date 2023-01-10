@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -25,10 +25,11 @@ function ConfirmPass(props: vari) {
       email,
       password,
     });
+    console.log(result, "결과");
     if (result!.ok) {
-      console.log(result, "결과");
       props.handleClose();
     } else {
+      alert("비밀번호가 틀렸습니다.");
       // passwordRef.current.value = "";
       passRef.current?.focus();
       passRef.current?.select();
@@ -36,7 +37,7 @@ function ConfirmPass(props: vari) {
   };
 
   return (
-    <Typography>
+    <Box>
       <form onSubmit={clickHandle}>
         <TextField
           fullWidth
@@ -44,27 +45,23 @@ function ConfirmPass(props: vari) {
           type="password"
           style={{ marginTop: 10 }}
           inputRef={passRef}
+          sx={{ width: "100%" }}
         />
         <Button
           variant="contained"
           disableElevation
-          sx={{ width: 480, height: 50 }}
-          style={{
-            margin: 10,
-            justifyContent: "center",
-            alignItems: "center",
-            display: "flex",
-            flexDirection: "column",
+          sx={{
             color: "pink",
             backgroundColor: "#E61E4D",
+            width: "100%",
+            mt: 2,
           }}
           type="submit"
         >
           로그인
         </Button>
       </form>
-      <Typography>비밀번호를 잊으셨나요?</Typography>
-    </Typography>
+    </Box>
   );
 }
 

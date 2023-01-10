@@ -13,14 +13,14 @@ import HostSelectHeader from "../../components/custom/hostSelectHeader";
 
 function BecomeAHost() {
   const { data, status } = useSession();
-  //   console.log(data);
+  console.log(data);
   const router = useRouter();
   const goToNext = () => {
     router.push("/become-a-host/property-type-group");
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
-      <LeftGrid showText={`${data?.user?.name}님 환영합니다!!`} />
+      <LeftGrid showText={`${data?.user?.email}님 환영합니다!!`} />
       {/* 오른쪽 */}
       <Grid
         item

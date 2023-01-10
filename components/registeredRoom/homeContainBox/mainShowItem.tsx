@@ -28,6 +28,7 @@ function MainShowItem(props: con) {
                 boxShadow: 10,
                 width: "300px",
                 height: "380px",
+                cursor: "pointer",
               }}
               onClick={() => goToDetail(item._id)}
             >

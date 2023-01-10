@@ -26,7 +26,7 @@ function LocationSelect() {
         id="outlined-basic"
         label="Search"
         variant="outlined"
-        sx={{ width: "27rem", bgcolor: "white" }}
+        sx={{ minWidth: "400px", bgcolor: "white" }}
         onChange={(e) => {
           ctx?.setInputVal(e.currentTarget.value);
         }}

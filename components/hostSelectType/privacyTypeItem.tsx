@@ -1,6 +1,4 @@
 import ToggleButton from "@mui/material/ToggleButton";
-import Box from "@mui/material/Box";
-import { useContext, useState } from "react";
 import { Typography } from "@mui/material";
 type con = {
   setSelectPrivacy: (a: string) => void;

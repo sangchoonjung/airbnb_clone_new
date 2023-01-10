@@ -1,13 +1,7 @@
 import { signOut, useSession } from "next-auth/react";
-import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
-import { useContext } from "react";
-import { UserAuthContext } from "../components/context/userAuth";
 import MainShow from "../components/registeredRoom/homeContainBox/mainShow";
 import { GetServerSideProps } from "next";
 import { Box, Button } from "@mui/material";
-import RoomDetailDataContextProvider from "../components/context/roomDetailData";
 import LoadingSpinner from "../components/custom/loadingSpinner";
 
 export default function Home(props: any) {
@@ -29,7 +23,7 @@ export default function Home(props: any) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // console.log(context.query);
+  console.log(context.query, "쿼리");
   const { tag } = context.query;
 
   const response = await fetch(

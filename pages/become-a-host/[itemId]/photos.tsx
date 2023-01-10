@@ -35,7 +35,7 @@ const RealUploadPhotos = () => {
         body: formData,
       });
       const data = await response.json();
-      alert(response.status);
+      alert("사진이 등록되었습니다.");
 
       console.log(data, "파일업로드 요청처리");
       // console.log(data.message._id);

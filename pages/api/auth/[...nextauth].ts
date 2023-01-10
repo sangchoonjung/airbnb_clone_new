@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 export const option: NextAuthOptions = {
   //유형별 페이지 렌더링하기
   pages: {
-    // error: "/auth/error",
+    error: "/auth/error",
   },
   providers: [
     CredentialsProvider({
@@ -33,7 +33,7 @@ export const option: NextAuthOptions = {
         );
         const data: any = await response.json();
         console.log("!!!!!!!!!!!!!!!!!!", data);
-        if (data) {
+        if (data.result) {
           const user: User = {
             email: data.message.email,
             id: data.message.name,

@@ -80,7 +80,7 @@ export default function DatePickerPlates() {
           }}
           renderInput={() => <></>}
           disablePast={true}
-          shouldDisableDate={(target) => {
+          shouldDisableDate={(target: any) => {
             return arr ? checkDate(target) : false;
           }}
         />

@@ -52,15 +52,11 @@ function PersonalConsent(props: con) {
       <Button
         variant="contained"
         disableElevation
-        sx={{ width: 300 }}
-        style={{
-          margin: 10,
-          justifyContent: "center",
-          alignItems: "center",
-          display: "flex",
-          flexDirection: "column",
+        sx={{
+          width: "100%",
+          mt: 2,
           color: "white",
-          backgroundColor: props.buttonActivate === true ? "grey" : "pink",
+          backgroundColor: props.buttonActivate === true ? "grey" : "#E61E4D",
         }}
         type="submit"
         disabled={props.buttonActivate as boolean}

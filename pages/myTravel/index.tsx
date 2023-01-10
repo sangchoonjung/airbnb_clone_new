@@ -21,24 +21,49 @@ function MyPage({ items }: { items: [] }) {
       <Head>
         <title>내 예약정보</title>
       </Head>
-      <Typography>여행</Typography>
+      <Typography>내 예약정보</Typography>
       <Divider sx={{ my: 2 }} />
       {items.map((one: BuyerType) => {
         return (
-          <Box key={one._id as any}>
-            <Typography>결제일</Typography>
-            <Typography>
-              {format(new Date(one?.payauth?.create_time), "yyyy.MM.dd")}
-            </Typography>
-            <Typography>숙소 이용일</Typography>
-            <Typography>
-              {one.useDate?.start}~{one.useDate?.end}
-            </Typography>
-            <Typography>인원</Typography>
-            <Typography>어른 {one.guest?.adult}명</Typography>
-            <Typography>결제금액</Typography>
-            <Typography>{one?.price?.total.toLocaleString()}</Typography>
-
+          <Box>
+            <Box
+              key={one._id as any}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                mb: 5,
+                justifyContent: "space-around",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography>결제일</Typography>
+                <Typography>
+                  {format(new Date(one?.payauth?.create_time), "yyyy.MM.dd")}
+                </Typography>
+                <Typography>숙소 이용일</Typography>
+                <Typography>
+                  {one.useDate?.start}~{one.useDate?.end}
+                </Typography>
+                <Typography>인원</Typography>
+                <Typography>어른 {one.guest?.adult}명</Typography>
+                <Typography>결제금액</Typography>
+                <Typography>{one?.price?.total.toLocaleString()}</Typography>
+              </Box>
+              <Box sx={{ width: "200px", heigh: "100px" }}>
+                <img
+                  src={one?.roomInformation?.picture[0].extraUrl}
+                  width="100%"
+                  height="100%"
+                  alt="none"
+                  style={{ objectFit: "cover" }}
+                />
+              </Box>
+            </Box>
             <Divider sx={{ my: 2 }} />
           </Box>
         );
@@ -53,9 +78,6 @@ function MyPage({ items }: { items: [] }) {
           <Button variant="contained">숙소 검색하기</Button>
         </Box>
       )} */}
-
-      <Divider sx={{ my: 2 }} />
-      <Typography>예약 내역을 찾으실 수 없나요?도움말 센터 방문하기</Typography>
     </Box>
   );
 }
