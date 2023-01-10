@@ -9,7 +9,7 @@ import { signIn } from "next-auth/react";
 export const option: NextAuthOptions = {
   //유형별 페이지 렌더링하기
   pages: {
-    error: "/auth/error",
+    // error: "/auth/error",
   },
   providers: [
     CredentialsProvider({
