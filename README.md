@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# airbnb 클론코딩 웹사이트
 
-## Getting Started
+## 프로젝트 소개
 
-First, run the development server:
+<p>사용자가 호스트가 되어 상품등록판매, 구매자가 되어 상품예약을 할수있는</p>
+<p>airbnb 클론코딩입니다.</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### 주요기능
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+회원가입, 로그인, 판매상품등록, 상품예약
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### 개발 환경 및 라이브러리
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+<p>(1) 검색엔진 최적화, 페이지 기반 라우팅을 위한 Next.js 활용</p>
+<p>(2) 오류 포착 및 쉬운 디버깅을 위한 TypeScript 활용</p>
+<p>(3) 높은 수준의 디자인 퀄리티, React와 높은 호환성과 디자인 퀄리티를 높이기 위한 MUI 활용</p>
+<p>(4) 간편하고 세계적으로 사용 비중이 높은 PayPal 결제 시스템 연동</p>
+<p>(5) 사진 콘텐츠를 빠르게 저장하고 제공받기 위한 Firebase Strorage 활용</p>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### 성과
 
-## Learn More
+<p>Google Maps, PayPal, Firebase Storage 등 각종 외부 API를 활용하여 사이트 구현을 해볼 수 있어서 경험치가 상승하게 되었습니다.</p>
+<p>Next.js를 활용하면서 SEO, CSR, SSR의 동작원리, 장단점을 이해하였습니다.</p>
 
-To learn more about Next.js, take a look at the following resources:
+### 개선할 부분
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<p>배포할 때 환경설정 부분에서 구글 로그인 요청 오류를 해결하지 못하였습니다.</p>
+<p>해당 API에서 제공하는 문서를 정확히 이해할 수 있고 적용할 수 있는 능력을 키울 필요가 있습니다.</p>
+<p>레이아웃 구성이 좀 더 직관적이고 섬세하게, 자유자재로 다룰 수 있도록 여러 가지 프로젝트를 진행할 것입니다.</p>
