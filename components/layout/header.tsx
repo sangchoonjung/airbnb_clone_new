@@ -71,14 +71,14 @@ export default function Header() {
           variant="outlined"
           color="inherit"
           sx={{
-            gap: "0.8rem",
             color: "gray",
             border: "1px solid gray",
             borderRadius: "50px",
+            gap: "1rem",
           }}
           onClick={openMenuHandle}
         >
-          <MenuIcon /> <AccountCircleIcon />
+          <MenuIcon />
         </Button>
       </Box>
       <Menu
@@ -96,7 +96,7 @@ export default function Header() {
         }}
       >
         {status === "unauthenticated" && (
-          <MenuItem onClick={openMenuHandle}>
+          <MenuItem>
             <LoginModal />
           </MenuItem>
         )}
